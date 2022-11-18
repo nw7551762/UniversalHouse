@@ -1,0 +1,3 @@
+127.0.0.1 - - [13/Nov/2022:14:19:21 +0800] "GET / HTTP/1.1" 200 11355
+0:0:0:0:0:0:0:1 - - [13/Nov/2022:14:19:22 +0800] "GET /jspExercise/index.jsp HTTP/1.1" 200 408
+0:0:0:0:0:0:0:1 - - [13/Nov/2022:14:19:23 +0800] "GET /jspExercise/ch02/sendHtmlServlet;jsessionid=24E06D7FA1404AE3CAD38F2160AC6772?amt=100&type=abc HTTP/1.1" 200 1472

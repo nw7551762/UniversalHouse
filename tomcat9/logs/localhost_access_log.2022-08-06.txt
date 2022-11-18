@@ -1,0 +1,10 @@
+127.0.0.1 - - [06/Aug/2022:00:06:16 +0800] "GET / HTTP/1.1" 200 11355
+0:0:0:0:0:0:0:1 - - [06/Aug/2022:00:06:26 +0800] "GET /jspExercise/index.jsp HTTP/1.1" 200 1126
+0:0:0:0:0:0:0:1 - - [06/Aug/2022:00:06:28 +0800] "GET /jspExercise/ch06_02/InsertMemberForm.jsp HTTP/1.1" 200 2492
+0:0:0:0:0:0:0:1 - - [06/Aug/2022:00:06:37 +0800] "POST /jspExercise/ch06_02/member.do HTTP/1.1" 200 2555
+0:0:0:0:0:0:0:1 - - [06/Aug/2022:00:06:43 +0800] "POST /jspExercise/ch06_02/member.do HTTP/1.1" 200 2539
+0:0:0:0:0:0:0:1 - - [06/Aug/2022:00:07:14 +0800] "POST /jspExercise/ch06_02/member.do HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [06/Aug/2022:00:07:14 +0800] "GET /jspExercise/ch06_02/InsertMemberSuccess.jsp HTTP/1.1" 200 346
+0:0:0:0:0:0:0:1 - - [06/Aug/2022:00:07:16 +0800] "GET /jspExercise/ch06_02/InsertMemberSuccess.jsp HTTP/1.1" 200 346
+0:0:0:0:0:0:0:1 - - [06/Aug/2022:00:07:17 +0800] "GET /jspExercise/ch06_02/InsertMemberSuccess.jsp HTTP/1.1" 200 346
+0:0:0:0:0:0:0:1 - - [06/Aug/2022:00:07:17 +0800] "GET /jspExercise/ch06_02/InsertMemberSuccess.jsp HTTP/1.1" 200 346

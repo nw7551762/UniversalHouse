@@ -1,0 +1,2 @@
+127.0.0.1 - - [10/Sep/2022:10:50:22 +0800] "GET / HTTP/1.1" 200 11355
+0:0:0:0:0:0:0:1 - - [10/Sep/2022:10:50:23 +0800] "GET /HibernateExamplesMySQL22/WEB-INF/classes/ch01/main/SaveEmployee.java HTTP/1.1" 404 682

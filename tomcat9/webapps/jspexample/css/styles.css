@@ -1,0 +1,41 @@
+
+
+body { 
+  background-color: #e1efbb;
+  font-family: verdana;
+  font-size: 15pt;
+}
+
+.servlet { 
+  background-color: #ECFAFD;
+  font-family: verdana;
+  font-size: 16pt;
+}  
+
+/* td {  */
+/*  border: 1px solid black; */
+/* }  */
+
+table {
+/*   width: 90%; */
+/*   border: 2px solid black; */
+/*   background-color: #AAF1F9; */
+}
+
+	
+
+/* legend { */
+/* 	font-weight: bold; */
+/* 	color: black; */
+/* 	background-color: white; */
+/* 	border: 1px solid #cccccc; */
+/* 	padding: 4px 2px; */
+/* } */
+
+/* fieldset { */
+/* 	font-weight: bold; */
+/* 	color: black; */
+/* 	background-color: #ffffcc; */
+/* 	border: 1px solid #cccccc; */
+/* 	padding: 4px 2px; */
+/* } */

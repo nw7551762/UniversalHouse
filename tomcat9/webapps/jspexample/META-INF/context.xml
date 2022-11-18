@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Context displayName="JSP Servlet Example" docBase="example"
+	path="/example" reloadable="true">
+
+	<!-- MySQL(範例程式會用到的DataSource) -->
+	<Resource name="jdbc/MemberDataBaseM" type="javax.sql.DataSource" 
+		username="root" password="Do!ng123"
+		driverClassName="com.mysql.cj.jdbc.Driver" 
+		url="jdbc:mysql:///jspdb"
+		connectionProperties=
+		"useUnicode=yes;characterEncoding=utf8;useSSL=false;serverTimezone=Asia/Taipei;allowPublicKeyRetrieval=true"
+		maxTotal="8" 
+		maxIdle="4" 
+		maxWaitMillis="5000" 
+	/>
+		
+<!--     SQL Server(範例程式會用到的DataSource) -->
+	<Resource name="jdbc/MemberDataBaseS" type="javax.sql.DataSource" 
+	 	username="sa" password="sa123456"
+      	driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+      	url="jdbc:sqlserver://127.0.0.1:1433;DatabaseName=JSPDB"
+      	maxTotal="8"
+      	maxIdle="4"
+      	maxWaitMillis="5000" 
+	/>		
+</Context>
+
+
+
+
+
+
+
+
+
+
+

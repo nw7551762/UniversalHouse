@@ -1,0 +1,8 @@
+127.0.0.1 - - [08/Aug/2022:21:46:49 +0800] "GET / HTTP/1.1" 200 11355
+0:0:0:0:0:0:0:1 - - [08/Aug/2022:21:46:50 +0800] "GET /jspExercise/index.jsp HTTP/1.1" 200 1522
+0:0:0:0:0:0:0:1 - - [08/Aug/2022:21:47:30 +0800] "GET /jspExercise/showMember.do;jsessionid=2009B507C40C7C5CB55BF3271C6329F2 HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [08/Aug/2022:21:47:30 +0800] "GET /jspExercise/ch06_01/login.jsp HTTP/1.1" 200 1352
+0:0:0:0:0:0:0:1 - - [08/Aug/2022:21:48:34 +0800] "POST /jspExercise/ch06_01/login.do HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [08/Aug/2022:21:48:34 +0800] "GET /jspExercise/showMember.do HTTP/1.1" 200 2455
+0:0:0:0:0:0:0:1 - - [08/Aug/2022:21:49:09 +0800] "GET /jspExercise/ HTTP/1.1" 200 1126
+0:0:0:0:0:0:0:1 - - [08/Aug/2022:21:49:11 +0800] "GET /jspExercise/ch05_03/InsertMemberForm.jsp HTTP/1.1" 200 2496
