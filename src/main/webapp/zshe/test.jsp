@@ -10,6 +10,7 @@
 <body>
 <div align='center'>
 <h2>test</h2>   
+<h1>  ${ no } </h1>
 
 <p>
 <a href="<c:url value='/' />" >回首頁</a>

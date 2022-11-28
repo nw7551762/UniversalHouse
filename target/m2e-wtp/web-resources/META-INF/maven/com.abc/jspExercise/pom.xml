@@ -59,7 +59,7 @@
 
 	</dependencies>
 	<build>
-		<finalName>jspExercise</finalName>
+		<finalName>Topic2</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
