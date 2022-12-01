@@ -4,7 +4,7 @@ public interface EvaluationDao {
 	
 	void saveEvaluation(EvaluationBean bean);
 	
-	void updateProject(EvaluationBean bean);
+	int updateProject(EvaluationBean bean);
 	
-	EvaluationBean findByPjID(int projectID);
+	EvaluationBean findByID(int projectID,int memberID);
 }
