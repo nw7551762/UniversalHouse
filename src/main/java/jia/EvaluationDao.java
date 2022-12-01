@@ -6,5 +6,5 @@ public interface EvaluationDao {
 	
 	int updateProject(EvaluationBean bean);
 	
-	EvaluationBean findByID(int projectID,int memberID);
+	EvaluationBean findByID(int projectID,int memberPk);
 }

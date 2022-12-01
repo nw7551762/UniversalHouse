@@ -24,12 +24,12 @@ public class EvaluationDaoImpl_JDBC implements EvaluationDao {
 
 	@Override
 	public void saveEvaluation(EvaluationBean bean) {
-		String sql = "INSERT INTO evaluation (pj_ID, member_ID, ev_DealPrice, ev_CompletionDate, ev_ClientEV, ev_CLientComment) VALUES (?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO evaluation (pj_ID, memberPk, ev_DealPrice, ev_CompletionDate, ev_ClientEV, ev_CLientComment) VALUES (?, ?, ?, ?, ?, ?)";
 
 		try (Connection connection = ds.getConnection();
 				PreparedStatement preState = connection.prepareStatement(sql);) {
 			preState.setInt(1, bean.getPjID());
-			preState.setInt(2, bean.getMemberID());
+			preState.setInt(2, bean.getMemberPk());
 			preState.setInt(3, bean.getEvDealPrice());
 			preState.setDate(4, bean.getEvCompletionDate());
 			preState.setInt(5, bean.getEvClientEV());
@@ -42,7 +42,7 @@ public class EvaluationDaoImpl_JDBC implements EvaluationDao {
 	@Override
 	public int updateProject(EvaluationBean bean) {
 		int n = 0;
-		String sql = "UPDATE evaluation SET ev_DealPrice=?, ev_CompletionDate=?, ev_ClientEV=?, ev_CLientComment=? WHERE pj_ID=? AND member_ID=?";
+		String sql = "UPDATE evaluation SET ev_DealPrice=?, ev_CompletionDate=?, ev_ClientEV=?, ev_CLientComment=? WHERE pj_ID=? AND memberPk=?";
 
 		try (Connection connection = ds.getConnection();
 				PreparedStatement preState = connection.prepareStatement(sql);) {
@@ -51,7 +51,7 @@ public class EvaluationDaoImpl_JDBC implements EvaluationDao {
 			preState.setInt(3, bean.getEvClientEV());
 			preState.setString(4, bean.getEvClientComment());
 			preState.setInt(5, bean.getPjID());
-			preState.setInt(6, bean.getMemberID());
+			preState.setInt(6, bean.getMemberPk());
 			n = preState.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -60,18 +60,18 @@ public class EvaluationDaoImpl_JDBC implements EvaluationDao {
 	}
 
 	@Override
-	public EvaluationBean findByID(int projectID, int memberID) {
+	public EvaluationBean findByID(int projectID, int memberPk) {
 		EvaluationBean bean = null;
-		String sql = "SELECT * FROM evaluation WHERE pj_ID = ? AND member_ID = ?";
+		String sql = "SELECT * FROM evaluation WHERE pj_ID = ? AND memberPk = ?";
 		try(Connection connection = ds.getConnection();
 			PreparedStatement preState = connection.prepareStatement(sql);){
 			preState.setInt(1, projectID);
-			preState.setInt(2, memberID);
+			preState.setInt(2, memberPk);
 			try(ResultSet rs = preState.executeQuery();){
 				if(rs.next()) {
 					bean = new EvaluationBean();
 					bean.setPjID(rs.getInt("pj_ID"));
-					bean.setMemberID(rs.getInt("member_ID"));
+					bean.setMemberPk(rs.getInt("memberPk"));
 					bean.setEvDealPrice(rs.getInt("ev_DealPrice"));
 					bean.setEvCompletionDate(rs.getDate("ev_CompletionDate"));
 					bean.setEvClientEV(rs.getInt("ev_ClientEV"));

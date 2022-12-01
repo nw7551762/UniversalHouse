@@ -5,7 +5,7 @@ import java.sql.Date;
 public class EvaluationBean {
 	
 	private int pjID;
-	private int memberID;
+	private int memberPk;
 	private int evDealPrice;
 	private Date evCompletionDate;
 	private int evClientEV;
@@ -14,11 +14,11 @@ public class EvaluationBean {
 	public EvaluationBean() {
 	}
 
-	public EvaluationBean(int pjID, int memberID, int evDealPrice, Date evCompletionDate, int evClientEV,
+	public EvaluationBean(int pjID, int memberPk, int evDealPrice, Date evCompletionDate, int evClientEV,
 			String evClientComment) {
 		super();
 		this.pjID = pjID;
-		this.memberID = memberID;
+		this.memberPk = memberPk;
 		this.evDealPrice = evDealPrice;
 		this.evCompletionDate = evCompletionDate;
 		this.evClientEV = evClientEV;
@@ -33,12 +33,12 @@ public class EvaluationBean {
 		this.pjID = pjID;
 	}
 
-	public int getMemberID() {
-		return memberID;
+	public int getMemberPk() {
+		return memberPk;
 	}
 
-	public void setMemberID(int memberID) {
-		this.memberID = memberID;
+	public void setMemberPk(int memberPk) {
+		this.memberPk = memberPk;
 	}
 
 	public int getEvDealPrice() {
@@ -75,7 +75,7 @@ public class EvaluationBean {
 
 	@Override
 	public String toString() {
-		return "EvaluationBean [pjID=" + pjID + ", memberID=" + memberID + ", evDealPrice=" + evDealPrice
+		return "EvaluationBean [pjID=" + pjID + ", memberPk=" + memberPk + ", evDealPrice=" + evDealPrice
 				+ ", evCompletionDate=" + evCompletionDate + ", evClientEV=" + evClientEV + ", evClientComment="
 				+ evClientComment + "]";
 	}

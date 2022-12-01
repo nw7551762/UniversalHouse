@@ -32,7 +32,7 @@ public class ProjectDaoImpl_JDBC implements ProjectDao {
 			preState.setString(1, bean.getPjClass());
 			preState.setString(2, bean.getFieldName());
 			preState.setString(3, bean.getPjName());
-			preState.setInt(4, bean.getMemberID());
+			preState.setInt(4, bean.getMemberPk());
 			preState.setString(5, bean.getPjInstruction());
 			preState.setString(6, bean.getPjServerLocation());
 			preState.setInt(7, bean.getPjPrice());
@@ -67,7 +67,7 @@ public class ProjectDaoImpl_JDBC implements ProjectDao {
 			preState.setString(1, bean.getPjClass());
 			preState.setString(2, bean.getFieldName());
 			preState.setString(3, bean.getPjName());
-			preState.setInt(4, bean.getMemberID());
+			preState.setInt(4, bean.getMemberPk());
 			preState.setString(5, bean.getPjInstruction());
 			preState.setString(6, bean.getPjServerLocation());
 			preState.setInt(7, bean.getPjPrice());
@@ -102,7 +102,7 @@ public class ProjectDaoImpl_JDBC implements ProjectDao {
 					bean.setPjClass(rs.getString("pj_Class"));
 					bean.setFieldName(rs.getString("pj_Class"));
 					bean.setPjName(rs.getString("pj_Name"));
-					bean.setMemberID(rs.getInt("member_ID"));
+					bean.setMemberPk(rs.getInt("member_ID"));
 					bean.setPjInstruction(rs.getString("pj_Instruction"));
 					bean.setPjServerLocation(rs.getString("pj_ServerLocation"));
 					bean.setPjPrice(rs.getInt("pj_Price"));
