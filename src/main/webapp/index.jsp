@@ -10,6 +10,15 @@
 </head>
 <body>
 <h1>Topic2</h1>
-<a href="<c:url value='/TestServlet' />">test</a><p/>
+
+<a href="<c:url value='/regist/regist.jsp' />">regist</a><p/>
+<a href="<c:url value='/regist/modify.jsp' />">modifyMemberInfo</a><p/>
+<a href="<c:url value='/TestDelete' />">testDelete</a><p/>
+<a href="<c:url value='/showMemberInfo.do' />">Show Member Informations</a><p/>
+<a href="<c:url value='/login/login.jsp' />">Login</a><p/>
+
+
+
+
 </body>
 </html>
