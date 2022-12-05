@@ -17,9 +17,17 @@
         }
         
     </style>
+    <script>
+		
+		
+		
+		
+	</script>
 </head>
 <body>
+	
 	<div id="container">
+		<h1 style="color: red;">${IdExist}</h1>
         <form action="<c:url value='/regist/regist.do' />" method="post" enctype="multipart/form-data">
             <p>
                 <label class="t1" for="memberId">memberId:</label>
@@ -43,14 +51,7 @@
             
             <input id="submit" type="submit" value="送出">
         </form>
-        
-        
-        
-        
-        
-        
-        
-        
+          
     </div>
 </body>
 </html>

@@ -26,18 +26,32 @@ public class RegistServlet extends HttpServlet {
 		
 		MemberDao dao = new MemberDao();
 		MemberBean member = new MemberBean();
-		member.setMemberId(request.getParameter("memberId"));
-		member.setName(request.getParameter("name"));
-		member.setPassword(request.getParameter("password"));
-		member.setEmail(request.getParameter("email"));
-		Date date = new Date();
-		member.setRegisterTime(date);
-		dao.save(member);
 		
-		request.setAttribute("member", member);
-		RequestDispatcher rd = request.getRequestDispatcher("/regist/registSuccess.jsp");
-		rd.forward(request, response);
-		return;
+		if( !dao.existsById(request.getParameter("memberId")) ) {
+			
+			member.setMemberId(request.getParameter("memberId"));
+			member.setName(request.getParameter("name"));
+			member.setPassword(request.getParameter("password"));
+			member.setEmail(request.getParameter("email"));
+			Date date = new Date();
+			member.setRegisterTime(date);
+			dao.save(member);
+			request.setAttribute("member", member);
+			RequestDispatcher rd = request.getRequestDispatcher("/regist/registSuccess.jsp");
+			rd.forward(request, response);
+			return;
+			
+		}else {
+			request.setAttribute("IdExist", "Regist Fail, This ID already exist");
+			
+			RequestDispatcher rd = request.getRequestDispatcher("/regist/regist.jsp");
+			rd.forward(request, response);
+			
+			return;
+			
+		}
+		
+		
 		
 		
 	}
