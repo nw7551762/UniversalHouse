@@ -16,6 +16,9 @@
 <a href="<c:url value='/TestDelete' />">testDelete</a><p/>
 <a href="<c:url value='/showMemberInfo.do' />">Show Member Informations</a><p/>
 <a href="<c:url value='/login/login.jsp' />">Login</a><p/>
+<a href="<c:url value='/project/saveProject.jsp' />">Save Project</a><p/>
+<a href="<c:url value='/project/showMyProjectServlet' />">Show My Project</a><p/>
+<a href="<c:url value='/project/showAllProjectServlet' />">Show All Project</a><p/>
 
 
 

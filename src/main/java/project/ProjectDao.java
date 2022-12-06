@@ -1,4 +1,6 @@
-package jia;
+package project;
+
+import java.util.List;
 
 public interface ProjectDao {
 	
@@ -14,7 +16,10 @@ public interface ProjectDao {
 	//更新一筆案件
 	void updateProject(ProjectBean bean,long sizeImgType);
 
-	//用案件ID查詢
-	ProjectBean findByID(int projectID);
+	//用會員ID查詢
+	List<ProjectBean> findByID(int memberPk);
+	
+	//列出所有案件
+	List<ProjectBean> findAllProject();
 	
 }

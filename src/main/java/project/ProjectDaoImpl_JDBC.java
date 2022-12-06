@@ -1,9 +1,11 @@
-package jia;
+package project;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -25,7 +27,7 @@ public class ProjectDaoImpl_JDBC implements ProjectDao {
 	// 新增案件
 	@Override
 	public void saveProject(ProjectBean bean) {
-		String sql = "INSERT INTO project (pj_Class,fieldName,pj_Name,member_ID,pj_Instruction,pj_ServerLocation,pj_Price,pj_ExCompletionDate,pj_UploadDate,pj_LastUpdate,pj_Status) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO project (pj_Class,fieldName,pj_Name,memberPk,pj_Instruction,pj_ServerLocation,pj_Price,pj_ExCompletionDate,pj_UploadDate,pj_LastUpdate,pj_Status) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
 		try (Connection connection = ds.getConnection();
 				PreparedStatement preState = connection.prepareStatement(sql);) {
@@ -40,6 +42,7 @@ public class ProjectDaoImpl_JDBC implements ProjectDao {
 			preState.setDate(9, bean.getPjUploadDate());
 			preState.setDate(10, bean.getPjLastUpdate());
 			preState.setString(11, bean.getPjStatus());
+			preState.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -60,7 +63,7 @@ public class ProjectDaoImpl_JDBC implements ProjectDao {
 	@Override
 	public int updateProject(ProjectBean bean) {
 		int n = 0;
-		String sql = "UPDATE project SET pj_Class=?, fieldName=?, pj_Name=?, member_ID=?, pj_Instruction=?, pj_ServerLocation=?, pj_Price=?, pj_ExCompletionDate=?, pj_UploadDate=?, pj_LastUpdate=?, pj_Status=? WHERE pj_ID = ?";
+		String sql = "UPDATE project SET pj_Class=?, fieldName=?, pj_Name=?, memberPk=?, pj_Instruction=?, pj_ServerLocation=?, pj_Price=?, pj_ExCompletionDate=?, pj_UploadDate=?, pj_LastUpdate=?, pj_Status=? WHERE pj_ID = ?";
 
 		try (Connection connection = ds.getConnection();
 				PreparedStatement preState = connection.prepareStatement(sql);) {
@@ -89,20 +92,21 @@ public class ProjectDaoImpl_JDBC implements ProjectDao {
 	}
 
 	@Override
-	public ProjectBean findByID(int projectID) {
+	public List<ProjectBean> findByID(int memberPk) {
 		ProjectBean bean = null;
-		String sql = "SELECT * FROM Book WHERE bookId = ?";
+		String sql = "SELECT * FROM project WHERE memberPk =?";
+		List<ProjectBean> allMyProject = new ArrayList<>();
 
 		try (Connection connection = ds.getConnection(); PreparedStatement ps = connection.prepareStatement(sql);) {
-			ps.setInt(1, projectID);
+			ps.setInt(1, memberPk);
 			try (ResultSet rs = ps.executeQuery();) {
-				if (rs.next()) {
+				while (rs.next()) {
 					bean = new ProjectBean();
 					bean.setPjID(rs.getInt("pj_ID"));
 					bean.setPjClass(rs.getString("pj_Class"));
-					bean.setFieldName(rs.getString("pj_Class"));
+					bean.setFieldName(rs.getString("fieldName"));
 					bean.setPjName(rs.getString("pj_Name"));
-					bean.setMemberPk(rs.getInt("member_ID"));
+					bean.setMemberPk(rs.getInt("memberPk"));
 					bean.setPjInstruction(rs.getString("pj_Instruction"));
 					bean.setPjServerLocation(rs.getString("pj_ServerLocation"));
 					bean.setPjPrice(rs.getInt("pj_Price"));
@@ -110,12 +114,45 @@ public class ProjectDaoImpl_JDBC implements ProjectDao {
 					bean.setPjUploadDate(rs.getDate("pj_UploadDate"));
 					bean.setPjLastUpdate(rs.getDate("pj_LastUpdate"));
 					bean.setPjStatus(rs.getString("pj_Status"));
+					allMyProject.add(bean);
 				}
 			}
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
-		return bean;
+		return allMyProject;
 	}
 
+	@Override
+	public List<ProjectBean> findAllProject() {
+		ProjectBean bean = null;
+		String sql = "SELECT * FROM project";
+		List<ProjectBean> allProject = new ArrayList<>();
+
+		try (Connection connection = ds.getConnection(); PreparedStatement ps = connection.prepareStatement(sql);) {
+			try (ResultSet rs = ps.executeQuery();) {
+				while (rs.next()) {
+					bean = new ProjectBean();
+					bean.setPjID(rs.getInt("pj_ID"));
+					bean.setPjClass(rs.getString("pj_Class"));
+					bean.setFieldName(rs.getString("fieldName"));
+					bean.setPjName(rs.getString("pj_Name"));
+					bean.setMemberPk(rs.getInt("memberPk"));
+					bean.setPjInstruction(rs.getString("pj_Instruction"));
+					bean.setPjServerLocation(rs.getString("pj_ServerLocation"));
+					bean.setPjPrice(rs.getInt("pj_Price"));
+					bean.setPjExCompletionDate(rs.getDate("pj_ExCompletionDate"));
+					bean.setPjUploadDate(rs.getDate("pj_UploadDate"));
+					bean.setPjLastUpdate(rs.getDate("pj_LastUpdate"));
+					bean.setPjStatus(rs.getString("pj_Status"));
+					allProject.add(bean);
+				}
+			}
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+		return allProject;
+	}
+
+	
 }
