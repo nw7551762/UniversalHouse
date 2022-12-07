@@ -62,7 +62,7 @@ table {
 	<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 	<script>
 		const member = {
-				memberId : 		"1",
+				memberId : 		"",
 				name:			"",
 				password:		"",
 				location:		"",
@@ -72,6 +72,8 @@ table {
 				lastLogin:		"",
 //				img 在servlet做判斷修改
 		};
+		
+		//ajax
 		var member1 = Object.create(member);
 	
 	
@@ -96,7 +98,7 @@ table {
 		
 		
 		$('tbody').on('click', '.toModifyMode', function(){
-			//將member資訊先存起來，修改完後交回
+			//將member資訊先存起來，修改完後交回	
 			
 			member1.memberId = $(this).parent().siblings().eq(0).text();
 			member1.name=			$(this).parent().siblings().eq(1).text();
