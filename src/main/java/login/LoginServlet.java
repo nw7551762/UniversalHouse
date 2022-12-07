@@ -3,11 +3,8 @@ package login;
 import java.io.IOException;
 import java.sql.Blob;
 import java.sql.SQLException;
-<<<<<<< HEAD
-=======
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
->>>>>>> zshe
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -106,15 +103,9 @@ public class LoginServlet extends HttpServlet {
 		// 5.依照 Business Logic 運算結果來挑選適當的畫面
 		// 如果 errorMsgMap 是空的，表示沒有任何錯誤，交棒給下一棒
 		if (errorMsgMap.isEmpty()) {
-<<<<<<< HEAD
-					
-			if (requestURI != null) {
-=======
 			Timestamp time = new Timestamp( new Date().getTime() );
 			mb.setLastLogin(time);
 			if (requestURI != null) {
-				
->>>>>>> zshe
 				requestURI = (requestURI.length() == 0 ? request.getContextPath() : requestURI);
 				response.sendRedirect(response.encodeRedirectURL(requestURI));
 				return;
@@ -124,11 +115,7 @@ public class LoginServlet extends HttpServlet {
 			}
 		} else {
 			// 如果errorMsgMap不是空的，表示有錯誤，交棒給login.jsp
-<<<<<<< HEAD
-			RequestDispatcher rd = request.getRequestDispatcher("/_02_login/login.jsp");
-=======
 			RequestDispatcher rd = request.getRequestDispatcher("/login/login.jsp");
->>>>>>> zshe
 			rd.forward(request, response);
 			return;
 		}

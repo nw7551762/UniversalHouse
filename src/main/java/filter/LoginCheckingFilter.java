@@ -28,15 +28,8 @@ import regist.MemberBean;
 @WebFilter(
 		urlPatterns = { "/*" }, 
 		initParams = { 
-<<<<<<< HEAD
-				@WebInitParam(name = "mustLogin1", value = "/_03_listBooks/*"), 
-				@WebInitParam(name = "mustLogin2", value = "/_04_ShoppingCart/*"), 
-				@WebInitParam(name = "mustLogin3", value = "/_05_orderProcess/*"),
-				@WebInitParam(name = "mustLogin4", value = "/_20_productMaintain/*")				
-=======
 				@WebInitParam(name = "mustLogin1", value = "/modify/*"), 
 				@WebInitParam(name = "mustLogin2", value = "/showMemberInfo/*"), 			
->>>>>>> zshe
 		})
 public class LoginCheckingFilter implements Filter {
 	
@@ -85,11 +78,7 @@ public class LoginCheckingFilter implements Filter {
 						// 原本要執行的程式。
 						session.setAttribute("requestURI", requestURI);	
 					}
-<<<<<<< HEAD
-					resp.sendRedirect(resp.encodeRedirectURL( contextPath + "/_02_login/login.jsp" ));
-=======
 					resp.sendRedirect(resp.encodeRedirectURL( contextPath + "/login/login.jsp" ));
->>>>>>> zshe
 					return;
 				}
 			} else {   //
