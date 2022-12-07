@@ -29,7 +29,11 @@ import regist.MemberBean;
 		urlPatterns = { "/*" }, 
 		initParams = { 
 				@WebInitParam(name = "mustLogin1", value = "/modify/*"), 
+<<<<<<< HEAD
 				@WebInitParam(name = "mustLogin2", value = "/showMemberInfo/*"), 			
+=======
+				@WebInitParam(name = "mustLogin2", value = "/showMemberInfo/*"), 
+>>>>>>> edf73f69cb1cbd533717a37ea01cbae113b75843
 		})
 public class LoginCheckingFilter implements Filter {
 	
