@@ -27,14 +27,14 @@ public class ProjectDaoImpl_JDBC implements ProjectDao {
 	// 新增案件
 	@Override
 	public void saveProject(ProjectBean bean) {
-		String sql = "INSERT INTO project (pj_Class,fieldName,pj_Name,memberPk,pj_Instruction,pj_ServerLocation,pj_Price,pj_ExCompletionDate,pj_UploadDate,pj_LastUpdate,pj_Status) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO project (pj_Class,fieldName,pj_Name,memberPK,pj_Instruction,pj_ServerLocation,pj_Price,pj_ExCompletionDate,pj_UploadDate,pj_LastUpdate,pj_Status) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
 		try (Connection connection = ds.getConnection();
 				PreparedStatement preState = connection.prepareStatement(sql);) {
 			preState.setString(1, bean.getPjClass());
 			preState.setString(2, bean.getFieldName());
 			preState.setString(3, bean.getPjName());
-			preState.setInt(4, bean.getMemberPk());
+			preState.setInt(4, bean.getMemberPK());
 			preState.setString(5, bean.getPjInstruction());
 			preState.setString(6, bean.getPjServerLocation());
 			preState.setInt(7, bean.getPjPrice());
@@ -63,14 +63,14 @@ public class ProjectDaoImpl_JDBC implements ProjectDao {
 	@Override
 	public int updateProject(ProjectBean bean) {
 		int n = 0;
-		String sql = "UPDATE project SET pj_Class=?, fieldName=?, pj_Name=?, memberPk=?, pj_Instruction=?, pj_ServerLocation=?, pj_Price=?, pj_ExCompletionDate=?, pj_UploadDate=?, pj_LastUpdate=?, pj_Status=? WHERE pj_ID = ?";
+		String sql = "UPDATE project SET pj_Class=?, fieldName=?, pj_Name=?, memberPK=?, pj_Instruction=?, pj_ServerLocation=?, pj_Price=?, pj_ExCompletionDate=?, pj_UploadDate=?, pj_LastUpdate=?, pj_Status=? WHERE pj_ID = ?";
 
 		try (Connection connection = ds.getConnection();
 				PreparedStatement preState = connection.prepareStatement(sql);) {
 			preState.setString(1, bean.getPjClass());
 			preState.setString(2, bean.getFieldName());
 			preState.setString(3, bean.getPjName());
-			preState.setInt(4, bean.getMemberPk());
+			preState.setInt(4, bean.getMemberPK());
 			preState.setString(5, bean.getPjInstruction());
 			preState.setString(6, bean.getPjServerLocation());
 			preState.setInt(7, bean.getPjPrice());
@@ -94,7 +94,7 @@ public class ProjectDaoImpl_JDBC implements ProjectDao {
 	@Override
 	public List<ProjectBean> findByID(int memberPk) {
 		ProjectBean bean = null;
-		String sql = "SELECT * FROM project WHERE memberPk =?";
+		String sql = "SELECT * FROM project WHERE memberPK =?";
 		List<ProjectBean> allMyProject = new ArrayList<>();
 
 		try (Connection connection = ds.getConnection(); PreparedStatement ps = connection.prepareStatement(sql);) {
@@ -106,7 +106,7 @@ public class ProjectDaoImpl_JDBC implements ProjectDao {
 					bean.setPjClass(rs.getString("pj_Class"));
 					bean.setFieldName(rs.getString("fieldName"));
 					bean.setPjName(rs.getString("pj_Name"));
-					bean.setMemberPk(rs.getInt("memberPk"));
+					bean.setMemberPK(rs.getInt("memberPK"));
 					bean.setPjInstruction(rs.getString("pj_Instruction"));
 					bean.setPjServerLocation(rs.getString("pj_ServerLocation"));
 					bean.setPjPrice(rs.getInt("pj_Price"));
@@ -137,7 +137,7 @@ public class ProjectDaoImpl_JDBC implements ProjectDao {
 					bean.setPjClass(rs.getString("pj_Class"));
 					bean.setFieldName(rs.getString("fieldName"));
 					bean.setPjName(rs.getString("pj_Name"));
-					bean.setMemberPk(rs.getInt("memberPk"));
+					bean.setMemberPK(rs.getInt("memberPK"));
 					bean.setPjInstruction(rs.getString("pj_Instruction"));
 					bean.setPjServerLocation(rs.getString("pj_ServerLocation"));
 					bean.setPjPrice(rs.getInt("pj_Price"));

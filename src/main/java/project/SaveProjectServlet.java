@@ -11,6 +11,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import regist.MemberBean;
+import regist.MemberDao;
 
 @MultipartConfig
 @WebServlet("/project/SaveProjectServlet")
@@ -31,19 +35,21 @@ public class SaveProjectServlet extends HttpServlet {
 		try {
 			request.setCharacterEncoding("UTF-8");
 
+			ProjectDaoImpl_JDBC pjDao = new ProjectDaoImpl_JDBC();
 			ProjectBean project = new ProjectBean();
-			ProjectDaoImpl_JDBC dao = new ProjectDaoImpl_JDBC();
+			HttpSession session = request.getSession();
+			MemberBean member = (MemberBean)session.getAttribute("LoginOK");
 
 			project.setPjClass(request.getParameter("pj_Class"));
 			project.setFieldName(request.getParameter("fieldName"));
 			project.setPjName(request.getParameter("pj_Name"));
-			project.setMemberPk(Integer.parseInt(request.getParameter("memberPk")));
+			project.setMemberPK(member.getMemberPK());
 			project.setPjInstruction(request.getParameter("pj_Instruction"));
 			project.setPjServerLocation(request.getParameter("pj_ServerLocation"));
 			project.setPjPrice(Integer.parseInt(request.getParameter("pj_Price")));
-			dao.saveProject(project);
+			pjDao.saveProject(project);
 			request.setAttribute("project", project);
-			RequestDispatcher rd = request.getRequestDispatcher("/project/saveProjectSuccess.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/myProject/saveProjectSuccess.jsp");
 			rd.forward(request, response);
 			return;
 		} catch (UnsupportedEncodingException e) {

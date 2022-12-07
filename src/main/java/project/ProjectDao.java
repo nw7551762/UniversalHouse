@@ -17,7 +17,7 @@ public interface ProjectDao {
 	void updateProject(ProjectBean bean,long sizeImgType);
 
 	//用會員ID查詢
-	List<ProjectBean> findByID(int memberPk);
+	List<ProjectBean> findByID(int memberPK);
 	
 	//列出所有案件
 	List<ProjectBean> findAllProject();

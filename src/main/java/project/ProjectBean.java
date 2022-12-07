@@ -8,7 +8,7 @@ public class ProjectBean {
 	private String pjClass;
 	private String fieldName;
 	private String pjName;
-	private int memberpk;
+	private int memberPK;
 	private String pjInstruction;
 	private String pjServerLocation;
 	private int pjPrice;
@@ -20,7 +20,7 @@ public class ProjectBean {
 	public ProjectBean() {
 	}
 
-	public ProjectBean(int pjID, String pjClass, String fieldName, String pjName, int memberPk, String pjInstruction,
+	public ProjectBean(int pjID, String pjClass, String fieldName, String pjName, int memberPK, String pjInstruction,
 			String pjServerLocation, int pjPrice, Date pjExCompletionDate, Date pjUploadDate, Date pjLastUpdate,
 			String pjStatus) {
 		super();
@@ -28,7 +28,7 @@ public class ProjectBean {
 		this.pjClass = pjClass;
 		this.fieldName = fieldName;
 		this.pjName = pjName;
-		this.memberpk = memberPk;
+		this.memberPK = memberPK;
 		this.pjInstruction = pjInstruction;
 		this.pjServerLocation = pjServerLocation;
 		this.pjPrice = pjPrice;
@@ -72,12 +72,12 @@ public class ProjectBean {
 		this.pjName = pjName;
 	}
 
-	public int getMemberPk() {
-		return memberpk;
+	public int getMemberPK() {
+		return memberPK;
 	}
 
-	public void setMemberPk(int memberPk) {
-		this.memberpk = memberPk;
+	public void setMemberPK(int memberPK) {
+		this.memberPK = memberPK;
 	}
 
 	public String getPjInstruction() {
@@ -139,7 +139,7 @@ public class ProjectBean {
 	@Override
 	public String toString() {
 		return "ProjectBean [pjID=" + pjID + ", pjClass=" + pjClass + ", fieldName=" + fieldName + ", pjName=" + pjName
-				+ ", memberPk=" + memberpk + ", pjInstruction=" + pjInstruction + ", pjServerLocation="
+				+ ", memberPK=" + memberPK + ", pjInstruction=" + pjInstruction + ", pjServerLocation="
 				+ pjServerLocation + ", pjPrice=" + pjPrice + ", pjExCompletionDate=" + pjExCompletionDate
 				+ ", pjUploadDate=" + pjUploadDate + ", pjLastUpdate=" + pjLastUpdate + ", pjStatus=" + pjStatus + "]";
 	}

@@ -31,7 +31,7 @@ public class showAllProjectServlet extends HttpServlet {
 		
 		
 		request.setAttribute("allProject", allProject);
-		RequestDispatcher rd = request.getRequestDispatcher("/project/showAllProject.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/allProject/showAllProject.jsp");
 		rd.forward(request, response);
 		return;
 		
