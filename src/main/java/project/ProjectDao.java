@@ -17,9 +17,10 @@ public interface ProjectDao {
 	void updateProject(ProjectBean bean,long sizeImgType);
 
 	//用會員ID查詢
-	List<ProjectBean> findByID(int memberPK);
+	List<ProjectBean> findByID(Integer memberPk);
 	
 	//列出所有案件
 	List<ProjectBean> findAllProject();
+
 	
 }

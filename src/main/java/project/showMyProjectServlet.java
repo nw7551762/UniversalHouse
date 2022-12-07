@@ -34,7 +34,6 @@ public class showMyProjectServlet extends HttpServlet {
 		MemberBean member = (MemberBean)session.getAttribute("LoginOK");
 		List<ProjectBean> project = dao.findByID(member.getMemberPK());
 		
-		
 		request.setAttribute("project", project);
 		RequestDispatcher rd = request.getRequestDispatcher("/myProject/showMyProject.jsp");
 		rd.forward(request, response);

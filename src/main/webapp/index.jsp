@@ -26,11 +26,14 @@
 	<p />
 	<a href="<c:url value='/showMemberInfo/showAllMember.do' />">Show All Member Informations</a>
 	<p />
-	<a href="<c:url value='/myProject/saveProject.jsp' />">Save Project</a>
+	<a href="<c:url value='/myProject/saveProject.jsp' />">新增委託案件</a>
 	<p/>
-<%-- 	<a href="<c:url value='/project/showMyProjectServlet' />">Show My Project</a> --%>
-<!-- 	<p/> -->
-	<a href="<c:url value='/project/showAllProjectServlet' />">Show All Project</a>
+	<p />
+	<a href="<c:url value='/myProject/saveServerProject.jsp' />">新增服務案件</a>
+	<p/>
+	<a href="<c:url value='/project/showMyProjectServlet' />">查詢我的案件</a>
+	<p/>
+	<a href="<c:url value='/project/showAllProjectServlet' />">查詢所有案件</a>
 	<p/>
 	<a href="<c:url value='/login/login.jsp' />">Login</a>
 	<p />

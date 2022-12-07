@@ -27,8 +27,8 @@ public class showAllProjectServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		ProjectDaoImpl_JDBC dao = new ProjectDaoImpl_JDBC();
-		List<ProjectBean> allProject = dao.findAllProject();
 		
+		List<ProjectBean> allProject = dao.findAllProject();
 		
 		request.setAttribute("allProject", allProject);
 		RequestDispatcher rd = request.getRequestDispatcher("/allProject/showAllProject.jsp");

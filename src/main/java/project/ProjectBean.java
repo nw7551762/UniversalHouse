@@ -1,9 +1,10 @@
 package project;
 
-import java.sql.Date;
+import java.sql.Timestamp;
+import java.util.Date;
 
 public class ProjectBean {
-	
+
 	private int pjID;
 	private String pjClass;
 	private String fieldName;
@@ -13,16 +14,17 @@ public class ProjectBean {
 	private String pjServerLocation;
 	private int pjPrice;
 	private Date pjExCompletionDate;
+	private String pjExecutionTime;
 	private Date pjUploadDate;
 	private Date pjLastUpdate;
 	private String pjStatus;
-	
+
 	public ProjectBean() {
 	}
 
 	public ProjectBean(int pjID, String pjClass, String fieldName, String pjName, int memberPK, String pjInstruction,
-			String pjServerLocation, int pjPrice, Date pjExCompletionDate, Date pjUploadDate, Date pjLastUpdate,
-			String pjStatus) {
+			String pjServerLocation, int pjPrice, Date pjExCompletionDate, String pjExecutionTime, Date pjUploadDate,
+			Date pjLastUpdate, String pjStatus) {
 		super();
 		this.pjID = pjID;
 		this.pjClass = pjClass;
@@ -33,19 +35,18 @@ public class ProjectBean {
 		this.pjServerLocation = pjServerLocation;
 		this.pjPrice = pjPrice;
 		this.pjExCompletionDate = pjExCompletionDate;
+		this.pjExecutionTime = pjExecutionTime;
 		this.pjUploadDate = pjUploadDate;
 		this.pjLastUpdate = pjLastUpdate;
 		this.pjStatus = pjStatus;
 	}
 
-
-
 	public int getPjID() {
 		return pjID;
 	}
-	
-	public int setPjID(Integer PjID) {
-		return pjID;
+
+	public void setPjID(Integer pjID) {
+		this.pjID = pjID;
 	}
 
 	public String getPjClass() {
@@ -109,7 +110,16 @@ public class ProjectBean {
 	}
 
 	public void setPjExCompletionDate(Date pjExCompletionDate) {
-		this.pjExCompletionDate = pjExCompletionDate;
+		Timestamp ts = new Timestamp(pjExCompletionDate.getTime());
+		this.pjExCompletionDate = ts;
+	}
+
+	public String getPjExecutionTime() {
+		return pjExecutionTime;
+	}
+
+	public void setPjExecutionTime(String pjExecutionTime) {
+		this.pjExecutionTime = pjExecutionTime;
 	}
 
 	public Date getPjUploadDate() {
@@ -117,7 +127,8 @@ public class ProjectBean {
 	}
 
 	public void setPjUploadDate(Date pjUploadDate) {
-		this.pjUploadDate = pjUploadDate;
+		Timestamp ts = new Timestamp(pjUploadDate.getTime());
+		this.pjUploadDate = ts;
 	}
 
 	public Date getPjLastUpdate() {
@@ -125,7 +136,8 @@ public class ProjectBean {
 	}
 
 	public void setPjLastUpdate(Date pjLastUpdate) {
-		this.pjLastUpdate = pjLastUpdate;
+		Timestamp ts = new Timestamp(pjLastUpdate.getTime());
+		this.pjLastUpdate = ts;
 	}
 
 	public String getPjStatus() {
@@ -141,6 +153,7 @@ public class ProjectBean {
 		return "ProjectBean [pjID=" + pjID + ", pjClass=" + pjClass + ", fieldName=" + fieldName + ", pjName=" + pjName
 				+ ", memberPK=" + memberPK + ", pjInstruction=" + pjInstruction + ", pjServerLocation="
 				+ pjServerLocation + ", pjPrice=" + pjPrice + ", pjExCompletionDate=" + pjExCompletionDate
-				+ ", pjUploadDate=" + pjUploadDate + ", pjLastUpdate=" + pjLastUpdate + ", pjStatus=" + pjStatus + "]";
+				+ ", pjExecutionTime=" + pjExecutionTime + ", pjUploadDate=" + pjUploadDate + ", pjLastUpdate="
+				+ pjLastUpdate + ", pjStatus=" + pjStatus + "]";
 	}
 }
