@@ -1,61 +1,3 @@
-<<<<<<< HEAD
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>showAllMember</title>
-<style>
-	table {
-		border: 1px solid black;
-	}
-</style>
-</head>
-<body>
-	<div class="container">
-
-		<table>
-			<thead>
-				<tr>
-					<th>memberId</th>
-					<th>name</th>
-					<th>password</th>
-					<th>location</th>
-					<th>email</th>
-					<th>phone</th>
-					<th>memberImage</th>
-				</tr>
-			</thead>
-
-			<tbody>
-				<tr>
-					<td>${member.memberId}</td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-				</tr>
-			</tbody>
-
-
-
-		</table>
-
-
-
-	</div>
-
-
-	<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-	<script>
-		
-	</script>
-</body>
-=======
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -104,7 +46,7 @@ table {
 							<td>${member.registerTime}</td>
 							<td>${member.lastLogin}</td>
 							<td><img
-								src="<c:url value='/ShowMemberImgServlet?memberPK=${member.memberPK} '/>"
+								src="<c:url value='/ShowMemberImgServlet?memberId=${member.memberId} '/>"
 								alt="no img" width="200px" height="150px"></td>
 							<td><input type="button" value="修改" class="toModifyMode">
 								<input type="submit" value="刪除" class="delete"></td>
@@ -119,6 +61,20 @@ table {
 
 	<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 	<script>
+		const member = {
+				memberId : 		"1",
+				name:			"",
+				password:		"",
+				location:		"",
+				email:			"",
+				phone:			"",
+				registerTime:	"",
+				lastLogin:		"",
+//				img 在servlet做判斷修改
+		};
+		var member1 = Object.create(member);
+	
+	
 		$('tbody').on('click', '.delete', function(){
  			let memberId = $(this).parent().siblings().eq(0).text();
 			$.ajax({
@@ -141,18 +97,17 @@ table {
 		
 		$('tbody').on('click', '.toModifyMode', function(){
 			//將member資訊先存起來，修改完後交回
-			member = {
-					memberId : 		"$(this).parent().siblings().eq(0).text()",
-					name:			"$(this).parent().siblings().eq(1).text()",
-					password:		"$(this).parent().siblings().eq(2).text()",
-					location:		"$(this).parent().siblings().eq(3).text()",
-					email:			"$(this).parent().siblings().eq(4).text()",
-					phone:			"$(this).parent().siblings().eq(5).text()",
-					registerTime:	"$(this).parent().siblings().eq(6).text()",
-					lastLogin:		"$(this).parent().siblings().eq(7).text()",
+			
+			member1.memberId = $(this).parent().siblings().eq(0).text();
+			member1.name=			$(this).parent().siblings().eq(1).text();
+			member1.password=		$(this).parent().siblings().eq(2).text();
+			member1.location=		$(this).parent().siblings().eq(3).text();
+			member1.email=			$(this).parent().siblings().eq(4).text();
+			member1.phone=			$(this).parent().siblings().eq(5).text();
+			member1.registerTime=	$(this).parent().siblings().eq(6).text();
+			member1.lastLogin=		$(this).parent().siblings().eq(7).text();
 //					img 在servlet做判斷修改
-			}
-			console.log("123123123123")
+			
 			
 			//將表格改成 <input>
 			$(this).parent().siblings().eq(1).empty().html('<input type="text" name="name">');
@@ -165,38 +120,49 @@ table {
 			
 		})
 		
-		$('tbody').on('click', '.modifyCancle', function(){
+		 $('tbody').on('click', '.modifyCancle', function(){
 			
-			//將表格改成 <input>
-			$(this).parent().siblings().eq(0).text('member.memberId');
-			$(this).parent().siblings().eq(1).text('member.name');
-			$(this).parent().siblings().eq(2).text('member.password');
-			$(this).parent().siblings().eq(3).text('member.location');
-			$(this).parent().siblings().eq(4).text('member.email');
-			$(this).parent().siblings().eq(5).text('member.phone');
-			$(this).parent().siblings().eq(6).text('member.registerTime');
-			$(this).parent().siblings().eq(7).text('member.lastLogin');
-			$(this).parent().siblings().eq(8).html('<img
-					src="<c:url value='/ShowMemberImgServlet?memberPK=${member.memberPK} '/>"
-						alt="no img" width="200px" height="150px">');
+			$(this).parent().siblings().eq(0).text(member1.memberId);
+			$(this).parent().siblings().eq(1).text(member1.name);
+			$(this).parent().siblings().eq(2).text(member1.password);
+			$(this).parent().siblings().eq(3).text(member1.location);
+			$(this).parent().siblings().eq(4).text(member1.email);
+			$(this).parent().siblings().eq(5).text(member1.phone);
+			$(this).parent().siblings().eq(6).text(member1.registerTime);
+			$(this).parent().siblings().eq(7).text(member1.lastLogin);
 			
-			//////
-			/////
-			$(this).parent().html('<input type="button" value="修改" class="toModifyMode">
-					<input type="submit" value="刪除" class="delete">');
 			
-		})
+			
+			str = '<img src="<c:url value='/ShowMemberImgServlet?memberId=replace '/>" alt="no img" width="200px" height="150px">'
+			img = str.replace( 'replace', member1.memberId );
+			$(this).parent().siblings().eq(8).html( img );
+			
+			$(this).parent().html('<input type="button" value="修改" class="toModifyMode"><input type="submit" value="刪除" class="delete">');
+			
+		}) 
 		
 		
 		
-		/* $('tbody').on('click', '.modifyConfirm', function(){
-		
+		$('tbody').on('click', '.modifyConfirm', function(){
+			alert("response success")
 		let memberId = $(this).parent().siblings().eq(0).text();
+		let name = $(this).parent().siblings().eq(1).children().val();
+		let password = $(this).parent().siblings().eq(2).children().val();
+		let location = $(this).parent().siblings().eq(3).children().val();
+		let email = $(this).parent().siblings().eq(4).children().val();
+		let phone = $(this).parent().siblings().eq(5).children().val();
+	//	let memberImage = $(this).parent().siblings().eq(8).value();
 			$.ajax({
 			    type: "post",
 			    url: '<c:url value='/modify/modifyByAd.do'/>',
 			    data: {
 			    	 memberId : memberId ,
+			    	 name: name,
+			    	 password: password,
+			    	 location: location,
+			    	 email: email,
+			    	 phone: phone,
+			    	 //memberImage: memberImage,
 			    },
 			    
 			    success: function () {
@@ -206,9 +172,10 @@ table {
 			    	alert("response error")
 			    }
 			  });
-		}) */
+		})
+		
+		
 		
 	</script>
 </body>
->>>>>>> zshe
 </html>

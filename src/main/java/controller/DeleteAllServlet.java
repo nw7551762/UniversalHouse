@@ -26,7 +26,6 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 private void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 	request.setCharacterEncoding("UTF-8");
 	testDaoimpl td = new testDaoimpl();
-//	String field = request.getParameter("field");
 	try {
 		 td.deletetestCenter();
 		 String field = request.getParameter("field");
@@ -35,6 +34,7 @@ private void processRequest(HttpServletRequest request, HttpServletResponse resp
 		RequestDispatcher rd = request.getRequestDispatcher("/test/showDeleteSuccess.jsp");
 		rd.forward(request, response);
 		return;
+		
 	} catch (SQLException e) {
 		e.printStackTrace();
 	}

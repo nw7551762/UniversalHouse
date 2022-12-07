@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+<!--
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -41,7 +41,7 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/javax.servlet.jsp.jstl/jstl-api -->
+
 		<dependency>
 			<groupId>javax.servlet.jsp.jstl</groupId>
 			<artifactId>jstl-api</artifactId>
@@ -66,7 +66,7 @@
 			<version>2.9.0</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-csv -->
+
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-csv</artifactId>
@@ -98,7 +98,7 @@
 		</plugins>
 	</build>
 
-=======
+-->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -164,8 +164,17 @@
 			<artifactId>gson</artifactId>
 			<version>2.9.0</version>
 		</dependency>
+		
+					<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-csv -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-csv</artifactId>
+			<version>1.9.0</version>
+		</dependency>
 
 	</dependencies>
+
+		
 	<build>
 		<finalName>Topic2</finalName>
 		<plugins>
@@ -188,5 +197,4 @@
 		</plugins>
 	</build>
 
->>>>>>> zshe
 </project>
