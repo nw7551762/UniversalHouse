@@ -4,18 +4,35 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+<<<<<<< HEAD
+=======
+import java.util.ArrayList;
+import java.util.List;
+>>>>>>> zshe
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+<<<<<<< HEAD
+=======
+import org.slf4j.LoggerFactory;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+>>>>>>> zshe
 
 
 
 
 public class MemberDao {
 	DataSource ds = null;
+<<<<<<< HEAD
+=======
+	private static Logger log = LoggerFactory.getLogger(MemberDao.class);
+>>>>>>> zshe
 	
 	public MemberDao() {
 		try {
@@ -26,11 +43,49 @@ public class MemberDao {
 		}
 	}	
 	
+<<<<<<< HEAD
+=======
+	public void modify(MemberBean mb) {
+		String sql = "UPDATE Member " 
+				+ "SET name= ? , 	"
+				+ "password= ? , "
+				+ "location= ? , "
+				+ "email= ? , "
+				+ " phone = ? , "
+				+ "registerTime= ? , "
+				+ "memberImage= ? , "
+				+ "lastLogin= ? ";
+		try (
+			Connection con = ds.getConnection(); 
+			PreparedStatement ps = con.prepareStatement(sql);
+		) {
+			ps.setString(1, mb.getName());
+			ps.setString(2, mb.getPassword());
+			ps.setString(3, mb.getLocation());
+			ps.setString(4, mb.getEmail());
+			ps.setString(5, mb.getPhone());
+			ps.setTimestamp(6, mb.getRegisterTime());
+			ps.setBlob(7, mb.getMemberImage());
+			ps.setTimestamp(8, mb.getLastLogin());
+			ps.executeUpdate();
+			log.info("modify(), 修改成功：MemberBean=" + mb);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			throw new RuntimeException("Class: MemberDaoc#modify()發生例外: " 
+										+ ex.getMessage());
+		}
+		
+	}
+>>>>>>> zshe
 	
 //	private static final String SELECT_BY_ID = "SELECT * FROM member";
 
 	public void save(MemberBean mb) {
+<<<<<<< HEAD
 //		log.info("會員註冊功能之Dao: 儲存會員資料");
+=======
+		log.info("會員註冊功能之Dao: 儲存會員資料");
+>>>>>>> zshe
  		String sql = "insert into Member " 
 				+ " (memberId, name, password, location, email, "
 				+ " phone, registerTime, memberImage, lastLogin) "
@@ -49,22 +104,38 @@ public class MemberDao {
 			ps.setBlob(8, mb.getMemberImage());
 			ps.setTimestamp(9, mb.getLastLogin());
 			ps.executeUpdate();
+<<<<<<< HEAD
 //			log.info("saveMember(), 新增成功：MemberBean=" + mb);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			throw new RuntimeException("Class: MemberDaoc#saveMember()發生例外: " 
+=======
+			log.info("saveMember(), 新增成功：MemberBean=" + mb);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			throw new RuntimeException("Class: MemberDaoc#save()發生例外: " 
+>>>>>>> zshe
 										+ ex.getMessage());
 		}
 	}
 	
+<<<<<<< HEAD
 	public void deleteMember( int memberPK ) throws SQLException {
 		String sql = "delete from member where memberPK  = ?";
+=======
+	public void deleteMember( String memberId ) throws SQLException {
+		String sql = "delete from member where memberId  = ?";
+>>>>>>> zshe
 		
 		try (
 				Connection con = ds.getConnection(); 
 				PreparedStatement ps = con.prepareStatement(sql);
 			) {
+<<<<<<< HEAD
 				ps.setInt(1, memberPK);
+=======
+				ps.setString(1, memberId);
+>>>>>>> zshe
 				ps.executeLargeUpdate();
 				
 			} catch (Exception ex) {
@@ -97,7 +168,11 @@ public class MemberDao {
 				throw new RuntimeException("MemberDaoImpl_Jdbc類別#idExists()發生例外: " 
 						+ ex.getMessage());
 			}
+<<<<<<< HEAD
 //			log.info("會員註冊功能之 Dao: 檢查會員輸入的編號是否已被使用, exist=" + exist);
+=======
+			log.info("會員註冊功能之 Dao: 檢查會員輸入的編號是否已被使用, exist=" + exist);
+>>>>>>> zshe
 			return exist;
 		}
 	
@@ -135,10 +210,49 @@ public class MemberDao {
 				throw new RuntimeException("MemberDaoImpl_Jdbc類別#queryMember()發生例外: " 
 						+ ex.getMessage());
 			}
+<<<<<<< HEAD
 //			log.info("會員登入功能之Dao: 取得某個會員的資料, mb=" + mb);
 			return mb;
 		}
 	
+=======
+			log.info("會員登入功能之Dao: 取得某個會員的資料, mb=" + mb);
+			return mb;
+		}
+	
+	public MemberBean findByMemberId(String memberId) {
+		MemberBean mb = null;
+		String sql = "SELECT * FROM Member m WHERE m.memberId = ?";
+		try (
+			Connection con = ds.getConnection(); 
+			PreparedStatement ps = con.prepareStatement(sql);
+		) {
+			ps.setString(1, memberId);
+			try (ResultSet rs = ps.executeQuery();) {
+				if (rs.next()) {
+					mb = new MemberBean();
+					mb.setMemberPK(rs.getInt("memberPK"));
+					mb.setMemberId(rs.getString("memberId"));
+					mb.setName(rs.getString("name"));
+					mb.setPassword(rs.getString("password"));
+					mb.setLocation(rs.getString("location"));
+					mb.setEmail(rs.getString("email"));
+					mb.setPhone(rs.getString("phone"));
+					mb.setRegisterTime(rs.getTimestamp("registerTime"));
+					
+					mb.setLastLogin(rs.getTimestamp("lastLogin"));
+					mb.setMemberImage(rs.getBlob("MemberImage"));
+				}
+			}
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+			throw new RuntimeException("MemberDaoImpl_Jdbc類別#findByMemberIdAndPassword()發生SQL例外: " 
+					+ ex.getMessage());
+		}
+		return mb;
+	}
+	
+>>>>>>> zshe
 	public MemberBean findByMemberIdAndPassword(String memberId, String password) {
 		MemberBean mb = null;
 		String sql = "SELECT * FROM Member m WHERE m.memberId = ? and m.password = ?";
@@ -169,11 +283,55 @@ public class MemberDao {
 			throw new RuntimeException("MemberDaoImpl_Jdbc類別#findByMemberIdAndPassword()發生SQL例外: " 
 					+ ex.getMessage());
 		}
+<<<<<<< HEAD
 //		log.info("會員登入功能之Dao: 檢查帳號/密碼結果:" 
 //				+ (mb == null ? "帳號/密碼正確" : "帳號/密碼錯誤"));
 		return mb;
 	}
 	
 	
+=======
+		log.info("會員登入功能之Dao: 檢查帳號/密碼結果:" 
+				+ (mb == null ? "帳號/密碼正確" : "帳號/密碼錯誤"));
+		return mb;
+	}
+	
+	public List<MemberBean> findAllMember() {
+//		log.info("會員登入功能之Dao: 檢查帳號/密碼"); 
+		List<MemberBean> members = new ArrayList<MemberBean>();
+		String sql = "SELECT * FROM Member";
+		try (
+			Connection connection = ds.getConnection(); 
+			PreparedStatement ps = connection.prepareStatement(sql);
+		) {
+			
+			
+			try (ResultSet rs = ps.executeQuery();) {
+				while( rs.next() ) {
+					MemberBean mb = new MemberBean();
+					mb = new MemberBean();
+					mb.setMemberPK(rs.getInt("memberPK"));
+					mb.setMemberId(rs.getString("memberId"));
+					mb.setName(rs.getString("name"));
+					mb.setPassword(rs.getString("password"));
+					mb.setLocation(rs.getString("location"));
+					mb.setEmail(rs.getString("email"));
+					mb.setPhone(rs.getString("phone"));
+					if(rs.getTimestamp("registerTime")!=null) {
+						mb.setRegisterTime(rs.getTimestamp("registerTime"));
+					}
+					mb.setLastLogin(rs.getTimestamp("lastLogin"));
+					mb.setMemberImage(rs.getBlob("MemberImage"));
+					members.add(mb);
+				}
+			}
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+			throw new RuntimeException("MemberDao類別#findAllMember()發生例外: " 
+					+ ex.getMessage());
+		}
+		return members;
+	}
+>>>>>>> zshe
 	
 }

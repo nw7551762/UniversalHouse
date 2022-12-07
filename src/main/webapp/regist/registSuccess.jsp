@@ -6,6 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<<<<<<< HEAD
+=======
+<style>
+	h1{
+		color: lightred;
+	}
+</style>
+>>>>>>> zshe
 </head>
 <body>
 	
@@ -15,7 +23,12 @@
    </c:when>
    
    <c:otherwise>
+<<<<<<< HEAD
    		${member.name} regist success
+=======
+   <h1>Regist Success</h1>
+   		Welcom User: ${member.name} <br>
+>>>>>>> zshe
    </c:otherwise>
   
 </c:choose>

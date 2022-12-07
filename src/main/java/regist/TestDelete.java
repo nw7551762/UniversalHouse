@@ -28,7 +28,11 @@ public class TestDelete extends HttpServlet {
 		
 		MemberDao dao = new MemberDao();
 		try {
+<<<<<<< HEAD
 			dao.deleteMember(1);
+=======
+			dao.deleteMember("1");
+>>>>>>> zshe
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

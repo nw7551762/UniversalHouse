@@ -35,9 +35,16 @@ public class ShowMemberImgServlet extends HttpServlet {
 	private void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		request.setCharacterEncoding("UTF-8");
 		
+<<<<<<< HEAD
 		System.out.println(  request.getParameter("memberPK") ); 
 		MemberDao dao = new MemberDao();
 		int memberPK=1;
+=======
+		
+		
+		MemberDao dao = new MemberDao();
+		int memberPK= Integer.parseInt(  request.getParameter("memberPK")   ) ;
+>>>>>>> zshe
 		//找pk的member物件 需再修改
 		MemberBean member =  dao.findByMemberPK(memberPK);
 		Blob blob =  member.getMemberImage();
