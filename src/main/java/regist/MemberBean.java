@@ -25,10 +25,15 @@ public class MemberBean {
 	private Timestamp lastLogin;
 	
 	public Blob partToBlob(Part part ) throws IOException, SerialException, SQLException {
+		//partImage轉inputstream
 		InputStream is =  part.getInputStream();
-		byte[] b = new byte[5128];
+		long len = part.getSize();
+		
+		byte[] b = new byte[(int) len];
+		//is資料寫入byte矩陣
 		is.read(b);
 		Blob blob = null;
+		//SerialBlob建構子 new一個Blob物件
 		blob = new SerialBlob(b);
 		
 		return blob;
@@ -116,8 +121,7 @@ public class MemberBean {
 	public Timestamp getRegisterTime() {
 		return registerTime;
 	}
-	public void setRegisterTime() {
-		Date date = new Date();
+	public void setRegisterTime( Date date) {
 		Timestamp ts = new Timestamp( date.getTime() ); 
 		this.registerTime = ts;
 	}
