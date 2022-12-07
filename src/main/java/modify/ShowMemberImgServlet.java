@@ -37,7 +37,6 @@ public class ShowMemberImgServlet extends HttpServlet {
 		
 		
 		
-		System.out.println(  request.getParameter("memberPK") ); 
 		MemberDao dao = new MemberDao();
 		int memberPK= Integer.parseInt(  request.getParameter("memberPK")   ) ;
 		//找pk的member物件 需再修改

@@ -96,14 +96,14 @@ public class MemberDao {
 		}
 	}
 	
-	public void deleteMember( int memberPK ) throws SQLException {
-		String sql = "delete from member where memberPK  = ?";
+	public void deleteMember( String memberId ) throws SQLException {
+		String sql = "delete from member where memberId  = ?";
 		
 		try (
 				Connection con = ds.getConnection(); 
 				PreparedStatement ps = con.prepareStatement(sql);
 			) {
-				ps.setInt(1, memberPK);
+				ps.setString(1, memberId);
 				ps.executeLargeUpdate();
 				
 			} catch (Exception ex) {
@@ -271,6 +271,7 @@ public class MemberDao {
 					}
 					mb.setLastLogin(rs.getTimestamp("lastLogin"));
 					mb.setMemberImage(rs.getBlob("MemberImage"));
+					members.add(mb);
 				}
 			}
 		} catch (SQLException ex) {

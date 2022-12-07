@@ -25,7 +25,7 @@
 	<p />
 	<a href="<c:url value='/showMemberInfo/showMemberInfo.do' />">Show Member Informations</a>
 	<p />
-	<a href="<c:url value='/showMemebrInfo/showAllMember.do' />">Show All Member Informations</a>
+	<a href="<c:url value='/showMemberInfo/showAllMember.do' />">Show All Member Informations</a>
 	<p />
 	<a href="<c:url value='/login/login.jsp' />">Login</a>
 	<p />

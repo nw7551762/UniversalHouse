@@ -22,7 +22,7 @@ import regist.MemberBean;
 import regist.MemberDao;
 
 @MultipartConfig
-@WebServlet( "/modify/modify.do" )
+@WebServlet( "/modify/modifyByMember.do" )
 public class modifyMemberInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -38,6 +38,7 @@ public class modifyMemberInfoServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		MemberDao dao = new MemberDao();
+		
 		HttpSession session = request.getSession();
 		
 		MemberBean member =  (MemberBean) session.getAttribute("LoginOK");

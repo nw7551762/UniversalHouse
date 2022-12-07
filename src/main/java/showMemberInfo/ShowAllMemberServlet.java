@@ -1,6 +1,7 @@
 package showMemberInfo;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,30 +14,34 @@ import javax.servlet.http.HttpSession;
 import regist.MemberBean;
 import regist.MemberDao;
 
-@WebServlet("/showMemberInfo/showMemberInfo.do")
-public class ShowMemberInfoServlet extends HttpServlet {
+/**
+ * Servlet implementation class ShowAllMember
+ */
+@WebServlet("/showMemberInfo/showAllMember.do")
+public class ShowAllMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		processRequest(request, response);
 	}
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		processRequest(request, response);
+		doGet(request, response);
 	}
 	
 	private void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		request.setCharacterEncoding("UTF-8");
-		
-		HttpSession session = request.getSession();
+HttpSession session = request.getSession();
 		
 		MemberDao dao = new MemberDao();
-		MemberBean member = (MemberBean) session.getAttribute("LoginOK") ;
+		List<MemberBean> members = dao.findAllMember();
 		
 		
-		request.setAttribute("member", member);
-		RequestDispatcher rd = request.getRequestDispatcher("/showMemberInfo/showMemberInfo.jsp");
+		request.setAttribute("members", members);
+		RequestDispatcher rd = request.getRequestDispatcher("/showMemberInfo/showAllMember.jsp");
 		rd.forward(request, response);
 		return;
+		
 		
 	}
 
