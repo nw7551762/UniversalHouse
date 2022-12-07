@@ -47,7 +47,7 @@
          
         	
 	</ul>
-	<img src="<c:url value='/ShowMemberImgServlet?memberPK=${member.memberPK} '/>" alt="no img" width="400px" height="400px">
+	<img src="<c:url value='/ShowMemberImgServlet?memberId=${member.memberId} '/>" alt="no img" width="400px" height="400px">
 	<table>
         <tr><td></td></tr>
 

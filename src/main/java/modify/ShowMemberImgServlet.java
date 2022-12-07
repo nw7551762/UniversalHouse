@@ -38,9 +38,9 @@ public class ShowMemberImgServlet extends HttpServlet {
 		
 		
 		MemberDao dao = new MemberDao();
-		int memberPK= Integer.parseInt(  request.getParameter("memberPK")   ) ;
+		String memberId=  request.getParameter("memberId") ;
 		//找pk的member物件 需再修改
-		MemberBean member =  dao.findByMemberPK(memberPK);
+		MemberBean member =  dao.findByMemberId(memberId);
 		Blob blob =  member.getMemberImage();
 		try (
 				InputStream is =  blob.getBinaryStream();
