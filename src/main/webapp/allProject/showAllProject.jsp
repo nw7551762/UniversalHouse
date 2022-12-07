@@ -110,6 +110,19 @@ th{
 		    }
 		});
 	})
+	
+	$('#tb').on('click','reviseProject',function(){
+		project
+		project
+		project
+		project
+		project
+		project
+		project
+		project
+		project
+		project
+	})
 </script>
 </body>
 </html>
