@@ -35,6 +35,7 @@ public class MemberBean {
 		Blob blob = null;
 		//SerialBlob建構子 new一個Blob物件
 		blob = new SerialBlob(b);
+		is.close();
 		
 		return blob;
 	}

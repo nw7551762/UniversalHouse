@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +18,7 @@ import javax.sql.rowset.serial.SerialException;
 import regist.MemberBean;
 import regist.MemberDao;
 
-
+@MultipartConfig
 @WebServlet("/modify/modifyByAd.do")
 public class ModifyByAdministratorServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -49,29 +50,30 @@ public class ModifyByAdministratorServlet extends HttpServlet {
 			MemberDao dao = new MemberDao();
 			
 			MemberBean member =  dao.findByMemberId(memberId);
-			if( request.getParameter("name")!=null ) {
+			if( !request.getParameter("name").equals("") ) {
 				member.setName(request.getParameter("name"));
 			}
-			if( request.getParameter("password")!=null ) {
+			if( !request.getParameter("password").equals("") ) {
 				member.setPassword(request.getParameter("password"));
 			}
-			if( request.getParameter("location")!=null ) {
+			if( !request.getParameter("location").equals("") ) {
 				member.setLocation(request.getParameter("location"));
 			}
-			if( request.getParameter("email")!=null ) {
+			if( !request.getParameter("email").equals("") ) {
 				member.setEmail(request.getParameter("email"));
 			}
-			if( request.getParameter("phone")!=null ) {
+			if( !request.getParameter("phone").equals("") ) {
 				member.setPhone(request.getParameter("phone"));
 			}
 			
-//			if(  request.getPart("memberImage")!=null  ) {
-//				Part imgPart = request.getPart("memberImage");
-//				Blob imgBlob = member.partToBlob(imgPart);
-//						
-//				member.setMemberImage(imgBlob);
-//			}
+			if(  request.getPart("memberImage").getSize()>0  ) {
+				Part imgPart = request.getPart("memberImage");
+				Blob imgBlob = member.partToBlob(imgPart);
+						
+				member.setMemberImage(imgBlob);
+			}
 			dao.modify(member);
+			response.getWriter().write("");;
 		}
 	
 	}
