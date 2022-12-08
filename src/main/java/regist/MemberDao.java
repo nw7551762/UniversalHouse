@@ -43,7 +43,8 @@ public class MemberDao {
 				+ " phone = ? , "
 				+ "registerTime= ? , "
 				+ "memberImage= ? , "
-				+ "lastLogin= ? ";
+				+ "lastLogin= ? "
+				+ "where memberId = ? ";
 		try (
 			Connection con = ds.getConnection(); 
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -56,6 +57,7 @@ public class MemberDao {
 			ps.setTimestamp(6, mb.getRegisterTime());
 			ps.setBlob(7, mb.getMemberImage());
 			ps.setTimestamp(8, mb.getLastLogin());
+			ps.setString(9, mb.getMemberId());
 			ps.executeUpdate();
 			log.info("modify(), 修改成功：MemberBean=" + mb);
 		} catch (Exception ex) {

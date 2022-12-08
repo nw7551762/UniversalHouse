@@ -73,7 +73,7 @@ table {
 				lastLogin:		"",
 //				img 在servlet做判斷修改
 		};
-		var member1 = Object.create(member);
+		
 	
 	
 		$('tbody').on('click', '.delete', function(){
@@ -95,7 +95,7 @@ table {
 		})
 		
 		
-		
+		var member1 = Object.create(member);
 		$('tbody').on('click', '.toModifyMode', function(){
 			//將member資訊先存起來，修改完後交回
 			
@@ -118,7 +118,6 @@ table {
  			$(this).parent().siblings().eq(5).html('<input type="text" name="phone">');
  			$(this).parent().siblings().eq(8).html('<input type="file" name="memberImage">');
 			$(this).parent().html('<input type="submit" value="確認修改"class="modifyConfirm"><input type="button" value="取消" class="modifyCancle">');
-			
 		})
 		
 		 $('tbody').on('click', '.modifyCancle', function(){
@@ -170,15 +169,14 @@ table {
 			    },  */
 			    enctype: "multipart/form-data",
 			    
-			    dataType: 'JSON',
+// 			    dataType: 'JSON',
 			    data: formData,
-			    contentType: false,
+ 			    contentType: false,
 		        cache: false,
-		        processData: false,
-		        
-			    
-			    
+ 		        processData: false,
 			    success: function (response) {
+			    	console.log('1234')
+			    	console.log(response)
 			    	alert("response success")
 			    },
 			    error: function (thrownError) {
