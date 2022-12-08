@@ -98,7 +98,7 @@ public class ProjectDaoImpl_JDBC implements ProjectDao {
 	@Override
 	public List<ProjectBean> findByID(Integer memberPk) {
 		ProjectBean bean = null;
-		String sql = "SELECT * FROM project WHERE memberPK =?";
+		String sql = "SELECT * FROM project WHERE memberPK =? ORDER BY pj_ID DESC";
 		List<ProjectBean> projectList = new ArrayList<>();
 
 		try (Connection connection = ds.getConnection(); PreparedStatement ps = connection.prepareStatement(sql);) {
@@ -166,7 +166,7 @@ public class ProjectDaoImpl_JDBC implements ProjectDao {
 	@Override
 	public List<ProjectBean> findAllProject() {
 		ProjectBean bean = null;
-		String sql = "SELECT * FROM project";
+		String sql = "SELECT * FROM project ORDER BY pj_ID DESC";
 		List<ProjectBean> allProject = new ArrayList<>();
 
 		try (Connection connection = ds.getConnection(); PreparedStatement ps = connection.prepareStatement(sql);) {

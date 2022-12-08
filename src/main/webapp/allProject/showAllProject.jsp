@@ -28,6 +28,7 @@ th{
 </style>
 </head>
 <body>
+<form>
 <c:if test="${ empty allProject}">
 <h2>查無案件資料</h2>
 </c:if>
@@ -68,12 +69,13 @@ th{
 			<td>${pj.pjLastUpdate}</td>
 			<td>${pj.pjStatus}</td>
 			<td><input type="button" value="修改" id="reviseProject">
-				<input type="button" value="刪除" id="delete"></td>
+				<input type="submit" value="刪除" id="delete"></td>
 		</tr>
 		</c:forEach>
 		</tbody>
 	</table>
 </c:if>
+</form>
 
 <div  class="t1"><a href="<c:url value='/' />">回首頁</a></div>
 
@@ -104,10 +106,14 @@ th{
 		    },
 		    
 		    success: function () {
-		    	alert("response success")
+		    	alert("刪除成功")
+		    	$.ajax({
+					type:'post',
+					url: '<c:url value='/project/showAllProjectServlet'/>'
+				});
 		    },
 		    error: function (thrownError) {
-		    	alert("response error")
+		    	alert("刪除失敗")
 		    }
 		});
 	})
@@ -125,16 +131,14 @@ th{
 		project.pjExecutionTime = $(this).parent().siblings().eq(9).text();
 		project.pjStatus = $(this).parent().siblings().eq(12).text();
 		
-		console.log(project);
-		
-		$(this).parent().siblings().eq(2).html('<select name="fieldName" id="fieldName"><option value="設計">設計</option><option value="資訊">資訊</option><option value="文書">文書</option><option value="影視">影視</option><option value="生活">生活</option><option value="顧問">顧問</option>');
+		$(this).parent().siblings().eq(2).html('<select name="fieldName" id="fieldName"><option value="設計">設計</option><option value="資訊">資訊</option><option value="文書">文書</option><option value="影視">影視</option><option value="生活">生活</option><option value="顧問">顧問</option></select>');
 		$(this).parent().siblings().eq(3).html('<input type="text" name="pj_Name">');
-		$(this).parent().siblings().eq(5).html('<textarea name="pj_Instruction" cols="40" rows="10"></textarea>');
+		$(this).parent().siblings().eq(5).html('<textarea name="pj_Instruction" cols="30" rows="15"></textarea>');
 		$(this).parent().siblings().eq(6).html('<input type="text" name="pj_ServerLocation">');
-		$(this).parent().siblings().eq(7).html('<input type="text" name="pj_Price" pattern="\d{8}">');
+		$(this).parent().siblings().eq(7).html('<input type="text" name="pj_Price">');
 		$(this).parent().siblings().eq(8).html('<input type="date" name="pj_ExCompletionDate" id="pj_ExCompletionDate" value="2022-12-01">');
 		$(this).parent().siblings().eq(9).html('<input type="text" name="pj_ExecutionTime">');
-		$(this).parent().siblings().eq(12).html('<select name="pj_Status" id="pj_Status"><option value="待審核">待審核</option><option value="已上架">已上架</option><option value="下架中">下架中</option>');
+		$(this).parent().siblings().eq(12).html('<select name="pj_Status" id="pj_Status"><option value="待審核">待審核</option><option value="已上架">已上架</option><option value="下架中">下架中</option></select>');
 		$(this).parent().html('<input type="submit" value="確認修改" id="Confirm"><input type="button" value="取消修改" id="Cancle">');
 		
 	})
@@ -154,12 +158,11 @@ th{
 		$(this).parent().siblings().eq(12).text(project.pjStatus);
 		
 			
-		$(this).parent().html('<input type="button" value="修改" class="reviseProject"><input type="button" value="刪除" class="delete">');
+		$(this).parent().html('<input type="button" value="修改" id="reviseProject"><input type="button" value="刪除" id="delete">');
 			
 	}) 
 	
 	$('#tb').on('click', '#Confirm', function(){
-			alert("response success")
 		let pj_ID = $(this).parent().siblings().eq(0).text();
 		let pj_Class = $(this).parent().siblings().eq(1).text();
 		let fieldName = document.getElementById("fieldName").value;
@@ -190,12 +193,14 @@ th{
 			    },
 			    
 			    success: function () {
-			    	alert("response success");
+			    	alert("修改成功")
 			    },
 			    error: function (thrownError) {
-			    	alert("response error");
+			    	alert("修改失敗")
 			    }
 			  });
+			
+			    	
 		})
 </script>
 </body>

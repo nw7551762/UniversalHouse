@@ -3,6 +3,7 @@ package project;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,9 +29,11 @@ public class DeleteProjectServlet extends HttpServlet {
 			request.setCharacterEncoding("UTF-8");
 			ProjectDaoImpl_JDBC dao = new ProjectDaoImpl_JDBC();
 			int pjID = Integer.parseInt(request.getParameter("pj_ID"));
-			System.out.println(pjID);
 			dao.deleteByID(pjID);
 		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

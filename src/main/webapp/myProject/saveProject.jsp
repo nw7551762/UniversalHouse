@@ -37,7 +37,14 @@ textarea {
 		method="post" enctype="multipart/form-data">
 		<fieldset>
 		<div class="st1">
-			領域分類：<br><input type="text" name="fieldName"><br> 
+			領域分類：<br>
+			<select name="fieldName" id="fieldName">
+			<option value="設計">設計</option>
+			<option value="資訊">資訊</option>
+			<option value="文書">文書</option>
+			<option value="影視">影視</option>
+			<option value="生活">生活</option>
+			<option value="顧問">顧問</option></select><br> 
 		</div>
 		<div class="st1">
 			委託項目名稱：<br><input type="text" name="pj_Name"><br> 
@@ -52,7 +59,7 @@ textarea {
 			委託項目報價：<br><input type="text" name="pj_Price"><br>
 		</div>
 		<div class="st1">
-			預計完成日：yyyy-MM-dd<br><input type="text" name="pj_ExCompletionDate"><br>
+			預計完成日：<br><input type="date" name="pj_ExCompletionDate" value="2022-12-01"><br>
 		</div>
 		</fieldset>
 		<br>
