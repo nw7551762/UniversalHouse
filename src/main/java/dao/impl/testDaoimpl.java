@@ -189,4 +189,8 @@ public class testDaoimpl implements dao.testService {
 //		}
 	}
 	
+	//判斷呼叫的題庫是否跟ShowTestServlet一樣
+	public void testEq() {
+		
+	}
 }

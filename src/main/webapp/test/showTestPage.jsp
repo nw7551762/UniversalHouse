@@ -10,71 +10,77 @@
 table {
 	border: 1px solid black;
 	border-collapse: collapse;
-	width:100%;
+	width: 100%;
+}
+
+p, label {
+	font: 1rem 'Fira Sans', sans-serif;
 }
 </style>
 </head>
 <body>
 	<div class="container">
-		<form>
-		<!--
-			<table border='1'>
-				<thead>
-					<tr>
-						<th>examinationQuestion</th>
-						<th>options</th>
-						<th>options2</th>
-						<th>options3</th>
-						<th>options4</th>
-						
+		<form action="<c:url value='/TestResultServlet?questionCounts=${testBeans.size()}'/>" method="post" enctype="multipart/form-data">
 
-					</tr>
-				</thead>
-				  -->
-<tbody class = "tbody">
-<c:forEach var="testBean" items=" ${testBeans}">
+			<c:forEach var="testBean" items="${testBeans}" varStatus="vs">
+				<fieldset id="tests" name= "test">
+					<legend>${testBean.examinationQuestion}</legend>
 
-<div class="divCss">
-${testBean.examinationQuestion}
-    <ol type="A" start="" class="olCss">
-        <input class="inputClass" type="checkbox" name="place" value="A" checked="checked"><li class="liRight">${testBean.options}</li>
-        <input class="inputClass" type="checkbox" name="place" value="B" checked="checked"><li class="liRight">${testBean.options2}</li>
-        <input class="inputClass" type="checkbox" name="place" value="C" checked="checked"><li class="liRight">${testBean.options3}</li>
-    </ol>
-</div>
-<!-- 
-<tr>
-<td> c</td>
-<td><input type="radio">${testBean.options}</td>
-<td><input type="radio" >${testBean.options2}</td>
-<td>${testBean.options3}</td>
-<td>${testBean.options4}</td>
-</tr>
--->
 
-</c:forEach>
-</tbody>
-<!-- </table> -->
-</form>
-</div>
+					<div>
+						<input type="radio" name="${vs.count}"  value="1"> 
+						<label for="huey">${testBean.options}</label>
+					</div>
+
+					<div>
+						<input type="radio" name="${vs.count}" value="2"> 
+						<label for="dewey">${testBean.options2}</label>
+					</div>
+
+
+
+				</fieldset>
+			</c:forEach>
+			<input type="submit"  value="提交" class="" onclick="">
+		</form>
+	</div>
 	<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-<script>
-const test = {
-		examinationQuestion :   "",
-		options :				"";
-		options2 :				"";
-		options3 :				"";
-		options4 :				"";
+	<script>
+	$(function(){
+		$(.container)
+	})
+
+	// on click事件
+	
+	
+	
+	
+	//pass  form and list.length to servlet 
+	//for( int i =1; i<list.length; i++) {
+	//		getparam( vscounts)
+	//		if(1){
+	// 		sum+= points(one)
+	//     }else{
+	//			sum+= points(two)
+	//		}
+	//		
+	//
+	
+		/*const test = {
+		 examinationQuestion :   "",
+		 options :				"";
+		 options2 :				"";
+		 options3 :				"";
+		 options4 :				"";
 		
-};
-/*
-var test1 = Object.creat(test);
+		 };
 
-$('tbody').on('click', 'delete', function(){
-	let 
-})
-*/
+		 var test1 = Object.creat(test);
 
-</script>
+		 $('tbody').on('click', 'delete', function(){
+		 let 
+		 })
+		 */
+	</script>
 </body>
 </html>
