@@ -99,7 +99,7 @@ public class ProjectDaoImpl_JDBC implements ProjectDao {
 	public List<ProjectBean> findByID(Integer memberPk) {
 		ProjectBean bean = null;
 		String sql = "SELECT * FROM project WHERE memberPK =?";
-		List<ProjectBean> allMyProject = new ArrayList<>();
+		List<ProjectBean> projectList = new ArrayList<>();
 
 		try (Connection connection = ds.getConnection(); PreparedStatement ps = connection.prepareStatement(sql);) {
 			ps.setInt(1, memberPk);
@@ -121,15 +121,48 @@ public class ProjectDaoImpl_JDBC implements ProjectDao {
 					bean.setPjUploadDate(rs.getTimestamp("pj_UploadDate"));
 					bean.setPjLastUpdate(rs.getTimestamp("pj_LastUpdate"));
 					bean.setPjStatus(rs.getString("pj_Status"));
-					allMyProject.add(bean);
+					projectList.add(bean);
 				}
 			}
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
-		return allMyProject;
+		return projectList;
 	}
 
+	@Override
+	public ProjectBean findBypjID(Integer projectID) {
+		ProjectBean bean = null;
+		String sql = "SELECT * FROM project WHERE pj_ID =?";
+
+		try (Connection connection = ds.getConnection(); PreparedStatement ps = connection.prepareStatement(sql);) {
+			ps.setInt(1, projectID);
+			try (ResultSet rs = ps.executeQuery();) {
+				while (rs.next()) {
+					bean = new ProjectBean();
+					bean.setPjID(rs.getInt("pj_ID"));
+					bean.setPjClass(rs.getString("pj_Class"));
+					bean.setFieldName(rs.getString("fieldName"));
+					bean.setPjName(rs.getString("pj_Name"));
+					bean.setMemberPK(rs.getInt("memberPK"));
+					bean.setPjInstruction(rs.getString("pj_Instruction"));
+					bean.setPjServerLocation(rs.getString("pj_ServerLocation"));
+					bean.setPjPrice(rs.getInt("pj_Price"));
+					if ((rs.getTimestamp("pj_ExCompletionDate")) != null) {
+						bean.setPjExCompletionDate(rs.getTimestamp("pj_ExCompletionDate"));
+					}
+					bean.setPjExecutionTime(rs.getString("pj_ExecutionTime"));
+					bean.setPjUploadDate(rs.getTimestamp("pj_UploadDate"));
+					bean.setPjLastUpdate(rs.getTimestamp("pj_LastUpdate"));
+					bean.setPjStatus(rs.getString("pj_Status"));
+				}
+			}
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+		return bean;
+	}
+	
 	@Override
 	public List<ProjectBean> findAllProject() {
 		ProjectBean bean = null;
@@ -163,5 +196,6 @@ public class ProjectDaoImpl_JDBC implements ProjectDao {
 		}
 		return allProject;
 	}
+
 
 }

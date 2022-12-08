@@ -50,7 +50,7 @@ public class SaveServerProjectServlet extends HttpServlet {
 			Date date = new Date();
 			project.setPjUploadDate(date);
 			project.setPjLastUpdate(date);
-			project.setPjStatus("待審核");
+			project.setPjStatus("審核中");
 			pjDao.saveProject(project);
 			request.setAttribute("project", project);
 			RequestDispatcher rd = request.getRequestDispatcher("/myProject/saveProjectSuccess.jsp");

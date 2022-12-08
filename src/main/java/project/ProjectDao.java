@@ -19,6 +19,9 @@ public interface ProjectDao {
 	//用會員ID查詢
 	List<ProjectBean> findByID(Integer memberPk);
 	
+	//用會員ID查詢
+	ProjectBean findBypjID(Integer projectID);
+
 	//列出所有案件
 	List<ProjectBean> findAllProject();
 

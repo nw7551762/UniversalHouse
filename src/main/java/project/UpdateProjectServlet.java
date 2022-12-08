@@ -28,9 +28,9 @@ public class UpdateProjectServlet extends HttpServlet {
 		try {
 			request.setCharacterEncoding("UTF-8");
 			
-			int memberPK = Integer.parseInt(request.getParameter("memberPK"));
+			int pjID = Integer.parseInt(request.getParameter("pj_ID"));
 			ProjectDaoImpl_JDBC dao = new ProjectDaoImpl_JDBC();
-			ProjectBean bean = (ProjectBean) dao.findByID(memberPK);
+			ProjectBean bean = dao.findBypjID(pjID);
 			
 			if((request.getParameter("fieldName"))!=null) {
 				bean.setFieldName(request.getParameter("fieldName"));
@@ -45,7 +45,7 @@ public class UpdateProjectServlet extends HttpServlet {
 			if((request.getParameter("pj_Price"))!=null) {
 				bean.setPjPrice(Integer.parseInt(request.getParameter("pj_Price")));
 			}
-			if((request.getParameter("pj_ExCompletionDate"))!=null && bean.getPjClass() == "委託" ) {
+			if((request.getParameter("pj_ExCompletionDate"))!=null && (bean.getPjClass()).equals("委託")  ) {
 				Date exCompletionDate;
 				try {
 					exCompletionDate = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("pj_ExCompletionDate"));
@@ -55,12 +55,17 @@ public class UpdateProjectServlet extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
-			if((request.getParameter("pj_ExecutionTime"))!=null && bean.getPjClass() == "服務" ) {
+			if((request.getParameter("pj_ExecutionTime"))!=null && (bean.getPjClass()).equals("服務") ) {
 				bean.setPjExecutionTime(request.getParameter("pj_ExecutionTime")); 
 			}
-			if((request.getParameter("pj_Status"))!=null) {
-				request.getParameter("pj_Status");
+			
+			Date date = new Date();
+			bean.setPjLastUpdate(date);
+			
+			if((request.getParameter("pj_Status"))!= null) {
+				bean.setPjStatus(request.getParameter("pj_Status"));
 			}
+			
 			dao.updateProject(bean);
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();

@@ -33,7 +33,7 @@
 	<p/>
 	<a href="<c:url value='/project/showMyProjectServlet' />">查詢我的案件</a>
 	<p/>
-	<a href="<c:url value='/project/showAllProjectServlet' />">查詢所有案件</a>
+	<a href="<c:url value='/project/showAllProjectServlet' />">管理所有案件</a>
 	<p/>
 	<a href="<c:url value='/login/login.jsp' />">Login</a>
 	<p />
