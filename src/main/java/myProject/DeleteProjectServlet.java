@@ -1,4 +1,4 @@
-package project;
+package myProject;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/project/DeleteProjectServlet")
+import project.ProjectDaoImpl_JDBC;
+
+@WebServlet("/myProject/DeleteProjectServlet")
 public class DeleteProjectServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -31,9 +33,6 @@ public class DeleteProjectServlet extends HttpServlet {
 			int pjID = Integer.parseInt(request.getParameter("pj_ID"));
 			dao.deleteByID(pjID);
 		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

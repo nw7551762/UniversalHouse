@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>我的所有案件</title>
+<title>我提出的所有案件</title>
 <style>
 .t1{
 	width:1400px;
@@ -29,10 +29,14 @@ th{
 </head>
 <body>
 <form>
-<c:if test="${empty project}">
-<h2>查無案件資料</h2>
+<c:if test="${empty myProject}">
+<div class="t1">
+<h2>目前沒有任何項目，快新增一個吧！</h2>
+<h3><a href="<c:url value='/myProject/saveProject.jsp' />">委託項目</a></h3>
+<h3><a href="<c:url value='/myProject/saveServerProject.jsp' />">服務項目</a></h3>
+</div>
 </c:if>
-<c:if test="${not empty project}">
+<c:if test="${not empty myProject}">
 	<table class="t1">
 	<thead>
 		<tr>
@@ -52,7 +56,7 @@ th{
 		</tr>
 		</thead>
 		<tbody id="tb">
-		<c:forEach var="pj" items="${project}" >
+		<c:forEach var="pj" items="${myProject}" >
 		<tr>
 			<td>${pj.pjID}</td>
 			<td>${pj.pjClass}</td>
@@ -90,7 +94,6 @@ th{
 			pjPrice:'',
 			pjExCompletionDate:'',
 			pjExecutionTime:'',
-			pjStatus:'',
 	};
 	var project1 = Object.create(project);
 	
@@ -98,7 +101,7 @@ th{
 		let pj_ID = $(this).parent().siblings().eq(0).text();
 		$.ajax({
 			type:'post',
-			url: '<c:url value='/project/DeleteProjectServlet'/>',
+			url: '<c:url value='/myProject/DeleteProjectServlet'/>',
 		    data: {
 		    	 pj_ID : pj_ID ,
 		    },
@@ -107,7 +110,7 @@ th{
 		    	alert("刪除成功")
 		    	$.ajax({
 					type:'post',
-					url: '<c:url value='/project/showAllProjectServlet'/>'
+					url: '<c:url value='/allProject/showAllProjectServlet'/>'
 				});
 		    },
 		    error: function (thrownError) {
@@ -135,7 +138,6 @@ th{
 		$(this).parent().siblings().eq(6).html('<input type="text" name="pj_Price">');
 		$(this).parent().siblings().eq(7).html('<input type="date" name="pj_ExCompletionDate" id="pj_ExCompletionDate" value="2022-12-01">');
 		$(this).parent().siblings().eq(8).html('<input type="text" name="pj_ExecutionTime">');
-		$(this).parent().siblings().eq(11).html('<select name="pj_Status" id="pj_Status"><option value="待審核">待審核</option><option value="已上架">已上架</option><option value="下架中">下架中</option></select>');
 		$(this).parent().html('<input type="submit" value="確認修改" id="Confirm"><input type="button" value="取消修改" id="Cancle">');
 		
 	})
@@ -168,11 +170,11 @@ th{
 		let pj_Price = $(this).parent().siblings().eq(6).children().val();
 		let pj_ExCompletionDate = document.getElementById("pj_ExCompletionDate").value;
 		let pj_ExecutionTime = $(this).parent().siblings().eq(8).children().val();
-		let pj_Status = document.getElementById("pj_Status").value;
+		let pj_Status = document.getElementById("pj_Status").text;
 		
 			$.ajax({
 			    type: "post",
-			    url: '<c:url value='/project/UpdateProjectServlet'/>',
+			    url: '<c:url value='/myProject/UpdateProjectServlet'/>',
 			    data: {
 			    	pj_ID:pj_ID,
 					pj_Class:pj_Class,

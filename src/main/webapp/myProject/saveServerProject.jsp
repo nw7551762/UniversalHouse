@@ -33,7 +33,7 @@ textarea {
 </style>
 </head>
 <body>
-	<form class="t1" action="<c:url value='/project/SaveServerProjectServlet' />"
+	<form class="t1" action="<c:url value='/myProject/SaveServerProjectServlet' />"
 		method="post" enctype="multipart/form-data">
 		<fieldset>
 		<div class="st1">

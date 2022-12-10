@@ -30,7 +30,9 @@ th{
 <body>
 <form>
 <c:if test="${ empty allProject}">
+<div class="t1">
 <h2>查無案件資料</h2>
+</div>
 </c:if>
 <c:if test="${not empty allProject}">
 	<table class="t1">
@@ -59,7 +61,7 @@ th{
 			<td>${pj.pjClass}</td>
 			<td>${pj.fieldName}</td>
 			<td>${pj.pjName}</td>
-			<td>${pj.memberPK}</td>
+			<td>${pj.memberID}</td>
 			<td>${pj.pjInstruction}</td>
 			<td>${pj.pjServerLocation}</td>
 			<td>${pj.pjPrice}</td>
@@ -86,7 +88,7 @@ th{
 			pjClass:'',
 			fieldName:'',
 			pjName:'',
-			memberPK:'',
+			memberID:'',
 			pjInstruction:'',
 			pjServerLocation:'',
 			pjPrice:'',
@@ -100,7 +102,7 @@ th{
 		let pj_ID = $(this).parent().siblings().eq(0).text();
 		$.ajax({
 			type:'post',
-			url: '<c:url value='/project/DeleteProjectServlet'/>',
+			url: '<c:url value='/myProject/DeleteProjectServlet'/>',
 		    data: {
 		    	 pj_ID : pj_ID ,
 		    },
@@ -109,7 +111,7 @@ th{
 		    	alert("刪除成功")
 		    	$.ajax({
 					type:'post',
-					url: '<c:url value='/project/showAllProjectServlet'/>'
+					url: '<c:url value='/allProject/showAllProjectServlet'/>'
 				});
 		    },
 		    error: function (thrownError) {
@@ -123,7 +125,7 @@ th{
 		project.pjClass = $(this).parent().siblings().eq(1).text();
 		project.fieldName = $(this).parent().siblings().eq(2).text();
 		project.pjName = $(this).parent().siblings().eq(3).text();
-		project.memberPK = $(this).parent().siblings().eq(4).text();
+		project.memberID = $(this).parent().siblings().eq(4).text();
 		project.pjInstruction = $(this).parent().siblings().eq(5).text();
 		project.pjServerLocation = $(this).parent().siblings().eq(6).text();
 		project.pjPrice = $(this).parent().siblings().eq(7).text();
@@ -132,8 +134,10 @@ th{
 		project.pjStatus = $(this).parent().siblings().eq(12).text();
 		
 		$(this).parent().siblings().eq(2).html('<select name="fieldName" id="fieldName"><option value="設計">設計</option><option value="資訊">資訊</option><option value="文書">文書</option><option value="影視">影視</option><option value="生活">生活</option><option value="顧問">顧問</option></select>');
-		$(this).parent().siblings().eq(3).html('<input type="text" name="pj_Name">');
-		$(this).parent().siblings().eq(5).html('<textarea name="pj_Instruction" cols="30" rows="15"></textarea>');
+		$(this).parent().siblings().eq(3).html('<input type="text" name="pj_Name" value="${project.pjName}">');
+		
+		$(this).parent().siblings().eq(5).html(`<textarea name="pj_Instruction" cols="30" rows="15">${project.pjInstruction}</textarea>`);
+		
 		$(this).parent().siblings().eq(6).html('<input type="text" name="pj_ServerLocation">');
 		$(this).parent().siblings().eq(7).html('<input type="text" name="pj_Price">');
 		$(this).parent().siblings().eq(8).html('<input type="date" name="pj_ExCompletionDate" id="pj_ExCompletionDate" value="2022-12-01">');
@@ -149,7 +153,7 @@ th{
 		$(this).parent().siblings().eq(1).text(project.pjClass);
 		$(this).parent().siblings().eq(2).text(project.fieldName);
 		$(this).parent().siblings().eq(3).text(project.pjName);
-		$(this).parent().siblings().eq(4).text(project.memberPK);
+		$(this).parent().siblings().eq(4).text(project.memberID);
 		$(this).parent().siblings().eq(5).text(project.pjInstruction);
 		$(this).parent().siblings().eq(6).text(project.pjServerLocation);
 		$(this).parent().siblings().eq(7).text(project.pjPrice);
@@ -167,7 +171,7 @@ th{
 		let pj_Class = $(this).parent().siblings().eq(1).text();
 		let fieldName = document.getElementById("fieldName").value;
 		let pj_Name = $(this).parent().siblings().eq(3).children().val();
-		let memberPK = $(this).parent().siblings().eq(4).text();
+		let memberID = $(this).parent().siblings().eq(4).text();
 		let pj_Instruction = $(this).parent().siblings().eq(5).children().val();
 		let pj_ServerLocation = $(this).parent().siblings().eq(6).children().val();
 		let pj_Price = $(this).parent().siblings().eq(7).children().val();
@@ -177,13 +181,13 @@ th{
 		
 			$.ajax({
 			    type: "post",
-			    url: '<c:url value='/project/UpdateProjectServlet'/>',
+			    url: '<c:url value='/myProject/UpdateProjectServlet'/>',
 			    data: {
 			    	pj_ID:pj_ID,
 					pj_Class:pj_Class,
 					fieldName:fieldName,
 					pj_Name:pj_Name,
-					memberPK:memberPK,
+					memberID:memberID,
 					pj_Instruction:pj_Instruction,
 					pj_ServerLocation:pj_ServerLocation,
 					pj_Price:pj_Price,

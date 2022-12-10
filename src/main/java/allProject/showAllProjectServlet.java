@@ -1,4 +1,4 @@
-package project;
+package allProject;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,7 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/project/showAllProjectServlet")
+import project.ProjectBean;
+import project.ProjectDaoImpl_JDBC;
+
+@WebServlet("/allProject/showAllProjectServlet")
 public class showAllProjectServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
