@@ -132,14 +132,22 @@ th{
 		project.pjStatus = $(this).parent().siblings().eq(11).text();
 		
 		$(this).parent().siblings().eq(2).html('<select name="fieldName" id="fieldName"><option value="設計">設計</option><option value="資訊">資訊</option><option value="文書">文書</option><option value="影視">影視</option><option value="生活">生活</option><option value="顧問">顧問</option></select>');
-		$(this).parent().siblings().eq(3).html('<input type="text" name="pj_Name">');
-		$(this).parent().siblings().eq(4).html('<textarea name="pj_Instruction" cols="30" rows="15"></textarea>');
-		$(this).parent().siblings().eq(5).html('<input type="text" name="pj_ServerLocation">');
-		$(this).parent().siblings().eq(6).html('<input type="text" name="pj_Price">');
+		//$('#fieldName').attr('option',project.fieldName);
+		//for迴圈，如果fieldName.text()=fieldName.value，就attr他的selected指定為selected
+		$(this).parent().siblings().eq(3).html('<input type="text" name="pj_Name" id="pj_Name">');
+		$('#pj_Name').attr('value',project.pjName);
+		$(this).parent().siblings().eq(4).html('<textarea name="pj_Instruction" id="pj_Instruction" cols="30" rows="15"></textarea>');
+		$('#pj_Instruction').attr('value',project.pjInstruction);
+		$(this).parent().siblings().eq(5).html('<input type="text" name="pj_ServerLocation" id="pj_ServerLocation">');
+		$('#pj_ServerLocation').attr('value',project.pjServerLocation);
+		$(this).parent().siblings().eq(6).html('<input type="text" name="pj_Price" id="pj_Price">');
+		$('#pj_Price').attr('value',project.pjPrice);
 		$(this).parent().siblings().eq(7).html('<input type="date" name="pj_ExCompletionDate" id="pj_ExCompletionDate" value="2022-12-01">');
-		$(this).parent().siblings().eq(8).html('<input type="text" name="pj_ExecutionTime">');
-		$(this).parent().html('<input type="submit" value="確認修改" id="Confirm"><input type="button" value="取消修改" id="Cancle">');
+		$('#pj_ExCompletionDate').attr('value',project.pjExCompletionDate);
+		$(this).parent().siblings().eq(8).html('<input type="text" name="pj_ExecutionTime" id="pj_ExecutionTime">');
+		$('#pj_ExecutionTime').attr('value',project.pjExecutionTime);
 		
+		$(this).parent().html('<input type="submit" value="確認修改" id="Confirm"><input type="button" value="取消修改" id="Cancle">');		
 	})
 	
 	$('#tb').on('click', '#Cancle', function(){

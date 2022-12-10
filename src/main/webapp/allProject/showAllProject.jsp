@@ -141,13 +141,16 @@ th{
 		$(this).parent().siblings().eq(5).html('<textarea name="pj_Instruction" id="pj_Instruction" cols="30" rows="15"></textarea>');
 		$('#pj_Instruction').attr('value',project.pjInstruction);
 		$(this).parent().siblings().eq(6).html('<input type="text" name="pj_ServerLocation" id="pj_ServerLocation">');
-		$('#pj_Instruction').attr('value',project.pjInstruction);
-		$(this).parent().siblings().eq(7).html('<input type="text" name="pj_Price">');
+		$('#pj_ServerLocation').attr('value',project.pjServerLocation);
+		$(this).parent().siblings().eq(7).html('<input type="text" name="pj_Price" id="pj_Price">');
+		$('#pj_Price').attr('value',project.pjPrice);
 		$(this).parent().siblings().eq(8).html('<input type="date" name="pj_ExCompletionDate" id="pj_ExCompletionDate" value="2022-12-01">');
-		$(this).parent().siblings().eq(9).html('<input type="text" name="pj_ExecutionTime">');
+		$('#pj_ExCompletionDate').attr('value',project.pjExCompletionDate);
+		$(this).parent().siblings().eq(9).html('<input type="text" name="pj_ExecutionTime" id="pj_ExecutionTime">');
+		$('#pj_ExecutionTime').attr('value',project.pjExecutionTime);
 		$(this).parent().siblings().eq(12).html('<select name="pj_Status" id="pj_Status"><option value="待審核">待審核</option><option value="已上架">已上架</option><option value="下架中">下架中</option></select>');
-		$(this).parent().html('<input type="submit" value="確認修改" id="Confirm"><input type="button" value="取消修改" id="Cancle">');
-		
+		$('#pj_Status').attr('value',project.pjStatus);
+		$(this).parent().html('<input type="submit" value="確認修改" id="Confirm"><input type="button" value="取消修改" id="Cancle">');		
 	})
 	
 	$('#tb').on('click', '#Cancle', function(){
