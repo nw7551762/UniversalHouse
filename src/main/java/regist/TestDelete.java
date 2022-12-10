@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/TestDelete.do")
+@WebServlet("/TestDelete")
 public class TestDelete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -27,12 +27,12 @@ public class TestDelete extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		MemberDao dao = new MemberDao();
-		try {
-			dao.deleteMember(1);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
+//		try {
+//			dao.deleteMember(1);
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		
 		
 		
 	}
