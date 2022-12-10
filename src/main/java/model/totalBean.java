@@ -10,13 +10,15 @@ import javax.sql.rowset.serial.SerialException;
 import java.sql.Blob;
 
 public class totalBean {
-
+	private String imageNumber;
 	private String memberId;
 	private String inputRadio;
 	private String inputRadio2;
 	private String fraction;
 	private Blob testImg;
+	
 	public totalBean() {
+		this.imageNumber = "";
 		this.memberId = "";
 		this.inputRadio = "";
 		this.inputRadio2 = "";
@@ -41,18 +43,31 @@ public class totalBean {
 		
 	}
 	
-	public totalBean(String memberId, String inputRadio, String inputRadio2, String fraction, Blob testImg) {
+
+	public totalBean(String imageNumber, String memberId, String inputRadio, String inputRadio2, String fraction,
+			Blob testImg) {
 		super();
+		this.imageNumber = imageNumber;
 		this.memberId = memberId;
 		this.inputRadio = inputRadio;
 		this.inputRadio2 = inputRadio2;
 		this.fraction = fraction;
 		this.testImg = testImg;
 	}
+	
+	public String getImageNumber() {
+		return imageNumber;
+	}
+
+	public void setImageNumber(String imageNumber) {
+		this.imageNumber = imageNumber;
+	}
 
 	public String getMemberId() {
 		return memberId;
 	}
+
+
 	public Blob getTestImg() {
 		return testImg;
 	}
@@ -86,7 +101,9 @@ public class totalBean {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("totalBean [memberId=");
+		builder.append("totalBean [imageNumber=");
+		builder.append(imageNumber);
+		builder.append(", memberId=");
 		builder.append(memberId);
 		builder.append(", inputRadio=");
 		builder.append(inputRadio);

@@ -22,14 +22,10 @@
 	<div id="container">
 		<form action="<c:url value='/PushTestImage/PushTestImage.do' />" method="post" enctype="multipart/form-data">
 			<p>
-				<label class="t1" for="answer">answer:</label> <input type="text"
+				<label class="t1" for="imgNumber">imageNumber:</label> <input type="text"
 					name="answer">
 			</p>
 
-			<p>
-				<label class="t1" for="questionbank">questionbank:</label> <input
-					type="text" name="questionbank">
-			</p>
 
 			<p>
 				<label class="t1" for="image">image:</label> <input type="file"

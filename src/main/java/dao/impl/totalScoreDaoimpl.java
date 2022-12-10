@@ -12,12 +12,15 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import model.TestBean;
 import model.totalBean;
 
 public class totalScoreDaoimpl {
 	DataSource ds = null;
-
+	private static Logger log = LoggerFactory.getLogger(totalScoreDaoimpl.class);
 	public totalScoreDaoimpl() {
 		try {
 			Context context = new InitialContext();
@@ -58,7 +61,27 @@ public class totalScoreDaoimpl {
 
 		preState.close();
 	}
-	
+	//新增圖片
+	public void saveImage(totalBean tb) {
+		log.info("新增測驗圖片結果");
+		String sql = "insert into totalScore " 
+				+ "(imageNumber, testImage) " 
+				+ "values ( ?, ?)";
+		try (
+				Connection con = ds.getConnection(); 
+				PreparedStatement ps = con.prepareStatement(sql);
+				){
+			ps.setString(1, tb.getImageNumber());
+			ps.setBlob(2, tb.getTestImg());
+			ps.executeUpdate();
+			log.info("saveImage(), 新增成功:ImageBean:" + tb);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("Class: MemberDaoc#save()發生例外: " 
+					+ e.getMessage());
+		}
+	}
 	
 	public List<totalBean> showSumTest()  {
 		
@@ -71,11 +94,17 @@ public class totalScoreDaoimpl {
 		{
 			ResultSet rs = preState.executeQuery();
 			List<totalBean> t = new ArrayList<>();
+			
 			while(rs.next()) {
 				totalBean td = new totalBean();
+				
 				td.setMemberId(rs.getString("memberId"));
+				String id = td.getMemberId();
 				td.setFraction(rs.getString("fraction"));
-				t.add(td);
+				if (id!=null) {
+					t.add(td);
+				}
+				
 			}
 			return t;
 			

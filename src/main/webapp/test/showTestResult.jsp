@@ -30,8 +30,8 @@ table {
 				<c:forEach var="total" items="${totals}">
 					<tr>
 						<td>${total.memberId}</td>
-						<td>${total.fraction}</td>
-
+						<td class= "score">${total.fraction}</td>
+						<td> </td>
 							<td><input type="button" value="修改" class="toModifyMode">
 								<input type="submit" value="刪除" class="delete"></td>
 					</tr>
@@ -41,5 +41,15 @@ table {
 		</table>
 		</form>
 	</div>
+		<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+	<script>
+	$('.tbody').on( 'blur', '.score',  function(){
+		if(  $(this).val()>=100){
+			
+		}
+	})
+	
+	</script>
+	
 </body>
 </html>

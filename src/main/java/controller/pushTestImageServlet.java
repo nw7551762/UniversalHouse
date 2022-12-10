@@ -14,8 +14,10 @@ import javax.sql.rowset.serial.SerialException;
 import java.sql.Blob;
 import java.sql.SQLException;
 
-import dao.impl.testDaoimpl;
-import model.TestBean;
+
+import dao.impl.totalScoreDaoimpl;
+
+import model.totalBean;
 
 @MultipartConfig
 @WebServlet("/PushTestImage/PushTestImage.do")
@@ -35,14 +37,15 @@ public class pushTestImageServlet extends HttpServlet {
 			throws IOException, ServletException, SerialException, SQLException {
 		request.setCharacterEncoding("UTF-8");
 		
-		testDaoimpl tDao = new testDaoimpl();
-		TestBean test = new TestBean();
-		test.setAnswer(request.getParameter("answer"));
-		test.setQuestionBank(request.getParameter("questionbank"));
+	
+		
+		totalScoreDaoimpl tDao = new totalScoreDaoimpl();
+		totalBean test = new totalBean();
+		test.setImageNumber(request.getParameter("imgNumber"));
 		Part imgPart = request.getPart("image");
 		System.out.println(imgPart);
 		Blob imgBlob = test.partToBlob(imgPart);
-		test.setTestImage(imgBlob);
+		test.setTestImg(imgBlob);
 		tDao.saveImage(test);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/test/TestSuccess.jsp");

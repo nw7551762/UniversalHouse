@@ -31,7 +31,7 @@ p, label {
 
 					
 					<div>
-						<input type="radio" name="${vs.count}" value="1" class="radio1"  required>
+						<input type="radio" name="${vs.count}" value="1" class="radio1"  required checked>
 						<label for="huey">${testBean.options}</label>
 					</div>
 
