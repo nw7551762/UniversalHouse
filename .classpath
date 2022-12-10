@@ -11,6 +11,10 @@
 			<attribute name="test" value="true"/>
 			<attribute name="optional" value="true"/>
 			<attribute name="maven.pomderived" value="true"/>
+<<<<<<< HEAD
+=======
+			<attribute name="test" value="true"/>
+>>>>>>> 6e3bd7841ec3b12addc6d5f002d088634e49c7c8
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11">
