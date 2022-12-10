@@ -23,13 +23,21 @@ public class MemberBean {
 	private Timestamp registerTime;
 	private Blob memberImage;
 	private Timestamp lastLogin;
+	private int verification;
+	private int permission;
 	
 	public Blob partToBlob(Part part ) throws IOException, SerialException, SQLException {
+		//partImage轉inputstream
 		InputStream is =  part.getInputStream();
-		byte[] b = new byte[5128];
+		long len = part.getSize();
+		
+		byte[] b = new byte[(int) len];
+		//is資料寫入byte矩陣
 		is.read(b);
 		Blob blob = null;
+		//SerialBlob建構子 new一個Blob物件
 		blob = new SerialBlob(b);
+		is.close();
 		
 		return blob;
 	}
@@ -48,10 +56,12 @@ public class MemberBean {
 		Timestamp time = null;
 		this.registerTime = time;
 		this.lastLogin = time;
+		this.verification = 0;
+		this.permission = 0;
 	}
 	
 	public MemberBean(String memberId, String name, String password, String location, String email, String phone,
-			 Timestamp registerdate, Blob memberImage, Timestamp registerTime, Timestamp lastLogin) {
+			 Timestamp registerdate, Blob memberImage, Timestamp registerTime, Timestamp lastLogin, int verification , int permission  ) {
 		super();
 		this.memberId = memberId;
 		this.name = name;
@@ -62,6 +72,8 @@ public class MemberBean {
 		this.memberImage = memberImage;
 		this.registerTime = registerTime;
 		this.lastLogin = lastLogin;
+		this.verification = verification;
+		this.permission = permission;
 	}
 	
 	
@@ -116,8 +128,7 @@ public class MemberBean {
 	public Timestamp getRegisterTime() {
 		return registerTime;
 	}
-	public void setRegisterTime() {
-		Date date = new Date();
+	public void setRegisterTime( Date date) {
 		Timestamp ts = new Timestamp( date.getTime() ); 
 		this.registerTime = ts;
 	}
@@ -127,6 +138,19 @@ public class MemberBean {
 	public void setLastLogin(Timestamp lastLogin) {
 		this.lastLogin = lastLogin;
 	}
+	public void setVerification(int verification) {
+		this.verification = verification;
+	}
+	public void setPermission(int permission) {
+		this.permission = permission;
+	}
+	public int getVerification() {
+		return verification;
+	}
+	public int getPermission() {
+		return permission;
+	}
+	
 	
 	
 	@Override
@@ -134,7 +158,7 @@ public class MemberBean {
 		return "MemberBean [memberPK=" + memberPK + ", memberId=" + memberId + ", name=" + name + ", password=" + password
 				+ ", location=" + location + ", email=" + email + ", phone=" + phone 
 				+ ", memberImage=" + memberImage + ", registerTime=" + registerTime
-				+ ", lastLogin=" + lastLogin + "]";
+				+ ", lastLogin=" + lastLogin +  ", verification="  + verification +  ", permission="  + permission + "]";
 	}
 
 	
