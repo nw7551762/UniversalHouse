@@ -16,8 +16,8 @@ import javax.servlet.http.Part;
 
 import java.sql.SQLException;
 import java.util.List;
-import model.TestBean;
 import dao.impl.testDaoimpl;
+import model.TestBean;
 
 @MultipartConfig()
 //@MultipartConfig
@@ -48,6 +48,7 @@ public class PushTestServlet extends HttpServlet {
 
 			List<TestBean> ioConnent = testDao.IOConnent(part);
 			testDao.addIOConnent(ioConnent);
+			System.out.println("1");
 			// 印出csv 在 console
 //			List<TestBean> ioConnent = testDao.IOConnent(part);
 			for (TestBean testBean : ioConnent) {

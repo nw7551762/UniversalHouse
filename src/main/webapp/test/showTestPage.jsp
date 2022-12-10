@@ -20,20 +20,23 @@ p, label {
 </head>
 <body>
 	<div class="container">
-		<form action="<c:url value='/TestResultServlet?questionCounts=${testBeans.size()}'/>" method="post" enctype="multipart/form-data">
+		<form
+			action="<c:url value='/TestResultServlet?questionCounts=${testBeans.size()}'/>"
+			method="post" enctype="multipart/form-data" id="form">
 
+			姓名:<input type="text" name="name" class="name" required>
 			<c:forEach var="testBean" items="${testBeans}" varStatus="vs">
-				<fieldset id="tests" name= "test">
+				<fieldset id="tests" name="test">
 					<legend>${testBean.examinationQuestion}</legend>
 
-
+					
 					<div>
-						<input type="radio" name="${vs.count}"  value="1"> 
+						<input type="radio" name="${vs.count}" value="1" class="radio1"  required>
 						<label for="huey">${testBean.options}</label>
 					</div>
 
 					<div>
-						<input type="radio" name="${vs.count}" value="2"> 
+						<input type="radio" name="${vs.count}" value="2" class="radio2"  required>
 						<label for="dewey">${testBean.options2}</label>
 					</div>
 
@@ -41,46 +44,35 @@ p, label {
 
 				</fieldset>
 			</c:forEach>
-			<input type="submit"  value="提交" class="" onclick="">
+			<input type="submit" value="提交" class="bun">
+		
 		</form>
 	</div>
 	<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 	<script>
-	$(function(){
-		$(.container)
-	})
 
-	// on click事件
-	
-	
-	
-	
-	//pass  form and list.length to servlet 
-	//for( int i =1; i<list.length; i++) {
-	//		getparam( vscounts)
-	//		if(1){
-	// 		sum+= points(one)
-	//     }else{
-	//			sum+= points(two)
-	//		}
-	//		
-	//
-	
-		/*const test = {
-		 examinationQuestion :   "",
-		 options :				"";
-		 options2 :				"";
-		 options3 :				"";
-		 options4 :				"";
 		
-		 };
+	$('.bun').on('click', function() {
+		var isel = 0;
+		for(var i = 0;  i<=$('#form').length ; i++){
+			console.log("123")
+			if ( $('.radio1')[i].checked ||  $('.radio2')[i].checked && $('.name')!=null)
+				isel += 1;
+				
+		}
+		if(isel<1)	{
+				alert('您需要完成以下選項，才可提交問卷。.')
+				return false;
+			}
+		
+	})
+	
+	
 
-		 var test1 = Object.creat(test);
 
-		 $('tbody').on('click', 'delete', function(){
-		 let 
-		 })
-		 */
+	} )
+	
+
 	</script>
 </body>
 </html>

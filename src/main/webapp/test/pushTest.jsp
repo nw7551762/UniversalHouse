@@ -28,9 +28,10 @@
 		</p>
 
 
-		<button type="submit">送出</button>
+			<button type="submit">送出</button>
 	</form>
 
+			<a href="<c:url value='/test/PushTestImage.jsp' />">存入照片</a>
 
 
 </body>

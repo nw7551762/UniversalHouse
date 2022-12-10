@@ -20,4 +20,13 @@ public interface testService {
 	void modify(String examinationQuestion, String answer, String field, String options, String options2,
 			String options3, String options4, String testId) throws SQLException;
 
+	List<TestBean> ShowAll();
+
+	void deleteImage(String questionBank) throws SQLException;
+
+	void saveImage(TestBean tb);
+
+
+	
+
 }

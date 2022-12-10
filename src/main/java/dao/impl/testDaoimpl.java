@@ -21,15 +21,16 @@ import javax.sql.DataSource;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-
-
+import controller.ShowTestServlet;
 import model.TestBean;
-
 
 public class testDaoimpl implements dao.testService {
 
 	DataSource ds = null;
+	private static Logger log = LoggerFactory.getLogger(testDaoimpl.class);
 
 	public testDaoimpl() {
 		try {
@@ -58,7 +59,7 @@ public class testDaoimpl implements dao.testService {
 	// 帶入CSV新增資料
 	@Override
 	public void addIOConnent(List<TestBean> list) throws SQLException {
-		String sql = "insert into testCenter values (?,?,?,?,?,?,?,?,?,?)";
+		String sql = "insert into testCenter (testId, examinationQuestion, answer, questionBank, field, options, options2, options3, options4, fraction) values (?,?,?,?,?,?,?,?,?,?)";
 //		deletetestCenter();
 		Connection con = ds.getConnection();
 		PreparedStatement preState = con.prepareStatement(sql);
@@ -158,12 +159,14 @@ public class testDaoimpl implements dao.testService {
 		}
 
 	}
+
 	// 修改
 	@Override
-	public void modify(String examinationQuestion,String answer,String field,String options,String options2,String options3,String options4,String testId) throws SQLException {
+	public void modify(String examinationQuestion, String answer, String field, String options, String options2,
+			String options3, String options4, String testId) throws SQLException {
 		TestBean testBean = new TestBean();
 		String sql = "update testCenter set examinationQuestion = ?, answer = ?, field = ?, options = ?, options2 = ?, options3 = ?, options4 = ? Where testId = ?";
-		Connection con = ds.getConnection(); 
+		Connection con = ds.getConnection();
 		PreparedStatement preState = con.prepareStatement(sql);
 //		ResultSet rs = preState.executeQuery();
 		preState.setString(1, examinationQuestion);
@@ -188,9 +191,82 @@ public class testDaoimpl implements dao.testService {
 //			preState.close();
 //		}
 	}
-	
-	//判斷呼叫的題庫是否跟ShowTestServlet一樣
-	public void testEq() {
+
+	// 呼叫全部試題
+	@Override
+	public List<TestBean> ShowAll() {
+		TestBean tb = new TestBean();
+		String sql = "SELECT * FROM testCenter";
+
+		try (Connection con = ds.getConnection(); PreparedStatement preState = con.prepareStatement(sql)) {
+
+			ResultSet rs = preState.executeQuery();
+			List<TestBean> t = new ArrayList<>();
+			if (rs != null) {
+				while (rs.next()) {
+					tb = new TestBean();
+					tb.setExaminationQuestion(rs.getString("examinationQuestion"));
+					tb.setOptions(rs.getString("options"));
+					tb.setOptions2(rs.getString("options2"));
+					tb.setOptions3(rs.getString("options3"));
+					tb.setOptions4(rs.getString("options4"));
+					tb.setField(rs.getString("field"));
+					t.add(tb);
+				}
+
+			}
+			return t;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException("TestDaoImpl_Jdbc類別#queryTest()發生例外: " + e.getMessage());
+		}
+
+	}
+
+	// 新增圖片
+	@Override
+	public void saveImage(TestBean tb) {
+		log.info("新增測驗圖片結果");
+		String sql = "insert into testCenter " 
+				+ "(answer, questionBank, testImage) " 
+				+ "values (?, ?, ?)";
+		try (
+			Connection con = ds.getConnection(); 
+			PreparedStatement ps = con.prepareStatement(sql);)
+		{
+			ps.setString(1, tb.getAnswer());
+			ps.setString(2, tb.getQuestionBank());
+			ps.setBlob(3, tb.getTestImage());
+			ps.executeUpdate();
+			log.info("saveImage(), 新增成功:ImageBean:" + tb);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("Class: MemberDaoc#save()發生例外: " 
+					+ e.getMessage());
+		}
+	}
+	//刪除圖片
+	@Override
+	public void deleteImage(String questionBank) throws SQLException {
+		String sql = "delete from testCenter where questionBank = ?";
+		try(
+				Connection con = ds.getConnection(); 
+				PreparedStatement ps = con.prepareStatement(sql);
+				) {
+				ps.setString(1, questionBank);
+				ps.executeLargeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("Class: MemberDaoc#deleteMember()發生例外: " 
+										+ e.getMessage());
+		}
+	}
+
+	//判斷
+	public void judgeField() {
+		
+		
 		
 	}
 }

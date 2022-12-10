@@ -39,6 +39,8 @@
 	<p/>
 	<a href="<c:url value='/test/ModifyTest.jsp' />">修改試題</a>
 	<p/>
+		<a href="<c:url value='/ShowTestOverServlet.do' />">測驗成績</a>
+	<p/>
 <c:choose>
 	<c:when test="${!empty LoginOK}">
 	<p class="userInfo">User: ${ LoginOK.memberId } </p>

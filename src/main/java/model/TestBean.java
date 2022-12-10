@@ -1,10 +1,15 @@
 package model;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Blob;
+import java.sql.SQLException;
 
+import javax.servlet.http.Part;
+import javax.sql.rowset.serial.SerialBlob;
+import javax.sql.rowset.serial.SerialException;
 
-public class TestBean  {
-	
-	
+public class TestBean {
 	private Integer testPK;
 	private String testId;
 	private String examinationQuestion;
@@ -16,7 +21,23 @@ public class TestBean  {
 	private String options3;
 	private String options4;
 	private String fraction;
+	private Blob testImage;
 	
+	public Blob partToBlob(Part part) throws IOException, SerialException, SQLException{
+		//partImage轉inputstream
+		InputStream is = part.getInputStream();
+		long len = part.getSize();
+		
+		byte[] b = new byte[(int) len];
+		//is資料寫入byte矩陣
+		is.read(b);
+		Blob blob = null;
+		//SerialBlob建構子 new一個Blob物件
+		blob = new SerialBlob(b);
+		
+		return blob;
+		
+	}
 	public TestBean() {
 		this.testId = "";
 		this.examinationQuestion = "";
@@ -28,10 +49,12 @@ public class TestBean  {
 		this.options3 = "";
 		this.options4 = "";
 		this.fraction = "";
+		Blob blob = null;
+		this.testImage = blob;
 	}
-	
 	public TestBean(Integer testPK, String testId, String examinationQuestion, String answer, String questionBank,
-			String field, String options, String options2, String options3, String options4, String fraction) {
+			String field, String options, String options2, String options3, String options4, String fraction,
+			Blob testImage) {
 		super();
 		this.testPK = testPK;
 		this.testId = testId;
@@ -44,7 +67,18 @@ public class TestBean  {
 		this.options3 = options3;
 		this.options4 = options4;
 		this.fraction = fraction;
+		this.testImage = testImage;
 	}
+
+	
+	public Blob getTestImage() {
+		return testImage;
+	}
+
+	public void setTestImage(Blob testImage) {
+		this.testImage = testImage;
+	}
+
 	public Integer getTestPK() {
 		return testPK;
 	}
@@ -114,7 +148,7 @@ public class TestBean  {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("MemberBean [testPK=");
+		builder.append("TestBean [testPK=");
 		builder.append(testPK);
 		builder.append(", testId=");
 		builder.append(testId);
@@ -136,11 +170,11 @@ public class TestBean  {
 		builder.append(options4);
 		builder.append(", fraction=");
 		builder.append(fraction);
+		builder.append(", testImage=");
+		builder.append(testImage);
 		builder.append("]");
 		return builder.toString();
 	}
-
-
 
 
 }

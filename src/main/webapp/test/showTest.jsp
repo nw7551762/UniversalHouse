@@ -17,7 +17,7 @@
 </head>
 <body>
 
-	<form action="<c:url value='/ShowTestServlet'/>" method="post"
+	<form action="<c:url value='/ShowTestServlet ' />" method="post"
 		enctype="multipart/form-data">
 		
 
