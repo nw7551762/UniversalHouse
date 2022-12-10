@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +18,7 @@
 <body>
 	<form action="<c:url value='/modify/modify.do' />" method="post" enctype="multipart/form-data">
 			<p><label class="t1" for="memberId">memberId:</label>
-                <input type="text" name="memberId" ></p>
+                <input type="text" name="memberId" readonly ></p>
                 
             <p><label class="t1" for="name">name:</label>
                 <input type="text" name="name"></p>

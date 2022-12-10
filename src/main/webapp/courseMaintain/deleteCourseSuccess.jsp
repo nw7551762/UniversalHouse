@@ -5,14 +5,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Delete Course Success</title>
 </head>
 <body>
-<div align='center'>
-<h2>test</h2>   
-<h1>  ${ no } </h1>
+<div>
 
-<p>
-<a href="<c:url value='/' />" >回首頁</a>
+<c:choose>
+<c:when test="${empty course}">delete successful!</c:when>
+<c:otherwise>unsuccessful!</c:otherwise>
+</c:choose>
+<a href="<c:url value='/' />">回首頁</a>
 </div>
+</body>
 </html>

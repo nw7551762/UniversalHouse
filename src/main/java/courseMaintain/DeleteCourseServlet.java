@@ -1,4 +1,4 @@
-package regist;
+package courseMaintain;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -11,10 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/TestDelete")
-public class TestDelete extends HttpServlet {
-	private static final long serialVersionUID = 1L;
 
+@WebServlet("/DeleteCourseServlet")
+public class DeleteCourseServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+   
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		processRequest(request,response);
 	}
@@ -26,16 +27,14 @@ public class TestDelete extends HttpServlet {
 	private void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		request.setCharacterEncoding("UTF-8");
 		
-		MemberDao dao = new MemberDao();
-		try {
-			dao.deleteMember(1);
-		} catch (SQLException e) {
-			e.printStackTrace();
+		CourseDao dao = new CourseDao();
+		System.out.println(request.getParameter("courseId"));
+		int courseId = Integer.parseInt(request.getParameter("courseId"));
+			
+			dao.deleteById(courseId);
+			RequestDispatcher rd = request.getRequestDispatcher("/courseMaintain/deleteCourseSuccess.jsp");
+			rd.forward(request, response);
+			return;
 		}
-		
-		
-		
-	}
-   
 
 }
