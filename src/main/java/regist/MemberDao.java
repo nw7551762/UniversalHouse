@@ -200,7 +200,7 @@ public class MemberDao {
 					
 					mb.setLastLogin(rs.getTimestamp("lastLogin"));
 					mb.setMemberImage(rs.getBlob("MemberImage"));
-				}
+				}		
 			}
 		} catch (SQLException ex) {
 			ex.printStackTrace();

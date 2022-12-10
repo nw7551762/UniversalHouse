@@ -1,3 +1,4 @@
+
 package controller;
 
 import java.io.IOException;
@@ -13,7 +14,7 @@ import javax.sql.rowset.serial.SerialException;
 
 import java.sql.Blob;
 import java.sql.SQLException;
-
+import java.util.List;
 
 import dao.impl.totalScoreDaoimpl;
 
@@ -41,14 +42,17 @@ public class pushTestImageServlet extends HttpServlet {
 		
 		totalScoreDaoimpl tDao = new totalScoreDaoimpl();
 		totalBean test = new totalBean();
-		test.setImageNumber(request.getParameter("imgNumber"));
+		test.setImageNumber(request.getParameter("answer"));
 		Part imgPart = request.getPart("image");
-		System.out.println(imgPart);
 		Blob imgBlob = test.partToBlob(imgPart);
 		test.setTestImg(imgBlob);
-		tDao.saveImage(test);
+	 tDao.saveImage(test);
+//		String s = request.getParameter("answer");
+//		 totalBean simg = tDao.showImg(s);
 		
+//		request.setAttribute("test", simg);
 		RequestDispatcher rd = request.getRequestDispatcher("/test/TestSuccess.jsp");
 		rd.forward(request, response);
+		return;
 	}
 }

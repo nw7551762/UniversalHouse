@@ -71,6 +71,7 @@ public class totalScoreDaoimpl {
 				Connection con = ds.getConnection(); 
 				PreparedStatement ps = con.prepareStatement(sql);
 				){
+			
 			ps.setString(1, tb.getImageNumber());
 			ps.setBlob(2, tb.getTestImg());
 			ps.executeUpdate();
@@ -114,6 +115,33 @@ public class totalScoreDaoimpl {
 		}
 		
 		
+	}
+	
+	public totalBean showImg(String imageNumber) {
+		log.info("顯示新增成功的圖片");
+		totalBean tb = null;
+		String sql = "select * FROM totalScore m WHERE m.imageNumber = ?";
+		try(
+				Connection con = ds.getConnection();
+				PreparedStatement preState = con.prepareStatement(sql);) 
+			{
+			ResultSet rs = preState.executeQuery();
+			
+			while(rs.next()) {
+				tb = new totalBean();
+				tb.setImageNumber(rs.getString("imageNumber"));
+				tb.setTestImg(rs.getBlob("testImage"));
+			}
+					
+				
+				
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new RuntimeException("TestDaoImpl_Jdbc類別#queryTest()發生例外: " + e.getMessage());
+			}
+		log.info("圖片功能之Dao: 取得圖片, tb=" + tb);
+		return tb;
 	}
 	
 }

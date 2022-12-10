@@ -32,7 +32,7 @@
 					name="image">
 			</p>
 
-			<input id="submit" type="submit" value="送出"> 
+			<input id="submit" type="submit"  value="送出"> 
 			<input id="submit" type="submit" value="修改" formaction="/regist/a.do">
 			<input id="submit" type="submit" value="刪除" formaction="/regist/a.do">
 		</form>
