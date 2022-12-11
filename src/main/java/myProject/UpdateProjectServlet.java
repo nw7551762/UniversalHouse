@@ -1,4 +1,4 @@
-package project;
+package myProject;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -12,7 +12,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/project/UpdateProjectServlet")
+import project.ProjectBean;
+import project.ProjectDaoImpl_JDBC;
+
+@WebServlet("/myProject/UpdateProjectServlet")
 public class UpdateProjectServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

@@ -1,4 +1,4 @@
-package project;
+package myProject;
 
 import java.io.IOException;
 import java.util.List;
@@ -11,9 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import project.ProjectBean;
+import project.ProjectDaoImpl_JDBC;
 import regist.MemberBean;
 
-@WebServlet("/project/showMyProjectServlet")
+@WebServlet("/myProject/showMyProjectServlet")
 public class showMyProjectServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -32,9 +34,9 @@ public class showMyProjectServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		ProjectDaoImpl_JDBC dao = new ProjectDaoImpl_JDBC();
 		MemberBean member = (MemberBean)session.getAttribute("LoginOK");
-		List<ProjectBean> project = dao.findByID(member.getMemberPK());
+		List<ProjectBean> project = dao.findByID(member.getMemberId());
 		
-		request.setAttribute("project", project);
+		request.setAttribute("myProject", project);
 		RequestDispatcher rd = request.getRequestDispatcher("/myProject/showMyProject.jsp");
 		rd.forward(request, response);
 		return;

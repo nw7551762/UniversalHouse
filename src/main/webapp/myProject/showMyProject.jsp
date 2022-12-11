@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>我的所有案件</title>
+<title>我提出的所有案件</title>
 <style>
 .t1{
 	width:1400px;
@@ -29,10 +29,14 @@ th{
 </head>
 <body>
 <form>
-<c:if test="${empty project}">
-<h2>查無案件資料</h2>
+<c:if test="${empty myProject}">
+<div class="t1">
+<h2>目前沒有任何項目，快新增一個吧！</h2>
+<h3><a href="<c:url value='/myProject/saveProject.jsp' />">委託項目</a></h3>
+<h3><a href="<c:url value='/myProject/saveServerProject.jsp' />">服務項目</a></h3>
+</div>
 </c:if>
-<c:if test="${not empty project}">
+<c:if test="${not empty myProject}">
 	<table class="t1">
 	<thead>
 		<tr>
@@ -52,7 +56,7 @@ th{
 		</tr>
 		</thead>
 		<tbody id="tb">
-		<c:forEach var="pj" items="${project}" >
+		<c:forEach var="pj" items="${myProject}" >
 		<tr>
 			<td>${pj.pjID}</td>
 			<td>${pj.pjClass}</td>
@@ -90,7 +94,6 @@ th{
 			pjPrice:'',
 			pjExCompletionDate:'',
 			pjExecutionTime:'',
-			pjStatus:'',
 	};
 	var project1 = Object.create(project);
 	
@@ -98,7 +101,7 @@ th{
 		let pj_ID = $(this).parent().siblings().eq(0).text();
 		$.ajax({
 			type:'post',
-			url: '<c:url value='/project/DeleteProjectServlet'/>',
+			url: '<c:url value='/myProject/DeleteProjectServlet'/>',
 		    data: {
 		    	 pj_ID : pj_ID ,
 		    },
@@ -107,7 +110,7 @@ th{
 		    	alert("刪除成功")
 		    	$.ajax({
 					type:'post',
-					url: '<c:url value='/project/showAllProjectServlet'/>'
+					url: '<c:url value='/allProject/showAllProjectServlet'/>'
 				});
 		    },
 		    error: function (thrownError) {
@@ -129,15 +132,22 @@ th{
 		project.pjStatus = $(this).parent().siblings().eq(11).text();
 		
 		$(this).parent().siblings().eq(2).html('<select name="fieldName" id="fieldName"><option value="設計">設計</option><option value="資訊">資訊</option><option value="文書">文書</option><option value="影視">影視</option><option value="生活">生活</option><option value="顧問">顧問</option></select>');
-		$(this).parent().siblings().eq(3).html('<input type="text" name="pj_Name">');
-		$(this).parent().siblings().eq(4).html('<textarea name="pj_Instruction" cols="30" rows="15"></textarea>');
-		$(this).parent().siblings().eq(5).html('<input type="text" name="pj_ServerLocation">');
-		$(this).parent().siblings().eq(6).html('<input type="text" name="pj_Price">');
+		//$('#fieldName').attr('option',project.fieldName);
+		//for迴圈，如果fieldName.text()=fieldName.value，就attr他的selected指定為selected
+		$(this).parent().siblings().eq(3).html('<input type="text" name="pj_Name" id="pj_Name">');
+		$('#pj_Name').attr('value',project.pjName);
+		$(this).parent().siblings().eq(4).html('<textarea name="pj_Instruction" id="pj_Instruction" cols="30" rows="15"></textarea>');
+		$('#pj_Instruction').attr('value',project.pjInstruction);
+		$(this).parent().siblings().eq(5).html('<input type="text" name="pj_ServerLocation" id="pj_ServerLocation">');
+		$('#pj_ServerLocation').attr('value',project.pjServerLocation);
+		$(this).parent().siblings().eq(6).html('<input type="text" name="pj_Price" id="pj_Price">');
+		$('#pj_Price').attr('value',project.pjPrice);
 		$(this).parent().siblings().eq(7).html('<input type="date" name="pj_ExCompletionDate" id="pj_ExCompletionDate" value="2022-12-01">');
-		$(this).parent().siblings().eq(8).html('<input type="text" name="pj_ExecutionTime">');
-		$(this).parent().siblings().eq(11).html('<select name="pj_Status" id="pj_Status"><option value="待審核">待審核</option><option value="已上架">已上架</option><option value="下架中">下架中</option></select>');
-		$(this).parent().html('<input type="submit" value="確認修改" id="Confirm"><input type="button" value="取消修改" id="Cancle">');
+		$('#pj_ExCompletionDate').attr('value',project.pjExCompletionDate);
+		$(this).parent().siblings().eq(8).html('<input type="text" name="pj_ExecutionTime" id="pj_ExecutionTime">');
+		$('#pj_ExecutionTime').attr('value',project.pjExecutionTime);
 		
+		$(this).parent().html('<input type="submit" value="確認修改" id="Confirm"><input type="button" value="取消修改" id="Cancle">');		
 	})
 	
 	$('#tb').on('click', '#Cancle', function(){
@@ -168,11 +178,11 @@ th{
 		let pj_Price = $(this).parent().siblings().eq(6).children().val();
 		let pj_ExCompletionDate = document.getElementById("pj_ExCompletionDate").value;
 		let pj_ExecutionTime = $(this).parent().siblings().eq(8).children().val();
-		let pj_Status = document.getElementById("pj_Status").value;
+		let pj_Status = document.getElementById("pj_Status").text;
 		
 			$.ajax({
 			    type: "post",
-			    url: '<c:url value='/project/UpdateProjectServlet'/>',
+			    url: '<c:url value='/myProject/UpdateProjectServlet'/>',
 			    data: {
 			    	pj_ID:pj_ID,
 					pj_Class:pj_Class,

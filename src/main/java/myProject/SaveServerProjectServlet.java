@@ -1,9 +1,7 @@
-package project;
+package myProject;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
@@ -15,11 +13,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import project.ProjectBean;
+import project.ProjectDaoImpl_JDBC;
 import regist.MemberBean;
 
 @MultipartConfig
-@WebServlet("/project/SaveProjectServlet")
-public class SaveProjectServlet extends HttpServlet {
+@WebServlet("/myProject/SaveServerProjectServlet")
+public class SaveServerProjectServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -41,19 +41,18 @@ public class SaveProjectServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			MemberBean member = (MemberBean)session.getAttribute("LoginOK");
 
-			project.setPjClass("委託");
+			project.setPjClass("服務");
 			project.setFieldName(request.getParameter("fieldName"));
 			project.setPjName(request.getParameter("pj_Name"));
-			project.setMemberPK(member.getMemberPK());
+			project.setMemberID(member.getMemberId());
 			project.setPjInstruction(request.getParameter("pj_Instruction"));
 			project.setPjServerLocation(request.getParameter("pj_ServerLocation"));
 			project.setPjPrice(Integer.parseInt(request.getParameter("pj_Price")));
-			Date exCompletionDate = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("pj_ExCompletionDate"));
-			project.setPjExCompletionDate(exCompletionDate);
+			project.setPjExecutionTime(request.getParameter("pj_ExecutionTime"));
 			Date date = new Date();
 			project.setPjUploadDate(date);
 			project.setPjLastUpdate(date);
-			project.setPjStatus("待審核");
+			project.setPjStatus("審核中");
 			pjDao.saveProject(project);
 			request.setAttribute("project", project);
 			RequestDispatcher rd = request.getRequestDispatcher("/myProject/saveProjectSuccess.jsp");
@@ -65,9 +64,6 @@ public class SaveProjectServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
