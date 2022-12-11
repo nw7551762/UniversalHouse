@@ -16,7 +16,7 @@ table {
 </head>
 <body>
 	<div class="container">
-		<form>
+		<form id="form" enctype="multipart/form-data" method="POST">
 			<table border='1'>
 				<thead>
 					<tr>
@@ -45,6 +45,7 @@ table {
 							<td>${member.phone}</td>
 							<td>${member.registerTime}</td>
 							<td>${member.lastLogin}</td>
+							
 							<td><img
 								src="<c:url value='/ShowMemberImgServlet?memberId=${member.memberId} '/>"
 								alt="no img" width="200px" height="150px"></td>
@@ -62,7 +63,7 @@ table {
 	<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 	<script>
 		const member = {
-				memberId : 		"",
+				memberId : 		"1",
 				name:			"",
 				password:		"",
 				location:		"",
@@ -73,8 +74,6 @@ table {
 //				img 在servlet做判斷修改
 		};
 		
-		//ajax
-		var member1 = Object.create(member);
 	
 	
 		$('tbody').on('click', '.delete', function(){
@@ -96,9 +95,9 @@ table {
 		})
 		
 		
-		
+		var member1 = Object.create(member);
 		$('tbody').on('click', '.toModifyMode', function(){
-			//將member資訊先存起來，修改完後交回	
+			//將member資訊先存起來，修改完後交回
 			
 			member1.memberId = $(this).parent().siblings().eq(0).text();
 			member1.name=			$(this).parent().siblings().eq(1).text();
@@ -112,14 +111,13 @@ table {
 			
 			
 			//將表格改成 <input>
-			$(this).parent().siblings().eq(1).empty().html('<input type="text" name="name">');
+			$(this).parent().siblings().eq(1).html('<input type="text" name="name">');
  			$(this).parent().siblings().eq(2).html('<input type="text" name="password">');
  			$(this).parent().siblings().eq(3).html('<input type="text" name="location"> ');
  			$(this).parent().siblings().eq(4).html('<input type="text" name="email">');
  			$(this).parent().siblings().eq(5).html('<input type="text" name="phone">');
  			$(this).parent().siblings().eq(8).html('<input type="file" name="memberImage">');
 			$(this).parent().html('<input type="submit" value="確認修改"class="modifyConfirm"><input type="button" value="取消" class="modifyCancle">');
-			
 		})
 		
 		 $('tbody').on('click', '.modifyCancle', function(){
@@ -146,35 +144,46 @@ table {
 		
 		
 		$('tbody').on('click', '.modifyConfirm', function(){
-			alert("response success")
+		var form = $('form')[0];
+		var formData = new FormData(form);
 		let memberId = $(this).parent().siblings().eq(0).text();
-		let name = $(this).parent().siblings().eq(1).children().val();
+		formData.append('memberId', memberId);
+		/*let name = $(this).parent().siblings().eq(1).children().val();
 		let password = $(this).parent().siblings().eq(2).children().val();
 		let location = $(this).parent().siblings().eq(3).children().val();
 		let email = $(this).parent().siblings().eq(4).children().val();
-		let phone = $(this).parent().siblings().eq(5).children().val();
-	//	let memberImage = $(this).parent().siblings().eq(8).value();
+		let phone = $(this).parent().siblings().eq(5).children().val(); */
+		//let memberImage = $(this).parent().siblings().eq(8).children().eq(0).files[0]; 
+
 			$.ajax({
-			    type: "post",
+				type : "POST",
 			    url: '<c:url value='/modify/modifyByAd.do'/>',
-			    data: {
+			   	/*data:{
 			    	 memberId : memberId ,
 			    	 name: name,
 			    	 password: password,
 			    	 location: location,
 			    	 email: email,
-			    	 phone: phone,
-			    	 //memberImage: memberImage,
-			    },
+			    	 phone: phone,  
+			    	 memberImage:memberImage ,
+			    },  */
+			    enctype: "multipart/form-data",
 			    
-			    success: function () {
+// 			    dataType: 'JSON',
+			    data: formData,
+ 			    contentType: false,
+		        cache: false,
+ 		        processData: false,
+			    success: function (response) {
+			    	console.log('1234')
+			    	console.log(response)
 			    	alert("response success")
 			    },
 			    error: function (thrownError) {
 			    	alert("response error")
 			    }
 			  });
-		})
+		}) 
 		
 		
 		

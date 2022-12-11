@@ -7,26 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-body {
-    font-size: 17px;
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #fff;
-}
 
-header {
-    background-color: black;
-    color: lightgreen;
-    /* 內距 */
-    padding: 20px;
-    text-align: center;
-}
-
-.container {
-    width: 90%;
-    /* 外距 */
-    margin: auto;
-    padding: 10px;
-}
 </style>
 </head>
 <body>
@@ -36,5 +17,6 @@ header {
     <div class="container">
 
     </div>
+    <a href="<c:url value='/' />" >回首頁</a>
 </body>
 </html>

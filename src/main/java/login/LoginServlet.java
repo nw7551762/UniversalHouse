@@ -19,13 +19,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
+
 import regist.MemberBean;
 import regist.MemberDao;
 
 @WebServlet("/login.do")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+//	private static Logger log = LoggerFactory.getLogger(LoginServlet.class);
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			processRequest(request, response);
@@ -90,7 +93,7 @@ public class LoginServlet extends HttpServlet {
 //				LogoutBean logoutBean = new LogoutBean(session);
 //				session.setAttribute("logoutBean", logoutBean);
 //				log.info("會員登入功能之Controller: 登入成功");
-				processCookies(request, response, memberId, password, rm);
+				processCookies(request, response, memberId, password, rm, mb.getMemberId());
 						
 			} else {
 				// NG, 登入失敗, userid與密碼的組合錯誤，放相關的錯誤訊息到 errorMsgMap 之內
@@ -126,12 +129,17 @@ public class LoginServlet extends HttpServlet {
 	
 
 	private void processCookies(HttpServletRequest request, HttpServletResponse response, 
-								String userId, String password, String rm) {
-		// **********Remember Me****************************
+								String userId, String password, String rm, String memberId) {
 		Cookie cookieUser = null;
 		Cookie cookiePassword = null;
 		Cookie cookieRememberMe = null;
+		Cookie cookieMemberId = null;
+		
 		// rm存放瀏覽器送來之RememberMe的選項，如果使用者對RememberMe打勾，rm就不會是null
+		cookieMemberId = new Cookie("memberId", memberId);
+		cookieMemberId.setMaxAge(7 * 24 * 60 * 60); // Cookie的存活期: 七天
+		cookieMemberId.setPath(request.getContextPath());
+		
 		if (rm != null) {
 			cookieUser = new Cookie("user", userId);
 			cookieUser.setMaxAge(7 * 24 * 60 * 60); // Cookie的存活期: 七天
@@ -159,6 +167,7 @@ public class LoginServlet extends HttpServlet {
 			cookieRememberMe.setMaxAge(0);
 			cookieRememberMe.setPath(request.getContextPath());
 		}
+		response.addCookie(cookieMemberId);
 		response.addCookie(cookieUser);
 		response.addCookie(cookiePassword);
 		response.addCookie(cookieRememberMe);

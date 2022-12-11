@@ -12,10 +12,10 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import org.slf4j.LoggerFactory;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.LoggerFactory;
+//
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 
 
 
@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
 
 public class MemberDao {
 	DataSource ds = null;
-	private static Logger log = LoggerFactory.getLogger(MemberDao.class);
+//	private static Logger log = LoggerFactory.getLogger(MemberDao.class);
 	
 	public MemberDao() {
 		try {
@@ -43,7 +43,8 @@ public class MemberDao {
 				+ " phone = ? , "
 				+ "registerTime= ? , "
 				+ "memberImage= ? , "
-				+ "lastLogin= ? ";
+				+ "lastLogin= ? "
+				+ "where memberId = ? ";
 		try (
 			Connection con = ds.getConnection(); 
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -56,8 +57,9 @@ public class MemberDao {
 			ps.setTimestamp(6, mb.getRegisterTime());
 			ps.setBlob(7, mb.getMemberImage());
 			ps.setTimestamp(8, mb.getLastLogin());
+			ps.setString(9, mb.getMemberId());
 			ps.executeUpdate();
-			log.info("modify(), 修改成功：MemberBean=" + mb);
+//			log.info("modify(), 修改成功：MemberBean=" + mb);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			throw new RuntimeException("Class: MemberDaoc#modify()發生例外: " 
@@ -69,7 +71,7 @@ public class MemberDao {
 //	private static final String SELECT_BY_ID = "SELECT * FROM member";
 
 	public void save(MemberBean mb) {
-		log.info("會員註冊功能之Dao: 儲存會員資料");
+//		log.info("會員註冊功能之Dao: 儲存會員資料");
  		String sql = "insert into Member " 
 				+ " (memberId, name, password, location, email, "
 				+ " phone, registerTime, memberImage, lastLogin) "
@@ -88,7 +90,7 @@ public class MemberDao {
 			ps.setBlob(8, mb.getMemberImage());
 			ps.setTimestamp(9, mb.getLastLogin());
 			ps.executeUpdate();
-			log.info("saveMember(), 新增成功：MemberBean=" + mb);
+//			log.info("saveMember(), 新增成功：MemberBean=" + mb);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			throw new RuntimeException("Class: MemberDaoc#save()發生例外: " 
@@ -136,7 +138,7 @@ public class MemberDao {
 				throw new RuntimeException("MemberDaoImpl_Jdbc類別#idExists()發生例外: " 
 						+ ex.getMessage());
 			}
-			log.info("會員註冊功能之 Dao: 檢查會員輸入的編號是否已被使用, exist=" + exist);
+//			log.info("會員註冊功能之 Dao: 檢查會員輸入的編號是否已被使用, exist=" + exist);
 			return exist;
 		}
 	
@@ -174,7 +176,7 @@ public class MemberDao {
 				throw new RuntimeException("MemberDaoImpl_Jdbc類別#queryMember()發生例外: " 
 						+ ex.getMessage());
 			}
-			log.info("會員登入功能之Dao: 取得某個會員的資料, mb=" + mb);
+//			log.info("會員登入功能之Dao: 取得某個會員的資料, mb=" + mb);
 			return mb;
 		}
 	
@@ -200,7 +202,7 @@ public class MemberDao {
 					
 					mb.setLastLogin(rs.getTimestamp("lastLogin"));
 					mb.setMemberImage(rs.getBlob("MemberImage"));
-				}		
+				}
 			}
 		} catch (SQLException ex) {
 			ex.printStackTrace();
@@ -240,8 +242,8 @@ public class MemberDao {
 			throw new RuntimeException("MemberDaoImpl_Jdbc類別#findByMemberIdAndPassword()發生SQL例外: " 
 					+ ex.getMessage());
 		}
-		log.info("會員登入功能之Dao: 檢查帳號/密碼結果:" 
-				+ (mb == null ? "帳號/密碼正確" : "帳號/密碼錯誤"));
+//		log.info("會員登入功能之Dao: 檢查帳號/密碼結果:" 
+//				+ (mb == null ? "帳號/密碼正確" : "帳號/密碼錯誤"));
 		return mb;
 	}
 	

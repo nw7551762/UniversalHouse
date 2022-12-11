@@ -23,16 +23,16 @@
 
 		<!-- -->
 		<p>
-			<label for="pushCsv" class="t1">pushCsv:</label> <input
-				type="file" name="file">
+			<label for="pushCsv" class="t1">存入測驗:</label> <input
+				type="file" name="file"><button type="submit">送出</button>
 		</p>
 
 
-			<button type="submit">送出</button>
+			
 	</form>
 
 			<a href="<c:url value='/test/PushTestImage.jsp' />">存入照片</a>
 
-
+<a href="<c:url value='/' />" >回首頁</a>
 </body>
 </html>

@@ -26,6 +26,12 @@ public interface testService {
 
 	void saveImage(TestBean tb);
 
+	List<TestBean> checkFieldTest2(String field);
+
+	void deletetestCenter(String field) throws SQLException;
+
+	int deletetestCenter(int field) throws SQLException;
+
 
 	
 

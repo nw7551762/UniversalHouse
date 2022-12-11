@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 //import org.slf4j.Logger;
@@ -36,6 +37,7 @@ public class PushTestServlet extends HttpServlet {
 	private void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		request.setCharacterEncoding("UTF-8");
 
+		HttpSession session = request.getSession();
 //		try {
 //			processRequest(request,response);
 //		} catch (IOException | ServletException | SQLException e) {

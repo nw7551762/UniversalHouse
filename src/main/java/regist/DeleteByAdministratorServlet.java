@@ -33,6 +33,7 @@ public class DeleteByAdministratorServlet extends HttpServlet {
 			
 			try {
 				dao.deleteMember(memberId);
+				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

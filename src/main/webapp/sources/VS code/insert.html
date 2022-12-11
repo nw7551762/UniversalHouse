@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <form action="<c:url value='/spaceRental/insertServlet.do'/>" method="POST" enctype="multipart/form-data">
+            <p><label class="c1">場地命名</label>
+                <input type="text" name="spaceName">
+            </p>
+
+            <p><label class="c1">所在縣市</label>
+                <select name="city">
+                    <option value="TPE">台北市</option>
+                    <option value="TPH">新北市</option>
+                    <option value="TYU">桃園市</option>
+                    <option value="HSC">新竹市</option>
+                </select>
+            </p>
+
+            <p><label class="c1">詳細地址</label>
+                <input type="text" name="address" placeholder="不輸入縣市">
+            </p>
+
+            <p><label class="c1">容納人數</label>
+                <input type="text" name="accommondate" placeholder="例如: 7">
+            </p>
+
+            <p><label class="c1">場地類型</label>
+                <select name="spaceType">
+                    <option value="business">商務會議</option>
+                    <option value="multitype">多功能</option>
+                    <option value="cook">烹飪教室</option>
+                    <option value="entertainment">藝文展演</option>
+                    <option value="media">多媒體</option>
+                </select>
+            </p>
+
+            <p><label class="c1">收取金額</label>
+                <input type="text" name="price">
+            </p>
+
+            <p><label class="c1">收費單位</label>
+                <input type="radio" name="unit" value="hour">小時
+                <input type="radio" name="unit" value="day">全天
+            </p>
+
+            <p><label class="c1">開放時段(一)</label>
+                <select name="period1">
+                    <option value="morning">上午09:00-12:00</option>
+                    <option value="afternoon">下午12:01-17:00</option>
+                    <option value="night">晚上17:01-21:00</option>
+                    <option value="day">全天09:00-21:00</option>
+                    <option value="none">無</option>
+                </select>
+            </p>
+
+            <p><label class="c1">開放時段(二)</label>
+                <select name="period2">
+                    <option value="morning">上午09:00-12:00</option>
+                    <option value="afternoon">下午12:01-17:00</option>
+                    <option value="night">晚上17:01-21:00</option>
+                    <option value="day">全天09:00-21:00</option>
+                    <option value="none">無</option>
+                </select>
+            </p>
+
+            <p><label class="c1">提供設施1</label>
+                <select name="facility_1">
+                    <option value="meeting">會議桌</option>
+                    <option value="wifi">無線wifi</option>
+                    <option value="DC">桌椅</option>
+                    <option value="projector">投影機(幕)</option>
+                    <option value="monitor">螢幕</option>
+                    <option value="board">白板設備</option>
+                    <option value="speaker">音響設備</opiton>
+                    <option value="cooked">烹飪設備</option>
+                    <option value="cp">電腦</option>
+                    <option value="coffee">咖啡機</option>
+                    <option value="restroom">洗手間</option>
+                    <option value="none">無</option>
+                </select>
+            </p>
+
+            <p><label class="c1">提供設施2</label>
+                <select name="facility_2">
+                    <option value="meeting">會議桌</option>
+                    <option value="wifi">無線wifi</option>
+                    <option value="DC">桌椅</option>
+                    <option value="projector">投影機(幕)</option>
+                    <option value="monitor">螢幕</option>
+                    <option value="board">白板設備</option>
+                    <option value="speaker">音響設備</opiton>
+                    <option value="cooked">烹飪設備</option>
+                    <option value="cp">電腦</option>
+                    <option value="coffee">咖啡機</option>
+                    <option value="restroom">洗手間</option>
+                    <option value="none">無</option>
+                </select>
+            </p>
+
+            <p><label class="c1">提供設施3</label>
+                <select name="facility_3">
+                    <option value="meeting">會議桌</option>
+                    <option value="wifi">無線wifi</option>
+                    <option value="DC">桌椅</option>
+                    <option value="projector">投影機(幕)</option>
+                    <option value="monitor">螢幕</option>
+                    <option value="board">白板設備</option>
+                    <option value="speaker">音響設備</opiton>
+                    <option value="cooked">烹飪設備</option>
+                    <option value="cp">電腦</option>
+                    <option value="coffee">咖啡機</option>
+                    <option value="restroom">洗手間</option>
+                    <option value="none">無</option>
+                </select>
+            </p>
+
+            <p><label class="c1">提供設施4</label>
+                <select name="facility_4">
+                    <option value="meeting">會議桌</option>
+                    <option value="wifi">無線wifi</option>
+                    <option value="DC">桌椅</option>
+                    <option value="projector">投影機(幕)</option>
+                    <option value="monitor">螢幕</option>
+                    <option value="board">白板設備</option>
+                    <option value="speaker">音響設備</opiton>
+                    <option value="cooked">烹飪設備</option>
+                    <option value="cp">電腦</option>
+                    <option value="coffee">咖啡機</option>
+                    <option value="restroom">洗手間</option>
+                    <option value="none">無</option>
+                </select>
+            </p>
+
+            <p><label class="c1">提供設施5</label>
+                <select name="facility_5">
+                    <option value="meeting">會議桌</option>
+                    <option value="wifi">無線wifi</option>
+                    <option value="DC">桌椅</option>
+                    <option value="projector">投影機(幕)</option>
+                    <option value="monitor">螢幕</option>
+                    <option value="board">白板設備</option>
+                    <option value="speaker">音響設備</opiton>
+                    <option value="cooked">烹飪設備</option>
+                    <option value="cp">電腦</option>
+                    <option value="coffee">咖啡機</option>
+                    <option value="restroom">洗手間</option>
+                    <option value="none">無</option>
+                </select>
+            </p>
+
+            <p><label class="c1">場地介紹</label>
+                <textarea name="intro" cols="30" rows="5"></textarea>
+            </p>
+
+            <p><label class="c1">上傳照片</label>
+                <input type="file" name="pic">
+            </p>
+        </form>
+    </div>
+
+    <input id="submit" type="submit" value="新增場地資訊">
+</body>
+
+</html>

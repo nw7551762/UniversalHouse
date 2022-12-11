@@ -19,16 +19,16 @@
 
 	<form action="<c:url value='/ShowTestServlet ' />" method="post"
 		enctype="multipart/form-data">
-		
 
-		<!-- -->
-	<select name="field">
-	<option>1</option>
-	<option>2</option>
-	<option>3</option>
-	<option>4</option>
-	<option>5</option>
-	</select>
+
+		<h1>選擇測驗</h1>
+		<select name="field">
+			<option value="1">心理測驗</option>
+			<option value="2">智力測驗</option>
+			<option value="3">魷魚遊戲</option>
+			<option value="4">星座測驗</option>
+			<option value="5">小小試題</option>
+		</select>
 
 		<button type="submit">送出</button>
 	</form>

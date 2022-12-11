@@ -1,6 +1,5 @@
 package modify;
 
-import java.io.Console;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -8,6 +7,7 @@ import java.sql.Blob;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +20,7 @@ import regist.MemberDao;
 /**
  * Servlet implementation class ShowMemberImgServlet
  */
+@MultipartConfig
 @WebServlet("/ShowMemberImgServlet")
 public class ShowMemberImgServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

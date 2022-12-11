@@ -29,13 +29,13 @@ table {
 			<tbody class="tbody">
 				<c:forEach var="total" items="${totals}">
 					<tr>
-						<td>${total.memberId}</td>
+						<td class="memberId">${total.memberId}</td>
 						<td class= "score">${total.fraction}</td>
-						<td> </td>
-							<td><input type="button" value="修改" class="toModifyMode">
-								<input type="submit" value="刪除" class="delete"></td>
+						<td class="image"><img src="<c:url value='/ShowImgForTestResultServlet?fraction=${total.fraction} '/>" alt="no img" width="400px" height="400px"></td>
+
 					</tr>
 				</c:forEach>
+				<a href="<c:url value='/' />" >回首頁</a>
 			</tbody>
 
 		</table>
@@ -43,12 +43,7 @@ table {
 	</div>
 		<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 	<script>
-	$('.tbody').on( 'blur', '.score',  function(){
-		if(  $(this).val()>=100){
-			
-		}
-	})
-	
+
 	</script>
 	
 </body>

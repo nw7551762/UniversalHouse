@@ -67,6 +67,9 @@ public class totalBean {
 		return memberId;
 	}
 
+	public String getMemberId(String memberId) {
+		return memberId;
+	}
 
 	public Blob getTestImg() {
 		return testImg;
@@ -92,6 +95,9 @@ public class totalBean {
 		this.inputRadio2 = inputRadio2;
 	}
 	public String getFraction() {
+		return fraction;
+	}
+	public String getFraction(String fraction) {
 		return fraction;
 	}
 	public void setFraction(String fraction) {

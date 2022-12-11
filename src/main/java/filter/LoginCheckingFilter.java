@@ -7,8 +7,8 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebInitParam;
 import javax.servlet.http.*;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 
 import regist.MemberBean;
 
@@ -30,10 +30,12 @@ import regist.MemberBean;
 		initParams = { 
 				@WebInitParam(name = "mustLogin1", value = "/modify/*"), 
 				@WebInitParam(name = "mustLogin2", value = "/showMemberInfo/*"), 
+				@WebInitParam(name = "mustLogin", value = "/spaceAdmin/*"), 
+				@WebInitParam(name = "mustLogin3", value = "/controller/*"), 
 		})
 public class LoginCheckingFilter implements Filter {
 	
-	private static Logger log = LoggerFactory.getLogger(LoginCheckingFilter.class);
+//	private static Logger log = LoggerFactory.getLogger(LoginCheckingFilter.class);
 	
 	List<String> url = new ArrayList<String>();
 	String servletPath;
@@ -64,11 +66,11 @@ public class LoginCheckingFilter implements Filter {
 
 			if (mustLogin()) {           
 				if (checkLogin(req)) {   
-					log.info("需要登入，但已經登入");
+//					log.info("需要登入，但已經登入");
 					
 					chain.doFilter(request, response);
 				} else {				
-					log.info("需要登入，尚未登入，所以送回登入畫面");
+//					log.info("需要登入，尚未登入，所以送回登入畫面");
 					HttpSession session = req.getSession();
 				    
 					if ( ! isRequestedSessionIdValid ) {
@@ -82,7 +84,7 @@ public class LoginCheckingFilter implements Filter {
 					return;
 				}
 			} else {   //
-				log.info("不需要登入，直接去執行他要執行的程式");
+//				log.info("不需要登入，直接去執行他要執行的程式");
 				
 				chain.doFilter(request, response);
 			}

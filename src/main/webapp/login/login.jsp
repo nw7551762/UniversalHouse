@@ -32,12 +32,12 @@
 				
 				<tr>
 					<td >帳號：</td>
-					<td ><input type="text" name="memberId" value="${requestScope.user}${param.userId}"> &nbsp;${ErrorMsgKey.AccountEmptyError}</td>
+					<td ><input type="text" name="memberId" value="${cookie['user'].getValue()}"> &nbsp;${ErrorMsgKey.AccountEmptyError}</td>
 				</tr>
 				<tr>
 					<td>密碼：</td>
 					<td >
-						<input type="password" name="password" value="${requestScope.password}${param.password}"> &nbsp;${ErrorMsgKey.PasswordEmptyError}
+						<input type="password" name="password" value="${cookie['password'].getValue()}"> &nbsp;${ErrorMsgKey.PasswordEmptyError}
 					</td>
 
 				</tr>
@@ -46,7 +46,7 @@
 					<td></td>
 					<td align="center" >
 						<input type="checkbox" name="rememberMe"
-							<c:if test='${requestScope.rememberMe==true}'>
+							<c:if test="${cookie['rm'].getValue()}">
                   				checked='checked'
                				</c:if>
 							value="true">記住密碼

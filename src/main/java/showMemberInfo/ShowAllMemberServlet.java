@@ -14,7 +14,9 @@ import javax.servlet.http.HttpSession;
 import regist.MemberBean;
 import regist.MemberDao;
 
-
+/**
+ * Servlet implementation class ShowAllMember
+ */
 @WebServlet("/showMemberInfo/showAllMember.do")
 public class ShowAllMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

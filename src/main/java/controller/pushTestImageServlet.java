@@ -14,11 +14,11 @@ import javax.sql.rowset.serial.SerialException;
 
 import java.sql.Blob;
 import java.sql.SQLException;
-import java.util.List;
 
-import dao.impl.totalScoreDaoimpl;
+import dao.impl.galleryDaoimpl;
 
-import model.totalBean;
+import model.galleryBean;
+
 
 @MultipartConfig
 @WebServlet("/PushTestImage/PushTestImage.do")
@@ -40,17 +40,17 @@ public class pushTestImageServlet extends HttpServlet {
 		
 	
 		
-		totalScoreDaoimpl tDao = new totalScoreDaoimpl();
-		totalBean test = new totalBean();
+		galleryDaoimpl tDao = new galleryDaoimpl();
+		galleryBean test = new galleryBean();
 		test.setImageNumber(request.getParameter("answer"));
 		Part imgPart = request.getPart("image");
 		Blob imgBlob = test.partToBlob(imgPart);
 		test.setTestImg(imgBlob);
-	 tDao.saveImage(test);
+		tDao.saveImage(test);
 //		String s = request.getParameter("answer");
 //		 totalBean simg = tDao.showImg(s);
 		
-//		request.setAttribute("test", simg);
+		request.setAttribute("test", test);
 		RequestDispatcher rd = request.getRequestDispatcher("/test/TestSuccess.jsp");
 		rd.forward(request, response);
 		return;

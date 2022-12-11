@@ -21,16 +21,9 @@
 
 <body>
 
-<c:choose>
-	<c:when test="${empty testCenter}">
-		 fail
-	</c:when>
-	
-	 	<c:otherwise>
-   			${testCenter} success
-   		</c:otherwise>
-</c:choose>
+
    
-<h1>end</h1>
+<h1>載入成功</h1>
+<a href="<c:url value='/' />" >回首頁</a>
 </body>
 </html>

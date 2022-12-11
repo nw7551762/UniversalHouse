@@ -16,24 +16,42 @@
 </style>
 </head>
 <body>
-    <header>
-        <h1>修改</h1>
-    </header>
-    <form action="<c:url value='/ModifyTestServlet'/>" method="post" enctype="multipart/form-data">
-        <table>
+	<div class="container">
+		 
+		<table border='1'>
+    			<thead>
+				<tr>
+<!-- 					<th>testId</th> -->
+					<th>examinationQuestion</th>
+					<th>field</th>
+					<th>options</th>
+					<th>options2</th>
+					<th>options3</th>
+					<th>options4</th>
+				</tr>
+			</thead>
+			
+			<tbody class="tbody">
+			<c:forEach var="testBean" items="${testBeans}"> 
+			<form action="<c:url value='/ModifyTestEndServlet?testIds=${testBean.testId}'/>" method="post" enctype="multipart/form-data">
             <tr>
-                <td>testId <input type="text" name="id"></td>
-                <td>examinationQuestion <input type="text" name="eq"></td>
-                <td>answer <input type="text" name="as"></td>
-                <td>field <input type="text" name="fd"></td>
-                <td>options <input type="text" name="os"></td>
-                <td>options2 <input type="text" name="os2"></td>
-                <td>options3 <input type="text" name="os3"></td>
-                <td>options4 <input type="text" name="os4"></td>
+<%--             <td>${testBean.testId} <input type="" name="${testBean.testId} " ></td> --%>
+                <td name="${testBean.examinationQuestion}">${testBean.examinationQuestion} </td>
+                <td name="${testBean.field}">${testBean.field}</td>
+                <td name="${testBean.options}">${testBean.options}</td>
+                <td name="${testBean.options2}">${testBean.options2}</td>
+                <td name="${testBean.options3}">${testBean.options3}</td>
+                <td name="${testBean.options4}">${testBean.options4}</td>
+            	<td><input type="submit"  value="修改" class="toModifyMode" name="${testBean.testId}" >
+								
+            </tr> 
+               </form>
+            </c:forEach>
+ 			
+			</tbody>
+			<a href="<c:url value='/' />" >回首頁</a>
+    </table>
 
-            </tr>
-        </table>
-        <button type="submit">送出</button>
-    </form>
+    </div>
 </body>
 </html>

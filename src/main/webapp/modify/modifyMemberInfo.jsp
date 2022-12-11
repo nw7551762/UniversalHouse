@@ -18,7 +18,7 @@
 <body>
 	<form action="<c:url value='/modify/modifyByMember.do' />" method="post" enctype="multipart/form-data">
 			<p><label class="t1" for="memberId">memberId:</label>
-                <input type="text" name="memberId" readonly ></p>
+                ${cookie['memberId'].getValue()}</p>
                 
             <p><label class="t1" for="name">name:</label>
                 <input type="text" name="name"></p>

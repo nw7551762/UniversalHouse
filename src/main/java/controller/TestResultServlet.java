@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-
 import dao.impl.testDaoimpl;
 import dao.impl.totalScoreDaoimpl;
 import model.TestBean;
@@ -80,13 +79,13 @@ public class TestResultServlet extends HttpServlet {
 			String name = request.getParameter("name");
 			String mb = name;
 			System.out.println(s1);
-			tsd.addSumTest(mb, s1);
-				
-			
-			
+			 tsd.addSumTest(mb, s1);
+			totalBean total = new totalBean();
+			total.setMemberId(mb);
+			total.setFraction(s1);
 
-//			request.setAttribute("testBeans", testBeans);
-			RequestDispatcher rd = request.getRequestDispatcher("/test/TestSuccess.jsp");
+			request.setAttribute("total", total);
+			RequestDispatcher rd = request.getRequestDispatcher("/test/showResultEnd.jsp");
 			rd.forward(request, response);
 			return;
 		} catch (Exception e) {

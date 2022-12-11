@@ -46,14 +46,17 @@ public class testDaoimpl implements dao.testService {
 
 	// 更新 重新整理資料
 	@Override
-	public void deletetestCenter() throws SQLException {
-		String sql = "delete from testCenter;";
+	public void deletetestCenter(String field) throws SQLException {
+//		int row = 0;
+		String sql = "delete from testCenter where field=?";
 		Connection con = ds.getConnection();
 		PreparedStatement preState = con.prepareStatement(sql);
-		int row = preState.executeUpdate();
-		System.out.println("重整表格修改:" + row + "筆資料");
+		preState.setString(1, field);
+		preState.executeUpdate();
+		System.out.println("重整表格修改:" +  "筆資料");
 		preState.close();
-
+		con.close();
+//		return row;
 	}
 
 	// 帶入CSV新增資料
@@ -129,6 +132,38 @@ public class testDaoimpl implements dao.testService {
 			throw new RuntimeException(e);
 		}
 	}
+	
+	
+	@Override
+	public List<TestBean> checkFieldTest2(String field) {
+		TestBean tb = new TestBean();
+		String sql = "SELECT * FROM testCenter WHERE field = ?";
+		try (Connection con = ds.getConnection(); PreparedStatement preState = con.prepareStatement(sql)) {
+			preState.setString(1, field);
+			ResultSet rs = preState.executeQuery();
+			List<TestBean> t = new ArrayList<>();
+			if (rs != null) {
+				while (rs.next()) {
+					tb = new TestBean();
+					tb.setTestId(rs.getString("testId"));
+					tb.setExaminationQuestion(rs.getString("examinationQuestion"));
+					tb.setOptions(rs.getString("options"));
+					tb.setOptions2(rs.getString("options2"));
+					tb.setOptions3(rs.getString("options3"));
+					tb.setOptions4(rs.getString("options4"));
+					tb.setField(rs.getString("field"));
+					t.add(tb);
+				}
+
+			}
+			return t;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException("TestDaoImpl_Jdbc類別#queryTest()發生例外: " + e.getMessage());
+		}
+
+	}
+	
 
 	// ShowAll查詢透過field
 	@Override
@@ -159,7 +194,75 @@ public class testDaoimpl implements dao.testService {
 		}
 
 	}
+	//查詢透過testId
+	public TestBean findByTestId(String testId) {
+		TestBean tb = null;
+		String sql = "SELECT * FROM TestCenter m WHERE m.testId = ?";
+		try (
+				Connection con = ds.getConnection(); 
+				PreparedStatement ps = con.prepareStatement(sql);
+				) {
+			ps.setString(1, testId);
+			try(ResultSet rs = ps.executeQuery();){
+				if(rs.next()) {
+					tb = new TestBean();
+					tb.setTestId(rs.getString("testId"));
+					tb.setExaminationQuestion(rs.getString("examinationQuestion"));
+					tb.setField(rs.getString("field"));
+					tb.setOptions(rs.getString("options"));
+					tb.setOptions2(rs.getString("options2"));
+					tb.setOptions3(rs.getString("options3"));
+					tb.setOptions4(rs.getString("options4"));
+				
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException("MemberDaoImpl_Jdbc類別#findByMemberIdAndPassword()發生SQL例外: " 
+					+ e.getMessage());
+		}
+		
+		return tb;
+	}
+	
+	
+	
+	//修改
+	public void modifyAllByTestId(TestBean tb) {
+		String sql ="UPDATE testCenter "
+				+ "SET examinationQuestion = ?,"
+				+ "field = ?, "
+				+ "options = ?, "
+				+ "options2 = ?, "
+				+ "options3 = ?, "
+				+ "options4 = ? "
+				+ "WHERE testId = ?";
+			try(
+					Connection con = ds.getConnection(); 
+					PreparedStatement ps = con.prepareStatement(sql);
+					) {
+					
+					ps.setString(1, tb.getExaminationQuestion());
+					ps.setString(2, tb.getField());
+					ps.setString(3, tb.getOptions());
+					ps.setString(4, tb.getOptions2());
+					ps.setString(5, tb.getOptions3());
+					ps.setString(6, tb.getOptions4());
+					ps.setString(7, tb.getTestId());
+					ps.executeUpdate();
+				
+					
+					log.info("modify(), 修改成功：MemberBean=" + tb);
 
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException("Class: MemberDaoc#modify()發生例外: " 
+											+ e.getMessage());
+			}
+			
+	}
+	
+	
 	// 修改
 	@Override
 	public void modify(String examinationQuestion, String answer, String field, String options, String options2,
@@ -268,5 +371,17 @@ public class testDaoimpl implements dao.testService {
 		
 		
 		
+	}
+
+	@Override
+	public void deletetestCenter() throws SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int deletetestCenter(int field) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

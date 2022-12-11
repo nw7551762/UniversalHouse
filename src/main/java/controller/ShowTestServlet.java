@@ -32,6 +32,7 @@ public class ShowTestServlet extends HttpServlet  {
 		
 		testDaoimpl testDao = new testDaoimpl();
 		String field = request.getParameter("field");
+
 		 List<TestBean> testBeans =  testDao.checkFieldTest(field);
 		request.setAttribute("testBeans", testBeans);
 		RequestDispatcher rd = request.getRequestDispatcher("/test/showTestPage.jsp");
