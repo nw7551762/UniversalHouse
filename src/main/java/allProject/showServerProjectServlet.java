@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import project.ProjectBean;
 import project.ProjectDaoImpl_JDBC;
 
-@WebServlet("/allProject/showAllProjectServlet")
-public class showAllProjectServlet extends HttpServlet {
+@WebServlet("/allProject/showServerProjectServlet")
+public class showServerProjectServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
@@ -34,13 +34,13 @@ public class showAllProjectServlet extends HttpServlet {
 		String sql = "";
 		
 		if((request.getParameter("findPJName"))=="" || (request.getParameter("findPJName"))==null) {
-		sql = "SELECT * FROM project ORDER BY pj_ID DESC";
+		sql = "SELECT * FROM project WHERE pj_Class LIKE N\'%服務%\' ORDER BY pj_ID DESC";
 		}else if((request.getParameter("findPJName"))!="" || (request.getParameter("findPJName"))!=null){
-		sql = "SELECT * FROM project WHERE pj_Name LIKE N\'%" + request.getParameter("findPJName") + "%\' ORDER BY pj_ID DESC";
+		sql = "SELECT * FROM project WHERE pj_Class LIKE N\'%服務%\' AND pj_Name LIKE N\'%" + request.getParameter("findPJName") + "%\' ORDER BY pj_ID DESC";
 		}
 		List<ProjectBean> allProject = dao.findAllProject(sql);
-		request.setAttribute("allProject", allProject);
-		RequestDispatcher rd = request.getRequestDispatcher("/allProject/showAllProject.jsp");
+		request.setAttribute("serverProject", allProject);
+		RequestDispatcher rd = request.getRequestDispatcher("/allProject/showServerProject.jsp");
 		rd.forward(request, response);
 		return;
 		

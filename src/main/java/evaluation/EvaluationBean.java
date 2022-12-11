@@ -1,11 +1,14 @@
 package evaluation;
 
-import java.sql.Date;
+import java.sql.Timestamp;
+import java.util.Date;
 
 public class EvaluationBean {
 	
+	private int evID;
 	private int pjID;
-	private int memberPk;
+	private String memberID;
+	private String pjMemberID;
 	private int evDealPrice;
 	private Date evCompletionDate;
 	private int evClientEV;
@@ -14,15 +17,24 @@ public class EvaluationBean {
 	public EvaluationBean() {
 	}
 
-	public EvaluationBean(int pjID, int memberPk, int evDealPrice, Date evCompletionDate, int evClientEV,
+	public EvaluationBean(int evID, int pjID, String memberID, String pjMemberID, int evDealPrice, Date evCompletionDate, int evClientEV,
 			String evClientComment) {
 		super();
+		this.evID = evID;
 		this.pjID = pjID;
-		this.memberPk = memberPk;
+		this.memberID = memberID;
+		this.pjMemberID = pjMemberID;
 		this.evDealPrice = evDealPrice;
-		this.evCompletionDate = evCompletionDate;
 		this.evClientEV = evClientEV;
 		this.evClientComment = evClientComment;
+	}
+
+	public int getEvID() {
+		return evID;
+	}
+
+	public void setEvID(int evID) {
+		this.evID = evID;
 	}
 
 	public int getPjID() {
@@ -33,12 +45,20 @@ public class EvaluationBean {
 		this.pjID = pjID;
 	}
 
-	public int getMemberPk() {
-		return memberPk;
+	public String getMemberID() {
+		return memberID;
 	}
 
-	public void setMemberPk(int memberPk) {
-		this.memberPk = memberPk;
+	public void setMemberID(String memberID) {
+		this.memberID = memberID;
+	}
+	
+	public String getPjMemberID() {
+		return pjMemberID;
+	}
+
+	public void setPjMemberID(String pjMemberID) {
+		this.pjMemberID = pjMemberID;
 	}
 
 	public int getEvDealPrice() {
@@ -54,7 +74,8 @@ public class EvaluationBean {
 	}
 
 	public void setEvCompletionDate(Date evCompletionDate) {
-		this.evCompletionDate = evCompletionDate;
+		Timestamp ts = new Timestamp(evCompletionDate.getTime());
+		this.evCompletionDate = ts;
 	}
 
 	public int getEvClientEV() {
@@ -75,7 +96,7 @@ public class EvaluationBean {
 
 	@Override
 	public String toString() {
-		return "EvaluationBean [pjID=" + pjID + ", memberPk=" + memberPk + ", evDealPrice=" + evDealPrice
+		return "EvaluationBean [evID=" + evID + "pjID=" + pjID + ", memberID=" + memberID + ", pjMemberID=" + pjMemberID + ", evDealPrice=" + evDealPrice
 				+ ", evCompletionDate=" + evCompletionDate + ", evClientEV=" + evClientEV + ", evClientComment="
 				+ evClientComment + "]";
 	}

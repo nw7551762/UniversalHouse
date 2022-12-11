@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>想找人才</title>
+<title>我委託的項目</title>
 <style>
 .t1{
 	width:1400px;
@@ -41,42 +41,49 @@ th{
 </head>
 <body>
 <form>
-<c:if test="${ empty serverProject}">
+<c:if test="${ empty evaluation}">
 <div class="t1">
-<h2>查無服務案件資料</h2>
+<h2>查無資料</h2>
 </div>
 </c:if>
-<c:if test="${not empty serverProject}">
+<c:if test="${not empty evaluation}">
 <div class="t2">
-<form id="form2" action="/allProject/showServerProjectServlet">
+<form id="form2" action="/allProject/showProjectServlet">
 <input type="text" name="findPJName" placeholder="請輸入專案名稱" class="ip1"><input type="submit"  form="form2" value="確認">
 </form>
 </div>
 	<table class="t1">
 	<thead>
 		<tr>
+			<th>評價編號</th>
 			<th>案件編號</th>
-			<th>領域分類</th>
-			<th>案件名稱</th>
-			<th>會員編號</th>
-			<th>服務地區</th>
-			<th>案件報價</th>
-			<th>上傳日期</th>
+			<th>委託者ID</th>
+			<th>成交金額</th>
+			<th>完成時間</th>
+			<th>對方的評分</th>
+			<th>對方的評價</th>
 			<th>功能</th>
 		</tr>
 		</thead>
 		<tbody id='tb'>
-		<c:forEach var="pj" items="${serverProject}" >
+		<c:forEach var="ev" items="${evaluation}" >
 		<tr>
-			<td>${pj.pjID}</td>
-			<td>${pj.fieldName}</td>
-			<td>${pj.pjName}</td>
-			<td>${pj.memberID}</td>
-			<td>${pj.pjServerLocation}</td>
-			<td>${pj.pjPrice}</td>
-			<td>${pj.pjUploadDate}</td>
-			<td><input type="button" value="查看詳情" id="detail">
-				<input type="button" value="邀請報價" id="quotation"></td>
+			<td>${ev.evID}</td>
+			<td>${ev.pjID}</td>
+			<td>${ev.pjMemberID}</td>
+			<td>${ev.evDealPrice}</td>
+			<td>${ev.evCompletionDate}</td>
+			<td>${ev.evClientEV}</td>
+			<td>${ev.evClientComment}</td>
+			<td>
+			<c:if test="${not empty ev.evCompletionDate}">
+				<input type="button" value="查看詳情" id="detail">
+			</c:if>	
+			<c:if test="${empty ev.evCompletionDate}">
+				<input type="button" value="查看詳情" id="detail">
+				<input type="submit" value="完成" id="deal">
+			</c:if>	
+			</td>
 		</tr>
 		</c:forEach>
 		</tbody>
@@ -89,30 +96,25 @@ th{
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script>
 
-$('#tb').on('click','#quotation',function(){
-	let pj_ID = $(this).parent().siblings().eq(0).text();
-	let memberID = $(this).parent().siblings().eq(3).text();
-	let pj_Price = $(this).parent().siblings().eq(5).text();
+$('#tb').on('click','#deal',function(){
+	let ev_ID = $(this).parent().siblings().eq(0).text();
 	
 	$.ajax({
 		type:'post',
-		url:'<c:url value='/evaluation/AddToProjectCart'/>',
+		url:'<c:url value='/evaluation/DealServlet'/>',
 		data:{
-			pj_ID:pj_ID,
-			memberID:memberID,
-			pj_Price:pj_Price,
+			ev_ID:ev_ID,
 		},
 	
 		success:function(){
-			alert("成功加入清單")
+			alert("已完成")
 		},
 		
 		error:function(thrownError){
-			alert("加入清單失敗")
+			alert("再試一次")
 		}
 	});
 })
-
 </script>
 </body>
 </html>

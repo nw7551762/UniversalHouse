@@ -5,13 +5,25 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>所有委託案件</title>
+<title>我想接案</title>
 <style>
 .t1{
 	width:1400px;
 	margin:auto;
 	border:1px solid #bebebe;
 	text-align:center;
+}
+
+.t2{
+	width:1400px;
+	margin:auto;
+	border:1px solid #bebebe;
+	text-align:left;
+}
+
+.ip1{
+	width:200px;
+	margin:10px;
 }
 
 tr{
@@ -29,12 +41,17 @@ th{
 </head>
 <body>
 <form>
-<c:if test="${ empty allProject}">
+<c:if test="${ empty project}">
 <div class="t1">
 <h2>查無委託案件資料</h2>
 </div>
 </c:if>
-<c:if test="${not empty allProject}">
+<c:if test="${not empty project}">
+<div class="t2">
+<form id="form2" action="/allProject/showProjectServlet">
+<input type="text" name="findPJName" placeholder="請輸入專案名稱" class="ip1"><input type="submit"  form="form2" value="確認">
+</form>
+</div>
 	<table class="t1">
 	<thead>
 		<tr>

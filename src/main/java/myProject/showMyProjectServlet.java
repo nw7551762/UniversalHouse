@@ -34,7 +34,14 @@ public class showMyProjectServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		ProjectDaoImpl_JDBC dao = new ProjectDaoImpl_JDBC();
 		MemberBean member = (MemberBean)session.getAttribute("LoginOK");
-		List<ProjectBean> project = dao.findByID(member.getMemberId());
+		String sql = "";
+		if((request.getParameter("findPJName"))=="" || (request.getParameter("findPJName"))==null) {
+			sql = "SELECT * FROM project WHERE memberID = \'"+member.getMemberId()+"\' ORDER BY pj_ID DESC";
+			}else if((request.getParameter("findPJName"))!="" || (request.getParameter("findPJName"))!=null){
+			sql = "SELECT * FROM project WHERE memberID = \'"+member.getMemberId()+"\' AND pj_Name LIKE N\'%" + request.getParameter("findPJName") + "%\' ORDER BY pj_ID DESC";
+			}
+		
+		List<ProjectBean> project = dao.findByID(sql);
 		
 		request.setAttribute("myProject", project);
 		RequestDispatcher rd = request.getRequestDispatcher("/myProject/showMyProject.jsp");

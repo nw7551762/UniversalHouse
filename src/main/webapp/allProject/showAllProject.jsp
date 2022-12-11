@@ -14,6 +14,18 @@
 	text-align:center;
 }
 
+.t2{
+	width:1400px;
+	margin:auto;
+	border:1px solid #bebebe;
+	text-align:left;
+}
+
+.ip1{
+	width:200px;
+	margin:10px;
+}
+
 tr{
 	border:1px solid #bebebe;
 }
@@ -35,6 +47,11 @@ th{
 </div>
 </c:if>
 <c:if test="${not empty allProject}">
+<div class="t2">
+<form id="form2" action="/allProject/showAllProjectServlet">
+<input type="text" name="findPJName" placeholder="請輸入專案名稱" class="ip1"><input type="submit"  form="form2" value="確認">
+</form>
+</div>
 	<table class="t1">
 	<thead>
 		<tr>
@@ -209,8 +226,6 @@ th{
 			    	alert("修改失敗")
 			    }
 			  });
-			
-			    	
 		})
 </script>
 </body>

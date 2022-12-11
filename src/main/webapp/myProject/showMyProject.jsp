@@ -14,6 +14,18 @@
 	text-align:center;
 }
 
+.t2{
+	width:1400px;
+	margin:auto;
+	border:1px solid #bebebe;
+	text-align:left;
+}
+
+.ip1{
+	width:200px;
+	margin:10px;
+}
+
 tr{
 	border:1px solid #bebebe;
 }
@@ -37,6 +49,11 @@ th{
 </div>
 </c:if>
 <c:if test="${not empty myProject}">
+<div class="t2">
+<form id="form2" action="/myProject/showMyProjectServlet">
+<input type="text" name="findPJName" placeholder="請輸入專案名稱" class="ip1"><input type="submit"  form="form2" value="確認">
+</form>
+</div>
 	<table class="t1">
 	<thead>
 		<tr>
@@ -84,7 +101,7 @@ th{
 
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script>
-	const project = {
+	project = {
 			pjID:'',
 			pjClass:'',
 			fieldName:'',

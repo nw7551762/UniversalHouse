@@ -31,8 +31,9 @@ import regist.MemberBean;
 				@WebInitParam(name = "mustLogin1", value = "/modify/*"), 
 				@WebInitParam(name = "mustLogin2", value = "/showMemberInfo/*"), 
 				@WebInitParam(name = "mustLogin3", value = "/myProject/*"), 			
-				@WebInitParam(name = "mustLogin4", value = "/project/showMyProjectServlet"), 
-				@WebInitParam(name = "mustLogin5", value = "/project/showAllProjectServlet"), 
+				@WebInitParam(name = "mustLogin4", value = "/myProject/showMyProjectServlet"),  
+				@WebInitParam(name = "mustLogin5", value = "/allProject/*"), 
+				@WebInitParam(name = "mustLogin6", value = "/evaluation/*"), 
 		})
 public class LoginCheckingFilter implements Filter {
 	

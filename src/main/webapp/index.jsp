@@ -26,15 +26,19 @@
 	<p />
 	<a href="<c:url value='/showMemberInfo/showAllMember.do' />">Show All Member Informations</a>
 	<p />
+	<a href="<c:url value='/allProject/showServerProjectServlet' />">想找人才</a>
+	<p/>
+	<a href="<c:url value='/evaluation/ShowEvaluationServlet' />">我委託的項目</a>
+	<p/>
+	<a href="<c:url value='/evaluation/ShowMyEvaluationServlet' />">被委託的項目及評價</a>
+	<p/>
 	<a href="<c:url value='/myProject/saveProject.jsp' />">新增委託案件</a>
 	<p />
 	<a href="<c:url value='/myProject/saveServerProject.jsp' />">新增服務案件</a>
 	<p/>
 	<a href="<c:url value='/myProject/showMyProjectServlet' />">查詢我提出的案件</a>
-	<p/>
-	<a href="<c:url value='/' />">我想接案(施工中)</a>
-	<p/>
-	<a href="<c:url value='/' />">想找人才(施工中)</a>
+<!-- 	<p/> -->
+<%-- 	<a href="<c:url value='/allProject/showProjectServlet' />">我想接案</a> --%>
 	<p/>
 	<a href="<c:url value='/allProject/showAllProjectServlet' />">管理所有案件</a>
 	<p/>
