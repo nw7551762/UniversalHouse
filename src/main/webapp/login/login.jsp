@@ -59,6 +59,7 @@
 				<tr><td ><input type="submit" value="提交"></td></tr>
 			</Table>
 	</Form>
+	 <a href="<c:url value='/' />">回首頁</a>
 	
 </body>
 </html>

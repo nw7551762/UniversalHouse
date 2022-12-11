@@ -43,6 +43,10 @@
         	
         <li><label class="t1" for="lastLogin">lastLogin:</label>
         	<input type="text" value="${member.lastLogin}" readonly></li>
+         <li><label class="t1" for="verification">verification:</label>
+        	<input type="text" value="${member.verification}" readonly></li>
+        	 <li><label class="t1" for="permission">permission:</label>
+        	<input type="text" value="${member.permission}" readonly></li>
         	
          
         	

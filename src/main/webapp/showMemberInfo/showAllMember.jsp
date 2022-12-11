@@ -10,7 +10,7 @@
 table {
 	border: 1px solid black;
 	border-collapse: collapse;
-	width:100%;
+	width: 100%;
 }
 </style>
 </head>
@@ -29,6 +29,8 @@ table {
 						<th>registerTime</th>
 						<th>lastLogin</th>
 						<th>memberImage</th>
+						<th>verification</th>
+						<th>permission</th>
 						<th>function</th>
 
 					</tr>
@@ -45,10 +47,20 @@ table {
 							<td>${member.phone}</td>
 							<td>${member.registerTime}</td>
 							<td>${member.lastLogin}</td>
-							
+
+
 							<td><img
 								src="<c:url value='/ShowMemberImgServlet?memberId=${member.memberId} '/>"
 								alt="no img" width="200px" height="150px"></td>
+							<td><c:choose>
+									<c:when test='${member.verification>0}'>
+										已驗證
+									</c:when>
+									<c:otherwise>
+										<a href="<c:url value='/regist/regServlet.do' />">發送驗證信</a>
+									</c:otherwise>
+								</c:choose></td>
+							<td>${member.permission}</td>
 							<td><input type="button" value="修改" class="toModifyMode">
 								<input type="submit" value="刪除" class="delete"></td>
 						</tr>
@@ -58,7 +70,7 @@ table {
 			</table>
 		</form>
 	</div>
-
+	 <a href="<c:url value='/' />">回首頁</a>
 
 	<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 	<script>
@@ -80,7 +92,7 @@ table {
  			let memberId = $(this).parent().siblings().eq(0).text();
 			$.ajax({
 			    type: "post",
-			    url: '<c:url value='/delete.do'/>',
+			    url: '<c:url value='/deleteMember.do'/>',
 			    data: {
 			    	 memberId : memberId ,
 			    },
@@ -111,16 +123,21 @@ table {
 			
 			
 			//將表格改成 <input>
-			$(this).parent().siblings().eq(1).html('<input type="text" name="name">');
- 			$(this).parent().siblings().eq(2).html('<input type="text" name="password">');
- 			$(this).parent().siblings().eq(3).html('<input type="text" name="location"> ');
- 			$(this).parent().siblings().eq(4).html('<input type="text" name="email">');
- 			$(this).parent().siblings().eq(5).html('<input type="text" name="phone">');
- 			$(this).parent().siblings().eq(8).html('<input type="file" name="memberImage">');
-			$(this).parent().html('<input type="submit" value="確認修改"class="modifyConfirm"><input type="button" value="取消" class="modifyCancle">');
+			$(this).parent().siblings().eq(1).html('<input type="text" name="name" id="name" > ');
+			$('#name').attr("value", member1.name);
+ 			$(this).parent().siblings().eq(2).html('<input type="text" name="password" id="password">');
+ 			$('#password').attr("value", member1.password);
+ 			$(this).parent().siblings().eq(3).html('<input type="text" name="location" id="location"> ');
+ 			$('#location').attr("value", member1.location);
+ 			$(this).parent().siblings().eq(4).html('<input type="email" name="email" id="email">');
+ 			$('#email').attr("value", member1.email);
+ 			$(this).parent().siblings().eq(5).html('<input type="text" name="phone" id="phone">');
+ 			$('#phone').attr("value", member1.phone);
+ 			$(this).parent().siblings().eq(8).html('<input type="file" name="memberImage" id="memberImage">');
+			$(this).parent().html('<input type="submit" value="確認修改" id="modifyConfirm"><input type="button" value="取消" id="modifyCancle">');
 		})
 		
-		 $('tbody').on('click', '.modifyCancle', function(){
+		 $('tbody').on('click', '#modifyCancle', function(){
 			
 			$(this).parent().siblings().eq(0).text(member1.memberId);
 			$(this).parent().siblings().eq(1).text(member1.name);
@@ -143,40 +160,24 @@ table {
 		
 		
 		
-		$('tbody').on('click', '.modifyConfirm', function(){
+		$('tbody').on('click', '#modifyConfirm', function(){
 		var form = $('form')[0];
 		var formData = new FormData(form);
+		
+		
 		let memberId = $(this).parent().siblings().eq(0).text();
 		formData.append('memberId', memberId);
-		/*let name = $(this).parent().siblings().eq(1).children().val();
-		let password = $(this).parent().siblings().eq(2).children().val();
-		let location = $(this).parent().siblings().eq(3).children().val();
-		let email = $(this).parent().siblings().eq(4).children().val();
-		let phone = $(this).parent().siblings().eq(5).children().val(); */
-		//let memberImage = $(this).parent().siblings().eq(8).children().eq(0).files[0]; 
 
 			$.ajax({
 				type : "POST",
-			    url: '<c:url value='/modify/modifyByAd.do'/>',
-			   	/*data:{
-			    	 memberId : memberId ,
-			    	 name: name,
-			    	 password: password,
-			    	 location: location,
-			    	 email: email,
-			    	 phone: phone,  
-			    	 memberImage:memberImage ,
-			    },  */
+			    url: '<c:url value='/modifyMemberInfo/modifyByAd.do'/>',
 			    enctype: "multipart/form-data",
 			    
-// 			    dataType: 'JSON',
 			    data: formData,
  			    contentType: false,
 		        cache: false,
  		        processData: false,
 			    success: function (response) {
-			    	console.log('1234')
-			    	console.log(response)
 			    	alert("response success")
 			    },
 			    error: function (thrownError) {
@@ -184,6 +185,35 @@ table {
 			    }
 			  });
 		}) 
+		
+		//確認使用者是否有修改密碼
+		$('tbody').on('blur', '#password', function(){
+			// user點進password input內, blur後檢查是否有修改, 沒修改不動作		  
+			if( ! $(this).val()==""  ){
+				//有修改檢查密碼規則
+				if( !varifyPassword() ){
+				//不符合將submit變成button不給送出
+					$('#modifyConfirm').removeAttr("type").attr("type", "button");
+					if( $(this).siblings().length <1 ){
+						console.log( $(this).siblings().length )
+						$(this).parent().append('<span class="errorMsg" id="errorPwd" style="color: red; font-size: 4px; margin-left: 20px">密碼應至少包含 8 個字元，包括至少一個大寫字母和一個小寫字母、一個特殊字元和一個數字</span>')
+					}
+				}else{
+					$('#modifyConfirm').removeAttr("type").attr("type", "submit");
+					$('#errorPwd').remove();
+				}
+			}
+		})
+		
+		function varifyPassword(){
+				let password =  $( "#password" ).val();
+				if (password.match(/[a-z]/g) && password.match(/[A-Z]/g) && password.match(/[0-9]/g) && 
+		                password.match(/[^a-zA-Z\d]/g) && password.length >= 8){
+					return true;
+				}else{
+					return false;
+				}
+			}		
 		
 		
 		

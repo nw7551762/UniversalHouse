@@ -47,9 +47,7 @@
             </p>
             
             <input id="submit" type="button" value="送出">
-            
         </form>
-          
     </div>
     
     
@@ -57,43 +55,66 @@
 	<script>
 		$(function () {
 			
-			
 			$( "#memberId" ).blur(function() {
 			  if( $(this).val()=="" &&  $(this).siblings().length <2){
-				  $(this).parent().append('<span style="color: red; font-size: 4px; margin-left: 20px">請輸入ID</span>')  
+				  $(this).parent().append('<span class="errorMsg" style="color: red; font-size: 4px; margin-left: 20px">請輸入ID</span>')  
+			  }else if( $(this).val()!="" ){
+				  $(this).parent().children('span').remove();
 			  }
 			  ifChangeToSubmit();
 			});
 			$( "#name" ).blur(function() {
+				 console.log($(this).siblings().length)
 				  if( $(this).val()=="" && $(this).siblings().length <2){
-					  $(this).parent().append('<span style="color: red; font-size: 4px; margin-left: 20px">請輸入姓名</span>')   
+					  $(this).parent().append('<span class="errorMsg" style="color: red; font-size: 4px; margin-left: 20px">請輸入姓名</span>')   
+				  }else if( $(this).val()!="" ) {
+					  $(this).parent().children('span').remove();
 				  }
 				  ifChangeToSubmit();
 				});
+			
 			$( "#password" ).blur(function() {
 				  if( $(this).val()=="" && $(this).siblings().length <2 ){
-					  $(this).parent().append('<span style="color: red; font-size: 4px; margin-left: 20px">請輸入密碼</span>')    
+					  $(this).parent().append('<span class="errorMsg" style="color: red; font-size: 4px; margin-left: 20px">請輸入密碼</span>')    
+				  }else if(  $(this).val()!="" && varifyPassword()){
+					  $(this).parent().children('span').remove();
+				  }else if( $(this).val()!="" && !varifyPassword()  ){
+					  $(this).parent().children('span').remove();
+					  $(this).parent().append('<span class="errorMsg" style="color: red; font-size: 4px; margin-left: 20px">密碼應至少包含 8 個字元，包括至少一個大寫字母和一個小寫字母、一個特殊字元和一個數字</span>')
 				  }
-				  ifChangeToSubmit();				  
-				});
-			$( "#email" ).blur(function() {
-				  if( $(this).val()=="" && $(this).siblings().length <2 ){
-					  $(this).parent().append('<span style="color: red; font-size: 4px; margin-left: 20px">請輸入email</span>')  
-				  } 
 				  ifChangeToSubmit();
 				});
 			
-			$( "#submit" ).click(function() {
-				if( !checkAllFilled() ){
-					alert('please fill all item') ;
+			function varifyPassword(){
+				let password =  $( "#password" ).val();
+				if (password.match(/[a-z]/g) && password.match(/[A-Z]/g) && password.match(/[0-9]/g) && 
+		                password.match(/[^a-zA-Z\d]/g) && password.length >= 8){
+					return true;
+				}else{
+					return false;
 				}
-			})
+			}
+			
+			$( "#email" ).blur(function() {
+				  if( $(this).val()=="" && $(this).siblings().length <2 ){
+					  $(this).parent().append('<span class="errorMsg" style="color: red; font-size: 4px; margin-left: 20px">請輸入email</span>')  
+				  } else if(  $(this).val()!="" ) {
+					  $(this).parent().children('span').remove();
+				  }
+				  ifChangeToSubmit();	
+				});
 			
 			var ifChangeToSubmit = function() {
-				checkAllFilled ? 
+				( checkAllFilled() && varifyPassword() ) ? 
 					$('#submit').removeAttr("type").attr("type", "submit") :
 					$('#submit').removeAttr("type").attr("type", "button");
 			}
+			
+			$( "#submit" ).click(function() {
+				if( !checkAllFilled() || !varifyPassword() ){
+					alert('please fill all item') ;
+				}
+			})
 			
 			$('form').submit( function() {
 				if( !checkAllFilled ){

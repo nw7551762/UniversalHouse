@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -14,6 +15,9 @@ import javax.sql.DataSource;
 
 import org.slf4j.LoggerFactory;
 
+import com.mchange.v2.c3p0.impl.C3P0ImplUtils;
+
+import org.apache.commons.dbutils.QueryRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,7 +47,9 @@ public class MemberDao {
 				+ " phone = ? , "
 				+ "registerTime= ? , "
 				+ "memberImage= ? , "
-				+ "lastLogin= ? "
+				+ "lastLogin= ? ,"
+				+ "verification= ? ,"
+				+ "permission= ? "
 				+ "where memberId = ? ";
 		try (
 			Connection con = ds.getConnection(); 
@@ -57,12 +63,14 @@ public class MemberDao {
 			ps.setTimestamp(6, mb.getRegisterTime());
 			ps.setBlob(7, mb.getMemberImage());
 			ps.setTimestamp(8, mb.getLastLogin());
-			ps.setString(9, mb.getMemberId());
+			ps.setInt(9, mb.getVerification());
+			ps.setInt(10, mb.getPermission());
+			ps.setString(11, mb.getMemberId());
 			ps.executeUpdate();
 			log.info("modify(), 修改成功：MemberBean=" + mb);
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			throw new RuntimeException("Class: MemberDaoc#modify()發生例外: " 
+			throw new RuntimeException("Class: MemberDao#modify()發生例外: " 
 										+ ex.getMessage());
 		}
 		
@@ -74,8 +82,8 @@ public class MemberDao {
 		log.info("會員註冊功能之Dao: 儲存會員資料");
  		String sql = "insert into Member " 
 				+ " (memberId, name, password, location, email, "
-				+ " phone, registerTime, memberImage, lastLogin) "
-				+ " values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+ " phone, registerTime, memberImage, lastLogin, verification, permission ) "
+				+ " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,?)";
 		try (
 			Connection con = ds.getConnection(); 
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -89,6 +97,8 @@ public class MemberDao {
 			ps.setTimestamp(7, mb.getRegisterTime());
 			ps.setBlob(8, mb.getMemberImage());
 			ps.setTimestamp(9, mb.getLastLogin());
+			ps.setInt(10, mb.getVerification());
+			ps.setInt(11, mb.getPermission());
 			ps.executeUpdate();
 			log.info("saveMember(), 新增成功：MemberBean=" + mb);
 		} catch (Exception ex) {
@@ -164,11 +174,12 @@ public class MemberDao {
 						mb.setLocation(rs.getString("location"));
 						mb.setEmail(rs.getString("email"));
 						mb.setPhone(rs.getString("phone"));
-						if(rs.getTimestamp("registerTime")!=null) {
-							mb.setRegisterTime(rs.getTimestamp("registerTime"));
-						}
+						mb.setRegisterTime(rs.getTimestamp("registerTime"));
+						
 						mb.setLastLogin(rs.getTimestamp("lastLogin"));
 						mb.setMemberImage(rs.getBlob("MemberImage"));
+						mb.setVerification(rs.getInt("verification"));
+						mb.setPermission(rs.getInt("permission"));
 					}
 				}
 			} catch (SQLException ex) {
@@ -202,6 +213,8 @@ public class MemberDao {
 					
 					mb.setLastLogin(rs.getTimestamp("lastLogin"));
 					mb.setMemberImage(rs.getBlob("MemberImage"));
+					mb.setVerification(rs.getInt("verification"));
+					mb.setPermission(rs.getInt("permission"));
 				}
 			}
 		} catch (SQLException ex) {
@@ -235,6 +248,8 @@ public class MemberDao {
 					
 					mb.setLastLogin(rs.getTimestamp("lastLogin"));
 					mb.setMemberImage(rs.getBlob("MemberImage"));
+					mb.setVerification(rs.getInt("verification"));
+					mb.setPermission(rs.getInt("permission"));
 				}
 			}
 		} catch (SQLException ex) {
@@ -273,6 +288,8 @@ public class MemberDao {
 					}
 					mb.setLastLogin(rs.getTimestamp("lastLogin"));
 					mb.setMemberImage(rs.getBlob("MemberImage"));
+					mb.setVerification(rs.getInt("verification"));
+					mb.setPermission(rs.getInt("permission"));
 					members.add(mb);
 				}
 			}
@@ -283,5 +300,6 @@ public class MemberDao {
 		}
 		return members;
 	}
+	
 	
 }

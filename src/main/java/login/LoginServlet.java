@@ -93,6 +93,9 @@ public class LoginServlet extends HttpServlet {
 //				LogoutBean logoutBean = new LogoutBean(session);
 //				session.setAttribute("logoutBean", logoutBean);
 				log.info("會員登入功能之Controller: 登入成功");
+				Timestamp time = new Timestamp( new Date().getTime() );
+				mb.setLastLogin(time);
+				dao.modify(mb);
 				processCookies(request, response, memberId, password, rm, mb.getMemberId());
 						
 			} else {
@@ -108,6 +111,7 @@ public class LoginServlet extends HttpServlet {
 		if (errorMsgMap.isEmpty()) {
 			Timestamp time = new Timestamp( new Date().getTime() );
 			mb.setLastLogin(time);
+			dao.modify(mb);
 			if (requestURI != null) {
 				
 				requestURI = (requestURI.length() == 0 ? request.getContextPath() : requestURI);
