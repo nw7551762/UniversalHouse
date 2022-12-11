@@ -1,0 +1,116 @@
+shift+ins
+
+
+local 
+working directory
+staging area
+respository
+====================
+remote
+respository
+
+git --version
+檢查版本
+
+git config --list
+檢查git設定
+
+:q 離開shell文本
+
+git config --global user.name "your name"
+git config --global user.email "your email"
+設定git name & email
+
+
+cd 資料夾路徑
+
+git init
+生成.git 資料夾受git版本控制
+
+git status
+查看資料夾git 狀態
+
+git add <file>
+git add *.副檔名
+git add --all
+
+git commit -m "message"
+
+git commit -a -m "message"
+git commit -am "message"
+一次 add&commit 一起
+但有條件 這檔案受git控管
+
+
+======================
+#為什麼要兩次
+1.廣場和倉庫
+2.逐筆檢查
+3.code review
+
+#commit
+1.沒有一定
+2.一個階段
+3.一天至少一次
+
+
+==============================================
+git log
+檢查git 紀錄
+
+git log --oneline
+檢查git 紀錄精簡版
+
+
+git reset <資訊碼>
+
+git reset <資訊碼> --hard
+會移除你的修改檔案
+
+
+git restore --staged <file>
+暫存區移動到工作區
+
+git diff
+檢視工作區的異動
+
+git diff <commit1> <commit2>
+檢視這兩個commit差異
+
+git reflog
+檢視所有的commit紀錄
+
+============================================
+git branch
+檢查分支
+
+git branch <brnach name>
+新增分支
+
+git checkout <brnach name>
+移動分支
+
+==============================================
+GitHub GitLab Bitbucket
+
+git remote add origin <雲端網址>
+
+git remote -v
+
+git push -u origin <分支>
+
+git pull origin <分支>
+
+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
+
+git remote set-url origin https://
+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@github.com/ispanzl/gitapp11.git
+
+===========================================
+git gui介面
+
+1.sourcetree
+2.github desktop
+3.git gui
+4.vscode git graph
+

@@ -34,13 +34,13 @@ border:1px solid black
 					<th>Accommodate</th>
 					<th>Type</th>
 					<th>Unit</th>
-					<th>Period 1st.</th>
-					<th>Period 2ed</th>
-					<th>Facility 1</th>
-					<th>Facility 2</th>
-					<th>Facility 3</th>
-					<th>Facility 4</th>
-					<th>Facility 5</th>
+					<th>Period_1st.</th>
+					<th>Period_2ed</th>
+					<th>Facility_1</th>
+					<th>Facility_2</th>
+					<th>Facility_3</th>
+					<th>Facility_4</th>
+					<th>Facility_5</th>
 					<th>Introduce</th>
 					<th>Picture</th>
 <!-- 				<th>Commit</th> -->
