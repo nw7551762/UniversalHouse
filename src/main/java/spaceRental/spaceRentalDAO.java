@@ -31,7 +31,7 @@ public class spaceRentalDAO {
 		}
 	}
 
-	// insert data (新增資料)OK!
+	// Creat data
 	public int insert(spaceRentalBEAN sb) {
 		int row = 0;
 		String sql = "insert into SpaceRental"
@@ -65,7 +65,7 @@ public class spaceRentalDAO {
 		return row;
 	}
 
-	// Read ALL (showAllData) OK!
+	// Read ALL
 	public List<spaceRentalBEAN> readAll() {
 		List<spaceRentalBEAN> list = new ArrayList<spaceRentalBEAN>();
 		String sql = "select * from SpaceRental";
@@ -101,7 +101,7 @@ public class spaceRentalDAO {
 		return list;
 	}
 
-	// Read By Like City (搜尋)OK!
+	// Read By Like City
 	public List<spaceRentalBEAN> readByCity(String city) throws SQLException {
 		String sql = "select * from SpaceRental where city like ?";
 		Connection con = ds.getConnection();
@@ -140,7 +140,7 @@ public class spaceRentalDAO {
 		return list;
 	}
 
-	// Delete By spaceNO (刪除) OK!
+	// Delete By spaceNO
 	public int deleteBySpaceNO(int spaceNo) throws SQLException {
 		int row = 0;
 		String sql = "delete from SpaceRental where spaceNo=?";

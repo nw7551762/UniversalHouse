@@ -25,14 +25,6 @@ public class showSpaceImgServlet extends HttpServlet {
 		processRequest(request, response);
 	}
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-//		OutputStream os = null;
-//		InputStream is = null;
-//		String fileName = null;
-//		String mimeType = null;
-//		Blob blob = null;
-//		String spaceNo = request.getParameter("spaceNo");
-//		spaceRentalDAO dao = new spaceRentalDAO();
-//		int sNO = Integer.parseInt(spaceNo);
 		doPost(request, response);
 	}
 	private void processRequest(HttpServletRequest request, HttpServletResponse response)

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Welcome Back!</title>
 	<style>
 		.t1 {
 	            width:100px;

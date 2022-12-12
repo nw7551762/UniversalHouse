@@ -174,7 +174,7 @@
 
 			<p>
 				<label class="c1">場地介紹</label>
-				<textarea type="text" name="intro" cols="30" rows="5"  style="width:300px;height:80px;">${update.intro}</textarea>
+				<textarea name="intro" cols="30" rows="5"  style="width:300px;height:80px;">${update.intro}</textarea>
 			</p>
 
 			<p>

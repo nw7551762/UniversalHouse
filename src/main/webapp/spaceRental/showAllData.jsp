@@ -5,33 +5,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>All Data !!</title>
+<title>Space Rental (Admin)</title>
 <style>
-table {
-	border: 2px solid black border-collapse:collapse;
-}
-
-td {
-	border: 1px solid black
-}
+table {	border: 2px solid black border-collapse:collapse;}
+td {border: 1px solid black}
 </style>
 </head>
-
 <body>
 	<h1 style="font-weight: fa-border">All Space Rental Data</h1>
-
-
-
-
 	<form action="<c:url value='/queryServlet' />" method="post">
-		<p>
-			Search By City: <input type="search" name="city" placeholder="關鍵字">
-			<input type="submit" name="query" value="search">
-		</p>
+		<p>Search By City: <input type="search" name="city" placeholder="關鍵字"><input type="submit" name="query" value="search"></p>
 	</form>
 	<br>
-	<form action="../spaceRental/insertData.jsp">
-		<input type="submit" value="新增場地資料">
+	<form action="../spaceRental/insertData.jsp"><input type="submit" value="新增場地資料">
 	</form>
 	<br>
 	<div>
@@ -101,20 +87,24 @@ td {
 	<p></p>
 	<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 	<script>
+		$('tbody').on('click', '.delete', function() {
+			let spaceNo = $(this).parent().siblings().eq(0).text();
+			$.ajax({
+				type : "post",
+				url : '<c:url value='/spaceAdmin/deleteServlet'/>',
+				data : {
+					no : spaceNo
+				},
 
-    
-    	$('tbody').on('click','.delete',function(){
-    		let spaceNo = $(this).parent().siblings().eq(0).text();
-    		$.ajax({
-    			type: "post",
-    			url: '<c:url value='/spaceAdmin/deleteServlet'/>',
-    			data:{ no :spaceNo} ,
-    			
-    			success: function () {alert("刪除成功!") },
-   			    error: function (thrownError) {alert("刪除失敗")}
-    		});
-    	})
-        </script>
+				success : function() {
+					alert("刪除成功!")
+				},
+				error : function(thrownError) {
+					alert("刪除失敗")
+				}
+			});
+		})
+	</script>
 
 
 
@@ -122,10 +112,14 @@ td {
 
 	<c:choose>
 		<c:when test="${row == 0}">
-			<script>alert('OOPS insert UNSUCCESSFUL !!!');</script>
+			<script>
+				alert('OOPS insert UNSUCCESSFUL !!!');
+			</script>
 		</c:when>
 		<c:when test="${row == 1}">
-			<script>alert('${space.spaceName} insert success!!!');</script>
+			<script>
+				alert('${space.spaceName} insert success!!!');
+			</script>
 		</c:when>
 		<c:otherwise>
 		</c:otherwise>
