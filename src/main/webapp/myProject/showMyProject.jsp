@@ -181,7 +181,7 @@ th{
 		$(this).parent().siblings().eq(11).text(project.pjStatus);
 		
 			
-		$(this).parent().html('<input type="button" value="修改" id="reviseProject"><input type="button" value="刪除" id="delete">');
+		$(this).parent().html('<input type="button" value="修改" id="reviseProject"><input type="submit" value="刪除" id="delete">');
 			
 	}) 
 	
