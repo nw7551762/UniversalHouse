@@ -141,6 +141,7 @@
 	
 	
 	</script>
+	<a href="<c:url value='/' />">回首頁</a>
     
 </body>
 </html>

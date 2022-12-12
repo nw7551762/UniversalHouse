@@ -57,8 +57,7 @@ table {
 										已驗證
 									</c:when>
 									<c:otherwise>
-										<a href="mailto:nw755162@gmail.com?subject=這是一個設定好的主旨">
-											寄信給abc@gmail.com並帶上主旨 </a>
+										<a href="<c:url value='/regist/regServlet.do?memberId=${member.memberId}' />">發送驗證信</a>
 									</c:otherwise>
 								</c:choose></td>
 							<td>${member.permission}</td>
@@ -71,7 +70,7 @@ table {
 			</table>
 		</form>
 	</div>
-
+	 <a href="<c:url value='/' />">回首頁</a>
 
 	<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 	<script>
@@ -124,12 +123,17 @@ table {
 			
 			
 			//將表格改成 <input>
-			$(this).parent().siblings().eq(1).html('<input type="text" name="name">');
+			$(this).parent().siblings().eq(1).html('<input type="text" name="name" id="name" > ');
+			$('#name').attr("value", member1.name);
  			$(this).parent().siblings().eq(2).html('<input type="text" name="password" id="password">');
- 			$(this).parent().siblings().eq(3).html('<input type="text" name="location"> ');
- 			$(this).parent().siblings().eq(4).html('<input type="email" name="email">');
- 			$(this).parent().siblings().eq(5).html('<input type="text" name="phone">');
- 			$(this).parent().siblings().eq(8).html('<input type="file" name="memberImage">');
+ 			$('#password').attr("value", member1.password);
+ 			$(this).parent().siblings().eq(3).html('<input type="text" name="location" id="location"> ');
+ 			$('#location').attr("value", member1.location);
+ 			$(this).parent().siblings().eq(4).html('<input type="email" name="email" id="email">');
+ 			$('#email').attr("value", member1.email);
+ 			$(this).parent().siblings().eq(5).html('<input type="text" name="phone" id="phone">');
+ 			$('#phone').attr("value", member1.phone);
+ 			$(this).parent().siblings().eq(8).html('<input type="file" name="memberImage" id="memberImage">');
 			$(this).parent().html('<input type="submit" value="確認修改" id="modifyConfirm"><input type="button" value="取消" id="modifyCancle">');
 		})
 		
@@ -166,7 +170,7 @@ table {
 
 			$.ajax({
 				type : "POST",
-			    url: '<c:url value='/modify/modifyByAd.do'/>',
+			    url: '<c:url value='/modifyMemberInfo/modifyByAd.do'/>',
 			    enctype: "multipart/form-data",
 			    
 			    data: formData,

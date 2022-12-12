@@ -1,15 +1,22 @@
 package utils;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Properties;
 
-import jakarta.mail.Authenticator;
-import jakarta.mail.PasswordAuthentication;
+import jakarta.activation.DataHandler;
+import jakarta.activation.FileDataSource;
+import jakarta.mail.Message;
+import jakarta.mail.MessagingException;
+import jakarta.mail.Multipart;
 import jakarta.mail.Session;
 import jakarta.mail.Transport;
+import jakarta.mail.internet.AddressException;
 import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeBodyPart;
 import jakarta.mail.internet.MimeMessage;
-import jakarta.mail.internet.MimeMessage.RecipientType;
+import jakarta.mail.internet.MimeMultipart;
 import regist.MemberBean;
 
 public class SendMailThread extends Thread{
@@ -22,36 +29,81 @@ public class SendMailThread extends Thread{
 
     @Override
     public void run() {
-        try {
-            Properties p = new Properties();
-            p.setProperty("mail.host", "smtp.mail.yahoo.com");
-            p.setProperty("mail.smtp.auth", "true");//認證登錄
-            Session session = Session.getDefaultInstance(p, new Authenticator() {
-		
-                @Override
-                protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication("menc86652","uzbshzjzlderssof");
-                }
-            });
+        
+        	 String from = "nw755162";
+             String pass = "knvmardwpikvwlbz";
+             //String[] to = { "nw755162@gmail.com" }; // list of recipient email addresses
+             Date date = new Date();
+             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+             LocalDateTime now = LocalDateTime.now();  
+             String subject = "UniversalHouse - 電子信箱驗證信";
+             String body = "<h1>Welcome to UniversalHouse! " + now +"</h1><br>" ;
+             
+        	
+        	Properties props = System.getProperties();
+             String host = "smtp.gmail.com";
+             props.put("mail.smtp.starttls.enable", "true");
+             props.put("mail.smtp.host", host);
+             props.put("mail.smtp.user", from);
+             props.put("mail.smtp.password", pass);
+             props.put("mail.smtp.port", "587");
+             props.put("mail.smtp.auth", "true");
+             Session session = Session.getDefaultInstance(props);
+             MimeMessage message = new MimeMessage(session);
+             
+             try {
+                 message.setFrom(new InternetAddress(from));
+                 InternetAddress toAddress = new InternetAddress(user.getEmail());
 
-            session.setDebug(true);//以debug方式(應答方式)進行通訊
+                 // To get the array of addresses
+                 toAddress =  new InternetAddress( user.getEmail() );
+                 message.addRecipient(Message.RecipientType.TO, toAddress);
 
-            //準備郵件///////有問題
-            MimeMessage msg = new MimeMessage(session); //從session中創建郵件
-            msg.setFrom( new InternetAddress("menc86652@yahoo.com.tw") );
-            msg.setRecipient(RecipientType.TO, new InternetAddress( user.getEmail() ) );////※※※
-            msg.setSubject("賬號激活郵件,城院公司歡迎你!");
-            String info = "激活:<a href='http://127.0.0.1:8080/mailWeb1602/ActiveServlet?acode="+user.getMemberId()+"'>激活</a>";
-            info = info + "<br/>如果激活未成功，請把地址複製到瀏覽器進行手動請求以進行激活:http://127.0.0.1:8080/mailWeb1602/ActiveServlet?acode="+user.getMemberId();
+                 message.setSubject(subject);
+//                 message.setText(body);
+                 
+                 
+                 
+                 MimeBodyPart textPart = new MimeBodyPart();
+                 StringBuffer html = new StringBuffer();
+                 html.append(body);
+                 html.append("<h3>點擊下列連結驗證</h3><br>");
+                 String a= "<a href=\"http://localhost:8080/Topic2/utils/VerifyServlet.do?"+ "memberId="+ user.getMemberId() +  "\">verify your account</a><br>";
+                 html.append(a);
+//                 html.append("<img src='cid:image'/><br>");
+                 textPart.setContent(html.toString(), "text/html; charset=UTF-8");
 
-            msg.setContent(info, "text/html;charset=utf-8");
-            msg.setSentDate( new Date() );
-            //發送郵件
-            Transport.send(msg);
-//            log.info("郵件成功發送到:"+user.getEmail());
-        } catch (Exception e) {
-//            log.error("郵件發送失敗,郵箱地址爲:"+user.getEmail());
-            e.printStackTrace();
-        }
+                 // 圖檔部份，注意 html 用 cid:image，則header要設<image>
+//                 MimeBodyPart picturePart = new MimeBodyPart();
+//                 FileDataSource fds = new FileDataSource("YourPictureFile.jpg");
+//                 picturePart.setDataHandler(new DataHandler(fds));
+//                 picturePart.setFileName(fds.getName());
+//                 picturePart.setHeader("Content-ID", "<image>");
+
+                 Multipart email = new MimeMultipart();
+                 email.addBodyPart(textPart);
+//                 email.addBodyPart(picturePart);
+
+                 message.setContent(email);
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 
+                 Transport transport = session.getTransport("smtp");
+                 transport.connect(host, from, pass);
+                 transport.sendMessage(message, message.getAllRecipients());
+                 transport.close();
+             }
+             catch (AddressException ae) {
+                 ae.printStackTrace();
+             }
+             catch (MessagingException me) {
+                 me.printStackTrace();
+             }
+        	
     }
 }

@@ -19,7 +19,7 @@
 
 	<a href="<c:url value='/regist/regist.jsp' />">regist</a>
 	<p />
-	<a href="<c:url value='/modify/modifyMemberInfo.jsp' />">modifyMemberInfo</a>
+	<a href="<c:url value='/modifyMemberInfo/modifyMemberInfo.jsp' />">modifyMemberInfo</a>
 	<p />
 	<a href="<c:url value='/showMemberInfo/showMemberInfo.do' />">Show Member Informations</a>
 	<p />
@@ -28,8 +28,6 @@
 	<a href="<c:url value='/login/login.jsp' />">Login</a>
 	<p />
 	<a href="<c:url value='/login/logout.jsp' />">Logout</a>
-	<p />
-	<a href="<c:url value='/regist/regServlet.do' />">SendEmailServlet</a>
 	<p />
 <c:choose>
 	<c:when test="${!empty LoginOK}">

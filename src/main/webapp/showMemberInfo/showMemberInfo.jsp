@@ -1,60 +1,92 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-		ul{
-			list-style: none;
-		}
-        .t1 {
-            width: 100px;
-            float: left;
-            text-align: right;
-            margin-right: 10px;
-        }
-    </style>
+ul {
+	list-style: none;
+}
+table {
+	border-collapse: collapse;
+	width: 300px;
+}
+td{
+width: 100px;
+height: 40px
+}
+
+.t1 {
+	width: 100px;
+	float: left;
+	text-align: right;
+	margin-right: 10px;
+}
+</style>
 </head>
 <body>
-	<ul>
-		<li><label class="t1" for="memberId">memberId:</label>
-			<input type="text" value="${member.memberId}" readonly></li>
+	<table >
+		<tr><td>memberId</td>
+			<td>${member.memberId}</td>
+		</tr>
+		<tr><td>name</td>
+			<td>${member.name}</td>
+		</tr>
+		<tr><td>password</td>
+			<td>${member.password}</td>
+		</tr>
+		<tr><td>location</td>
+			<td>${member.location}</td>
+		</tr>
+		<tr><td>email</td>
+			<td>${member.email}</td>
+		</tr>
+		<tr><td>phone</td>
+			<td>${member.phone}</td>
+		</tr>
+		<tr><td>registerTime</td>
+			<td>${member.registerTime}</td>
+		</tr>
+		<tr><td>verification</td>
+			<td id="verification"></td>
+		</tr>
+		<tr><td>permission</td>
+			<td id="permission">${member.permission}</td>
+		</tr>
+		<tr><td><img
+		src="<c:url value='/ShowMemberImgServlet?memberId=${member.memberId} '/>"
+		alt="no img" width="400px" height="400px"></td>
 			
-        <li><label class="t1" for="name">name:</label>
-        	<input type="text" value="${member.name}" readonly></li>
-        	
-        <li><label class="t1" for="password">password:</label>
-        	<input type="text" value="${member.password}" readonly></li>
-        	
-        <li><label class="t1" for="location">location:</label> 
-        	<input type="text" value="${member.location}" readonly></li>
-        	
-        <li><label class="t1" for="email">email:</label>
-        	<input type="text" value="${member.email}" readonly></li>
-        	
-        <li><label class="t1" for="phone">phone:</label>
-        	<input type="text" value="${member.phone}" readonly></li>
-        	
-        <li><label class="t1" for="registerTime">registerTime:</label>
-        	<input type="text" value="${member.registerTime}" readonly></li>
-        	
-        <li><label class="t1" for="lastLogin">lastLogin:</label>
-        	<input type="text" value="${member.lastLogin}" readonly></li>
-        	
-         
-        	
-	</ul>
-	<img src="<c:url value='/ShowMemberImgServlet?memberId=${member.memberId} '/>" alt="no img" width="400px" height="400px">
-	<table>
-        <tr><td></td></tr>
-
-    </table>
-    <a href="<c:url value='/' />">回首頁</a>
+		</tr>
+	
+	</table>
 
 
+	
+	<a href="<c:url value='/' />">回首頁</a>
+
+
+	<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+	<script>
+	$(function(){
+		
+		${LoginOK.verification }==0 ?
+			$('#verification').html( '<a href="<c:url value='/regist/regServlet.do?memberId=${member.memberId}' />">發送驗證信</a>' ):
+			$('#verification').append( '已驗證');
+		
+		${LoginOK.permission }==0 ?
+			$('#permission').append( 'OO會員' ):
+			$('#permission').append( 'xx會員' );
+		
+		
+		
+	})
+		
+	
+	</script>
 
 </body>
 </html>
