@@ -32,7 +32,7 @@ import regist.MemberBean;
 				@WebInitParam(name = "mustLogin2", value = "/showMemberInfo/*"), 
 				@WebInitParam(name = "mustLogin10000", value = "/Forum/Article/newArticle.jsp"),
 				@WebInitParam(name = "mustLogin10001", value = "/Forum/Article/myRecord.jsp"),
-				@WebInitParam(name = "mustLogin3", value = "/myProject/*"),3
+				@WebInitParam(name = "mustLogin3", value = "/myProject/*"),
 				@WebInitParam(name = "mustLogin4", value = "/allProject/*"),
 				@WebInitParam(name = "mustLogin5", value = "/evaluation/*"),
 		})
