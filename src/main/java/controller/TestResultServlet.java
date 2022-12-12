@@ -48,9 +48,9 @@ public class TestResultServlet extends HttpServlet {
 			totalScoreDaoimpl tsd = new totalScoreDaoimpl();
 			String inputRadio = "a";
 		 	String testLength = request.getParameter("questionCounts");
-		 	System.out.println();
-		 	Integer testL = Integer.parseInt(testLength);
 		 	System.out.println(testLength);
+		 	Integer testL = Integer.parseInt(testLength);
+		 	System.out.println(testL);
 		 	System.out.println("------------------------");
 			for (int i = 1; i < testL; i++) {
 				String s = Integer.toString(i);
