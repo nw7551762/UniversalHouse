@@ -2,6 +2,7 @@ package courseMaintain;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.Date;
 
@@ -12,6 +13,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+import javax.sql.rowset.serial.SerialException;
 
 import regist.MemberBean;
 import regist.MemberDao;
@@ -51,11 +54,29 @@ public class AddCourseServlet extends HttpServlet {
 		course.setStartTime(req.getParameter("startTime"));
 		course.setEndTime(req.getParameter("endTime"));
 		//course.setImage(req.getParameter("image"));
+		Part imgPart = req.getPart("image");
+		// member -> Blob 
+		Blob imgBlob = null;
+		try {
+			imgBlob = course.partToBlob(imgPart);
+		} catch (SerialException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		course.setImage(imgBlob);
+		
 		try {
 			cdao.addCourse(course);
-		} catch (SQLException e) {
+		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e1.printStackTrace();
 		}
 		req.setAttribute("course", course);
 		RequestDispatcher rd = req.getRequestDispatcher("/courseMaintain/addCourseSuccess.jsp");

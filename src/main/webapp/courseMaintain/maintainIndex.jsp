@@ -10,8 +10,8 @@
 </head>
 <body>
 <h2><a href="<c:url value='/queryCourseServlet' />">查詢所有課程</a></h2>
-<h2><a href="addCourse.jsp">新增</a></h2>
-<h2><a href="<c:url value='/updateCourse.jsp' />">修改</a></h2>
+<h2><a href="<c:url value='/courseMaintain/addCourse.jsp'/>">新增</a></h2>
+<h2><a href="<c:url value='/courseMaintain/updateCourse.jsp' />">修改</a></h2>
 <h2><a href="<c:url value='deleteCourse.jsp' />">刪除</a></h2>
 </body>
 </html>

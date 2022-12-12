@@ -63,7 +63,7 @@ public class CourseDao {
 	// 修改
 	public int updateById(CourseBean cb) {
 		int n = 0;
-		String sql = "update course set courseName=?, category=?, teacher=?, price=?, courseType=?, startDate=?, endDate=?, startTime=?, endTime=?, image=? where courseId = ?";
+		String sql = "update course set courseName=?, category=?, teacher=?, price=?, courseType=?, startDate=?, endDate=?, startTime=?, endTime=? where courseId = ?";
 
 		try (Connection connection = ds.getConnection(); PreparedStatement ps = connection.prepareStatement(sql);) {
 			ps.setString(1, cb.getCourseName());
@@ -75,7 +75,9 @@ public class CourseDao {
 			ps.setString(7, cb.getEndDate());
 			ps.setString(8, cb.getStartTime());
 			ps.setString(9, cb.getEndTime());
-			ps.setBlob(10, cb.getImage());
+			ps.setInt(10, cb.getCourseId());
+
+//			ps.setBlob(10, cb.getImage());
 			n = ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -120,11 +122,14 @@ public class CourseDao {
 	public CourseBean findById(Integer courseId) throws SQLException {
 		String sql = "SELECT * FROM course WHERE courseId =?";
 
-		try (Connection connection = ds.getConnection(); PreparedStatement ps = connection.prepareStatement(sql);) {
+		CourseBean cb = new CourseBean();
+		try (Connection connection = ds.getConnection();
+			PreparedStatement ps = connection.prepareStatement(sql);) {
 			ps.setInt(1, courseId);
-
 			ResultSet rs = ps.executeQuery();
-			CourseBean cb = new CourseBean();
+
+			while (rs.next()) {
+
 			cb.setCourseId(rs.getInt("courseId"));
 			cb.setCourseName(rs.getString("courseName"));
 			cb.setCategory(rs.getString("category"));
@@ -135,14 +140,15 @@ public class CourseDao {
 			cb.setEndDate(rs.getString("endDate"));
 			cb.setStartTime(rs.getString("startTime"));
 			cb.setEndTime(rs.getString("endTime"));
-			cb.setImage(rs.getBlob("image"));
+//			cb.setImage(rs.getBlob("image"));
 
 			rs.close();
 			ps.close();
 
 			return cb;
-
+			}
 		}
+		return cb;
 
 	}
 
@@ -181,31 +187,3 @@ public class CourseDao {
 		return findByNameList;
 	}
 }
-//    	ps.setString(1, "%" + courseName + "%");
-//    	ResultSet rs = ps.executeQuery();
-//    	
-//    	List<Course> list = new LinkedList<Course>();
-//    	
-//    	while(rs.next()) {
-//    		Course c = new Course();
-//    		c.setCourseId(rs.getInt("courseId"));
-//			c.setCourseName(rs.getString("courseName"));
-//			c.setCategory(rs.getString("category"));
-//			c.setTeacher(rs.getString("teacher"));
-//			c.setPrice(rs.getInt("price"));
-//			c.setCourseType(rs.getString("courseType"));
-//			c.setStartDate(rs.getString("startDate"));
-//			c.setEndDate(rs.getString("endDate"));
-//			c.setStartTime(rs.getString("startTime"));
-//			c.setEndTime(rs.getString("endTime"));
-//			list.add(c);
-//    	}
-//    	
-//    	rs.close();
-//    	preState.close();
-//    	
-//    	return list;
-//
-//	}
-//
-//}

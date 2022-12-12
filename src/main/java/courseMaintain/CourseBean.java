@@ -56,6 +56,21 @@ public class CourseBean {
 
 
 	public CourseBean(Integer courseId, String courseName, String category, String teacher, Integer price,
+			String courseType, String startDate, String endDate, String startTime, String endTime) {
+		super();
+		this.courseId = courseId;
+		this.courseName = courseName;
+		this.category = category;
+		this.teacher = teacher;
+		this.price = price;
+		this.courseType = courseType;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.startTime = startTime;
+		this.endTime = endTime;
+	}
+
+	public CourseBean(Integer courseId, String courseName, String category, String teacher, Integer price,
 			String courseType, String startDate, String endDate, String startTime, String endTime, Blob image) {
 		super();
 		this.courseId = courseId;

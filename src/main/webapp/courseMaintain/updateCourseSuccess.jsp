@@ -7,6 +7,6 @@
 <title>Update Course Success</title>
 </head>
 <body>
-
+123
 </body>
 </html>

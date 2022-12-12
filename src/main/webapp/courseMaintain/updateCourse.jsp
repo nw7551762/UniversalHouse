@@ -16,57 +16,56 @@
     </style>
 </head>
 <body>
-<form action="<c:url value='/UpdateCourseServlet' />" method="post"
-		enctype="multipart/form-data">
-<!-- 		<p> -->
-<!-- 			<label class="t1" for="courseId">課程代號:</label> <input type="text" -->
-<!-- 				name="courseId" > -->
-<!-- 		</p> -->
+<form action="<c:url value='/UpdateCourseServlet' />" method="POST" enctype="multipart/form-data">
+ 		<p> 
+  			<label class="t1" for="courseId">課程代號:</label>
+ 			<input type="text" name="courseId" value="${update.courseId}"> 
+ 		</p>
 
 		<p>
 			<label class="t1" for="courseName">課程名稱:</label> <input type="text"
-				name="courseName">
+				name="courseName" value="${update.courseName}">
 		</p>
 
 		<p>
 			<label class="t1" for="category">類別:</label> <input type="text"
-				name="category">
+				name="category"  value="${update.category}">
 		</p>
 
 		<p>
 			<label class="t1" for="teacher">教師:</label> <input type="text"
-				name="teacher">
+				name="teacher" value="${update.teacher}" >
 		</p>
 
 		<p>
 			<label class="t1" for="price">價錢:</label> <input type="text"
-				name="price">
+				name="price" value="${update.price}">
 		</p>
 
 		<p>
 			<label class="t1" for="courseType">上課形式:</label> <input type="text"
-				name="courseType">
+				name="courseType" value="${update.courseType}">
 		</p>
 		<p>
 			<label class="t1" for="startDate">開課日期:</label> <input type="text"
-				name="startDate">
+				name="startDate" value="${update.startDate}">
 		</p>
 		<p>
 			<label class="t1" for="endDate">結束日期:</label> <input type="text"
-				name="endDate">
+				name="endDate" value="${update.endDate}">
 		</p>
 		<p>
 			<label class="t1" for="startTime">開始時間:</label> <input type="text"
-				name="startTime">
+				name="startTime" value="${update.startTime}">
 		</p>
 		<p>
 			<label class="t1" for="endTime">結束時間:</label> <input type="text"
-				name="endTime">
+				name="endTime" value="${update.endTime}">
 		</p>
-		<p>
-			<label class="t1" for="image">圖片:</label> <input
-				type="file" name="image">
-		</p>
+<!-- 		<p> -->
+<!-- 			<label class="t1" for="image">圖片:</label> <input -->
+<!-- 				type="file" name="image"> -->
+<!-- 		</p> -->
 
 
 		<input id="submit" type="submit" value="送出">
