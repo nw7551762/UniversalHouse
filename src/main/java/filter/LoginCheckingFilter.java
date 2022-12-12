@@ -30,6 +30,8 @@ import regist.MemberBean;
 		initParams = { 
 				@WebInitParam(name = "mustLogin1", value = "/modifyMemberInfo/*"), 
 				@WebInitParam(name = "mustLogin2", value = "/showMemberInfo/*"), 
+				@WebInitParam(name = "mustLogin10000", value = "/Forum/Article/newArticle.jsp"),
+				@WebInitParam(name = "mustLogin10001", value = "/Forum/Article/myRecord.jsp"),
 		})
 public class LoginCheckingFilter implements Filter {
 	
