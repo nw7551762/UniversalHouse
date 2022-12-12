@@ -89,14 +89,14 @@
 					courseId : courseId,
 				},
 				success:function(){
-					alert("刪除成功")
+					alert("刪除成功!")
 // 					$.ajax({
 // 						type:'post'
 // 						url: '<c:url value='/courseMaintain/queryCourseServlet'/>'
 // 					});
 				},
 				error:function(thrownError){
-					alert("刪除失敗")
+					alert("刪除失敗!")
 				}
 			});
 		})

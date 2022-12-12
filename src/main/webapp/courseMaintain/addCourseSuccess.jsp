@@ -10,8 +10,8 @@
 <body>
 
 <c:choose>
-<c:when test="${empty course}">unsuccessful</c:when>
-<c:otherwise>add successful!</c:otherwise>
+<c:when test="${empty course}">新增失敗!</c:when>
+<c:otherwise>新增成功!</c:otherwise>
 
 
 </c:choose>
