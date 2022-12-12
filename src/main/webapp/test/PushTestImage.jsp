@@ -22,7 +22,7 @@
 	<div id="container">
 		<form action="<c:url value='/PushTestImage/PushTestImage.do' />" method="post" enctype="multipart/form-data">
 			<p>
-				<label class="t1" for="imgNumber">imageNumber:</label> <input type="text"
+				<label class="t1" for="imgNumber">圖片編號:</label> <input type="text"
 					name="answer">
 			</p>
 
